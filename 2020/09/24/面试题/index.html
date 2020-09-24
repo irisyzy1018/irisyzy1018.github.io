@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: SQL | Iris Yuan</title>
+  <title>SQL面试题汇总 | Iris Yuan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Iris Yuan">
-<meta property="og:url" content="http://example.com/tags/SQL/index.html">
+  <meta name="description" content="1.题目描述查找最晚入职员工的所有信息，为了减轻入门难度，目前所有的数据里员工入职的日期都不是同一天(sqlite里面的注释为–,mysql为comment)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL面试题汇总">
+<meta property="og:url" content="http://example.com/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
 <meta property="og:site_name" content="Iris Yuan">
-<meta property="og:description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
+<meta property="og:description" content="1.题目描述查找最晚入职员工的所有信息，为了减轻入门难度，目前所有的数据里员工入职的日期都不是同一天(sqlite里面的注释为–,mysql为comment)">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-24T08:57:34.189Z">
+<meta property="article:modified_time" content="2020-09-24T10:17:35.626Z">
 <meta property="article:author" content="Iris Yuan">
-<meta property="article:tag" content="Happy">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Iris Yuan" type="application/atom+xml">
@@ -148,35 +150,1615 @@
           </div>
           <div id="js-content" class="content-ll">
             
+<article id="post-面试题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      SQL面试题汇总
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/" class="archive-article-date">
+
+        
+        <a href="/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/" class="archive-article-date">
   	<time datetime="2020-09-24T08:57:34.189Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/">SQL面试题汇总</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h3><p>查找最晚入职员工的所有信息，为了减轻入门难度，目前所有的数据里员工入职的日期都不是同一天(sqlite里面的注释为–,mysql为comment)</p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,  -- &#39;员工编号&#39;
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>答案</p>
+<pre><code>select * 
+from employees
+where hire_date =
+            (select max(hire_date) 
+            from employees);</code></pre>
+<p>tips:最晚入职的当天未必就一个人，也许有多人，使用排序并限制得只能取得指定数量的结果</p>
+<h3 id="2-题目描述"><a href="#2-题目描述" class="headerlink" title="2.题目描述"></a>2.题目描述</h3><p>查找入职员工时间排名倒数第三的员工所有信息，为了减轻入门难度，目前所有的数据里员工入职的日期都不是同一天</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>答案：</p>
+<pre><code>select
+    *
+from
+    employees
+where
+    hire_date = (select distinct hire_date from employees order by hire_date desc limit 2,1);</code></pre>
+<p>思路：</p>
+<ul>
+<li>第一步：找出入职时间排名倒数第三的时间是多少</li>
+<li>第二步：找出入职时间是第一步时间的所有记录  </li>
+</ul>
+<p>使用这个思路是为了防止有多个员工的入职时间是相同的且均为倒数第三，这样可以找出重复记录</p>
+<p>根据阿里巴巴Java开发规范v1.4中，数据库规约，关键词应大写，SELECT后面不要跟着“*”，要把具体的字段写出来。</p>
+<pre><code>SELECT emp_no, birth_date, first_name, last_name, gender, hire_date
+FROM employees
+WHERE hire_date=(
+            SELECT DISTINCT hire_date 
+            FROM employees
+            ORDER BY hire_date DESC
+            LIMIT 2,1);</code></pre>
+<p>解法2：</p>
+<pre><code>select emp_no,birth_date,first_name,last_name,gender,hire_date 
+from employees 
+where hire_date = (
+            select hire_date 
+            from employees 
+            group by hire_date 
+            order by hire_date desc 
+            limit 2,1);</code></pre>
+<p>MySql中distinct和group by 效率比较<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zox2011/archive/2012/09/12/2681797.html">https://www.cnblogs.com/zox2011/archive/2012/09/12/2681797.html</a></p>
+<h3 id="3-题目描述"><a href="#3-题目描述" class="headerlink" title="3.题目描述"></a>3.题目描述</h3><p>查找各个部门当前(dept_manager.to_date=’9999-01-01’)领导当前(salaries.to_date=’9999-01-01’)薪水详情以及其对应部门编号dept_no<br>(注:请以salaries表为主表进行查询，输出结果以salaries.emp_no升序排序，并且请注意输出结果里面dept_no列是最后一列)</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL, -- &#39;员工编号&#39;,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));
+CREATE TABLE `dept_manager` (
+`dept_no` char(4) NOT NULL, -- &#39;部门编号&#39;
+`emp_no` int(11) NOT NULL, --  &#39;员工编号&#39;
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));</code></pre>
+<p>思路：<br>关于为什么一定要两个表格的时间都限制成规定时间（9999-01-01）呢？<br>–因为薪水表是按年发的，而题目要查找的是当前的薪水，所以要过滤掉以前，而dept_manager是因为有领导会离职，<br>–to_date时间不一定是9999-01-01，所以要过滤过离职的领导</p>
+<p>由于输出顺序是按照emp_no递增来的，join时salaries表要放在前面，否则输出顺序不对<br>由于两个表都有重复数据，所以两个表的to_date都要做限制  </p>
+<pre><code>select s.* ,d.dept_no
+from salaries as s 
+join dept_manager as d 
+on s.emp_no=d.emp_no
+where s.to_date = &#39;9999-01-01&#39;
+    and d.to_date=&#39;9999-01-01&#39;
+order by s.emp_no;
+
+select s.* ,d.dept_no
+from salaries as s 
+join dept_manager as d 
+on s.emp_no=d.emp_no
+and s.to_date = &#39;9999-01-01&#39;
+and d.to_date = &#39;9999-01-01&#39;
+order by s.emp_no;</code></pre>
+<p>对于内连接来说，where 和 on 都可以用来对数据的筛选</p>
+<h3 id="4-题目描述"><a href="#4-题目描述" class="headerlink" title="4.题目描述"></a>4.题目描述</h3><p>查找所有已经分配部门的员工的last_name和first_name以及dept_no(请注意输出描述里各个列的前后顺序)</p>
+<pre><code>CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>员工表employees中可能有部分员工无部门；部门雇员表中正常情况下每个员工都有部门；</p>
+<pre><code>select e.last_name,e.first_name,d.dept_no
+from dept_emp d
+left join employees e
+on d.emp_no = e.emp_no
+
+select e.last_name,e.first_name,d.dept_no
+from dept_emp d
+join employees e
+on d.emp_no = e.emp_no</code></pre>
+<h3 id="5-题目描述"><a href="#5-题目描述" class="headerlink" title="5.题目描述"></a>5.题目描述</h3><p>查找所有员工的last_name和first_name以及对应部门编号dept_no，也包括暂时没有分配具体部门的员工(请注意输出描述里各个列的前后顺序)</p>
+<pre><code>CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>解法：</p>
+<pre><code>select e.last_name,e.first_name,d.dept_no
+from
+employees e
+left join 
+dept_emp d
+on e.emp_no = d.emp_no</code></pre>
+<h3 id="6-题目描述"><a href="#6-题目描述" class="headerlink" title="6.题目描述"></a>6.题目描述</h3><p>查找所有员工入职时候的薪水情况，给出emp_no以及salary， 并按照emp_no进行逆序(请注意，一个员工可能有多次涨薪的情况)</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>对于内连接来说，使用on还是where作为筛选条件均可</p>
+<pre><code>select e.emp_no,s.salary
+from employees e
+join salaries s
+on e.emp_no = s.emp_no
+    and e.hire_date = s.from_date
+order by e.emp_no desc;</code></pre>
+<p>这种写法更通用 on 后面跟表的连接条件，where用来筛选数据</p>
+<pre><code>select e.emp_no, s.salary 
+from employees e 
+inner join salaries s
+on e.emp_no = s.emp_no
+where e.hire_date = s.from_date
+order by e.emp_no desc;</code></pre>
+<h3 id="7-题目描述"><a href="#7-题目描述" class="headerlink" title="7.题目描述"></a>7.题目描述</h3><p>查找薪水变动超过15次的员工号emp_no以及其对应的变动次数t</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>此题应注意以下四点：<br>1、用COUNT()函数和GROUP BY语句可以统计同一emp_no值的记录条数<br>2、根据题意，输出的涨幅次数为t，故用AS语句将COUNT(emp_no)的值转换为t<br>3、由于COUNT()函数不可用于WHERE语句中，故使用HAVING语句来限定t&gt;15的条件<br>4、最后存在一个理解误区，变动超过15次，salaries中相应的记录数应该超过16（从第2条记录开始算作第1次变动），<br>不过题目为了简单起见，将第1条记录当作第1次变动，所以令t&gt;15即可   </p>
+<pre><code>SELECT emp_no, COUNT(emp_no) AS t 
+FROM salaries 
+GROUP BY emp_no 
+HAVING t &gt; 15</code></pre>
+<h3 id="8-题目描述"><a href="#8-题目描述" class="headerlink" title="8.题目描述"></a>8.题目描述</h3><p>找出所有员工当前(to_date=’9999-01-01’)具体的薪水salary情况，对于相同的薪水只显示一次,并按照逆序显示</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>对于distinct与group by的使用:<br>1、当对系统的性能高并数据量大时使用group by<br>2、当对系统的性能不高时使用数据量少时两者皆可 3、尽量使用group by</p>
+<p>此题应注意以下两点：<br>1、相同薪水显示一次，则使用SELECT DISTINCT可去除重复值<br>2、要求逆序排列，则在最后应使用ORDER BY  </p>
+<pre><code>select distinct salary
+from salaries
+where to_date=&#39;9999-01-01&#39;
+order by salary desc</code></pre>
+<p>– distinct 可以使用 group by 替代</p>
+<pre><code>select salary 
+from salaries 
+where to_date=&#39;9999-01-01&#39; 
+group by salary 
+order by salary desc</code></pre>
+<h3 id="9-题目描述"><a href="#9-题目描述" class="headerlink" title="9.题目描述"></a>9.题目描述</h3><p>获取所有部门当前(dept_manager.to_date=’9999-01-01’)manager的当前(salaries.to_date=’9999-01-01’)薪水情况，<br>给出dept_no, emp_no以及salary(请注意，同一个人可能有多条薪水情况记录)</p>
+<pre><code>CREATE TABLE `dept_manager` (
+`dept_no` char(4) NOT NULL,
+`emp_no` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>解法：</p>
+<pre><code>select d.dept_no,d.emp_no,s.salary
+from dept_manager d
+join salaries s
+on d.emp_no = s.emp_no
+and d.to_date=&#39;9999-01-01&#39;
+and s.to_date=&#39;9999-01-01&#39;;    </code></pre>
+<p>更推荐这种写法</p>
+<pre><code>select d.dept_no,d.emp_no,s.salary
+from dept_manager d
+join salaries s
+on d.emp_no = s.emp_no
+where d.to_date=&#39;9999-01-01&#39;
+      and s.to_date=&#39;9999-01-01&#39;;   </code></pre>
+<p>下面这种写法是错的</p>
+<pre><code>select d.dept_no,d.emp_no,s.salary
+from dept_manager d
+join salaries s
+on d.emp_no = s.emp_no
+   and d.to_date=s.to_date=&#39;9999-01-01&#39;;   // 不能连等</code></pre>
+<h3 id="10-题目描述"><a href="#10-题目描述" class="headerlink" title="10.题目描述"></a>10.题目描述</h3><p>获取所有非manager的员工emp_no</p>
+<pre><code>CREATE TABLE `dept_manager` (
+`dept_no` char(4) NOT NULL,
+`emp_no` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>解法：</p>
+<pre><code>select 
+    e.emp_no
+from
+    employees e 
+left join 
+    dept_manager d
+on 
+    e.emp_no = d.emp_no
+where 
+    d.emp_no is null</code></pre>
+<p>法2：使用NOT IN选出在employees但不在dept_manager中的emp_no记录</p>
+<pre><code>SELECT emp_no FROM employees
+WHERE emp_no NOT IN (SELECT emp_no FROM dept_manager)</code></pre>
+<h3 id="11-题目描述"><a href="#11-题目描述" class="headerlink" title="11.题目描述"></a>11.题目描述</h3><p>获取所有员工当前的(dept_manager.to_date=’9999-01-01’)manager，如果员工是manager的话不显示(也就是如果当前的manager是自己的话结果不显示)。输出结果第一列给出当前员工的emp_no,第二列给出其manager对应的emp_no。</p>
+<pre><code>CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL, -- &#39;所有的员工编号&#39;
+`dept_no` char(4) NOT NULL, -- &#39;部门编号&#39;
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `dept_manager` (
+`dept_no` char(4) NOT NULL, -- &#39;部门编号&#39;
+`emp_no` int(11) NOT NULL, -- &#39;经理编号&#39;
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));</code></pre>
+<p>本题应注意以下三点：<br>1、用 INNER JOIN 连接两张表，因为要输出自己的经理，得知自己与经理的部门要相同，故有限制条件 de.dept_no = dm.dept_no<br>2、再用 WHERE 限制当前员工与当前经理的条件，即 dm.to_date 等于 ‘9999-01-01’ 、de.to_date 等于 ‘9999-01-01’ 、 de.emp_no 不等于 dm.emp_no<br>3、为了增强代码可读性，将 dept_emp 用别名 de 代替，dept_manager 用 dm 代替，最后根据题意将 de.emp_no 用别名 manager_no 代替后输出    </p>
+<pre><code>select de.emp_no,dm.emp_no
+from dept_emp de
+join dept_manager dm
+on de.dept_no = dm.dept_no
+where de.emp_no != dm.emp_no and de.to_date = &#39;9999-01-01&#39; and dm.to_date=&#39;9999-01-01&#39;;</code></pre>
+<h3 id="12-题目描述————重点，可以再看看，使用dense-rank-窗口函数试一试"><a href="#12-题目描述————重点，可以再看看，使用dense-rank-窗口函数试一试" class="headerlink" title="12.题目描述————重点，可以再看看，使用dense_rank()窗口函数试一试"></a>12.题目描述————重点，可以再看看，使用dense_rank()窗口函数试一试</h3><p>获取所有部门中当前(dept_emp.to_date = ‘9999-01-01’)员工当前(salaries.to_date=’9999-01-01’)薪水最高的相关信息，<br>给出dept_no, emp_no以及其对应的salary，按照部门升序排列。</p>
+<pre><code>CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>这是自己的写法是错误的，而且没有考虑分组后，一个部门的最高薪水有多个的情况<br>而且有个常识性错误，返回的字段有d.emp_no，但是这个字段并不是用来分组的字段<br>使用group by子句时，select子句中只能有聚合键、聚合函数、常数。emp_no并不符合这个要求。<br>所以这里的emp_no是随机返回的，而不是与最大工资相对应的那个</p>
+<pre><code>select 
+    d.dept_no, d.emp_no, max(s.salary) salary
+from
+    dept_emp d
+join 
+    salaries s
+on 
+    d.emp_no = s.emp_no
+where 
+    d.to_date=&#39;9999-01-01&#39; and s.to_date=&#39;9999-01-01&#39;
+group by 
+    d.dept_no</code></pre>
+<p>这是改进的方法 ，将上面的select返回的结果作为临时表，再去做表连接<br>因为上面的我们已经得到了每个部门的最高薪水的数值  </p>
+<pre><code>select
+    t1.dept_no,t1.emp_no,t1.salary
+from
+    --用于存放当前每个部门所有员工的编号和薪水
+    (select d.emp_no,d.dept_no,s.salary 
+    from dept_emp d 
+    join salaries s 
+    on d.emp_no=s.emp_no 
+    WHERE d.to_date = &#39;9999-01-01&#39; AND s.to_date = &#39;9999-01-01&#39;) t1
+join 
+    --用于存放当前每个部门薪水的最大值
+    (select d.dept_no,max(salary)as salary 
+    from dept_emp d 
+    join salaries s 
+    on d.emp_no=s.emp_no 
+    WHERE d.to_date = &#39;9999-01-01&#39; AND s.to_date = &#39;9999-01-01&#39; 
+    group by d.dept_no) t2
+on
+    t1.dept_no=t2.dept_no 
+    and t1.salary= t2.salary --前面的and 也可以换成where
+order by 
+    t1.dept_no asc;
+
+
+select de.dept_no, de.emp_no, s.salary
+from dept_emp de 
+inner join salaries s
+on de.emp_no = s.emp_no
+and de.to_date = &#39;9999-01-01&#39;
+and s.to_date = &#39;9999-01-01&#39;
+where s.salary = (select max(s2.salary)
+            from dept_emp de2 
+            inner join salaries s2
+            on de2.emp_no = s2.emp_no
+                and de2.to_date = &#39;9999-01-01&#39;
+                and s2.to_date = &#39;9999-01-01&#39;
+            where de2.dept_no = de.dept_no
+            group by de2.dept_no)
+order by de.dept_no</code></pre>
+<h3 id="13-题目描述"><a href="#13-题目描述" class="headerlink" title="13.题目描述"></a>13.题目描述</h3><p>从titles表获取按照title进行分组，每组个数大于等于2，给出title以及对应的数目t。</p>
+<pre><code>CREATE TABLE IF NOT EXISTS &quot;titles&quot; (
+`emp_no` int(11) NOT NULL,
+`title` varchar(50) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date DEFAULT NULL);</code></pre>
+<p>此题应注意以下三点：<br>1、用COUNT()函数和GROUP BY语句可以统计同一title值的记录条数<br>2、根据题意，输出每个title的个数为t，故用AS语句将COUNT(title)的值转换为t<br>3、由于WHERE后不可跟COUNT()函数，故用HAVING语句来限定t&gt;=2的条件   </p>
+<pre><code>SELECT title, COUNT(title) AS t 
+FROM titles
+GROUP BY title 
+HAVING t &gt;= 2</code></pre>
+<h3 id="14-题目描述"><a href="#14-题目描述" class="headerlink" title="14.题目描述"></a>14.题目描述</h3><p>从titles表获取按照title进行分组，每组个数大于等于2，给出title以及对应的数目t。<br>注意对于重复的emp_no进行忽略(即emp_no重复的title不计算，title对应的数目t不增加)。</p>
+<pre><code>CREATE TABLE IF NOT EXISTS `titles` (
+`emp_no` int(11) NOT NULL,
+`title` varchar(50) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date DEFAULT NULL);</code></pre>
+<p>解法：</p>
+<pre><code>SELECT title, COUNT(DISTINCT emp_no) AS t 
+FROM titles
+GROUP BY title 
+HAVING t &gt;= 2</code></pre>
+<h3 id="15-题目描述"><a href="#15-题目描述" class="headerlink" title="15.题目描述"></a>15.题目描述</h3><p>查找employees表所有emp_no为奇数，且last_name不为Mary(注意大小写)的员工信息，并按照hire_date逆序排列(题目不能使用mod函数)</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>我看了下你们都是用的取余做奇偶的判断，然而在机器中，位运算才是最厉害的🤣</p>
+<pre><code>select *
+from employees e
+where e.emp_no &amp; 1 = 1 and e.last_name != &#39;Mary&#39;
+ORDER BY e.hire_date desc</code></pre>
+<p>取余做奇偶的判断</p>
+<pre><code>select * from employees
+where emp_no % 2 = 1 and last_name != &#39;Mary&#39;
+order by hire_date desc</code></pre>
+<h3 id="16-题目描述"><a href="#16-题目描述" class="headerlink" title="16.题目描述"></a>16.题目描述</h3><p>统计出当前(titles.to_date=’9999-01-01’)各个title类型对应的员工当前(salaries.to_date=’9999-01-01’)薪水对应的平均工资。<br>结果给出title以及平均工资avg。</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));
+CREATE TABLE IF NOT EXISTS &quot;titles&quot; (
+`emp_no` int(11) NOT NULL,
+`title` varchar(50) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date DEFAULT NULL);</code></pre>
+<p>解法：</p>
+<pre><code>select t.title,avg(s.salary)
+from salaries s
+join titles t
+on s.emp_no=t.emp_no
+where s.to_date=&#39;9999-01-01&#39; and t.to_date=&#39;9999-01-01&#39;
+group by t.title</code></pre>
+<p>这样写也可以</p>
+<pre><code>select t.title,avg(s.salary)
+from salaries s
+join titles t
+on s.emp_no=t.emp_no
+and s.to_date=&#39;9999-01-01&#39; and t.to_date=&#39;9999-01-01&#39;
+group by t.title</code></pre>
+<h3 id="17-题目描述"><a href="#17-题目描述" class="headerlink" title="17.题目描述"></a>17.题目描述</h3><p>获取当前（to_date=’9999-01-01’）薪水第二多的员工的emp_no以及其对应的薪水salary</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>解法： </p>
+<pre><code>select emp_no,salary
+from salaries
+where to_date = &#39;9999-01-01&#39; and salary=(
+    select distinct salary
+    from salaries
+    where to_date=&#39;9999-01-01&#39;
+    order by salary desc 
+    limit 1,1);</code></pre>
+<p> 子查询是查出第二高的工资数值，这样写是为了避免多人同工资的情况<br> 避免了2个问题：<br>(1) 首先这样可以解决多个人工资相同的问题；<br>(2) 另外，筛选出第二多的工资时要注意distinct salary，否则不能选出第二多的工资。<br>改写成用group by </p>
+<pre><code>select emp_no,salary
+from salaries
+where to_date = &#39;9999-01-01&#39; and salary=(
+    select  salary
+    from salaries
+    where to_date=&#39;9999-01-01&#39;
+    group by salary
+    order by salary desc 
+    limit 1,1);</code></pre>
+<p>类似于自连接的写法</p>
+<pre><code>SELECT S1.EMP_NO, S1.SALARY 
+FROM SALARIES S1
+WHERE TO_DATE = &#39;9999-01-01&#39; AND
+    2 = (SELECT COUNT(DISTINCT S2.SALARY)
+                FROM SALARIES S2 
+                WHERE S2.SALARY &gt;= S1.SALARY)</code></pre>
+<p>MYSQL8.0支持窗口函数，我们这里也可以使用窗口函数来写</p>
+<pre><code>select c.emp_no, c.salary 
+from 
+    (select emp_no, salary, 
+            dense_rank() over(order by salary desc) as rk 
+    from salaries) as c
+where c.rk=2 #限定条件 第二名
+limit 1; #如果有多个同值（多个第二名），只取第一个值,如果全都要，就不要写这一句</code></pre>
+<h3 id="18-题目描述"><a href="#18-题目描述" class="headerlink" title="18.题目描述"></a>18.题目描述</h3><p>查找当前薪水(to_date=’9999-01-01’)排名第二多的员工编号emp_no、薪水salary、last_name以及first_name，你可以不使用order by完成吗</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>本题做法很多，主要思想为多层SELECT嵌套与MAX()函数结合</p>
+<p>1、先利用MAX()函数找出salaries中当前薪水最高者，即</p>
+<pre><code>SELECT MAX(salary) FROM salaries
+WHERE to_date = &#39;9999-01-01&#39;</code></pre>
+<p>2、再利用INNER JOIN连接employees与salaries表，限定条件为</p>
+<pre><code>【同一员工】e.emp_no =
+s.emp_no、【当前】s.to_date = &#39;9999-01-01&#39;与【非薪水最高】s.salary NOT IN (SELECT
+MAX(salary) FROM salaries WHERE to_date = &#39;9999-01-01&#39;)</code></pre>
+<p>3、在以上限制条件下找薪水最高者，即为所有员工薪水的次高者</p>
+<pre><code>SELECT e.emp_no, MAX(s.salary) AS salary, e.last_name, e.first_name 
+FROM employees AS e INNER JOIN salaries AS s 
+ON e.emp_no = s.emp_no
+WHERE s.to_date = &#39;9999-01-01&#39; 
+    AND s.salary NOT IN (SELECT MAX(salary) FROM salaries WHERE to_date = &#39;9999-01-01&#39;)</code></pre>
+<p>这种写法在MYSQL中不使用，因为MYSQL中max()只会返回一条数据，SQLite会把所有的最高工资显示出来</p>
+<p>在MySQL中，只显示一个，这样如果第二高的工资人数有多个的话，上述代码会漏掉其他人，</p>
+<p>解法1 max 任意相同工资人数</p>
+<pre><code>select e.emp_no,s.salary,e.last_name,e.first_name
+from
+employees e
+join 
+salaries s on e.emp_no=s.emp_no 
+and  s.to_date=&#39;9999-01-01&#39;
+and s.salary = (select max(salary)
+                from salaries
+                where salary&lt;(select max(salary) 
+                            from salaries 
+                            where to_date=&#39;9999-01-01&#39;
+                            )
+                        and to_date=&#39;9999-01-01&#39;
+                )</code></pre>
+<p>第二种 通用型可以求任意第几高，并且可以求多个形同工资；使用的是自连接<br>一个表的自连接，连接条件使用小于号，还可以筛选出小于最大的前两个的值.这里不理解</p>
+<pre><code>select e.emp_no,s.salary,e.last_name,e.first_name
+from
+employees e
+join 
+salaries s 
+on e.emp_no=s.emp_no 
+and  s.to_date=&#39;9999-01-01&#39;
+and s.salary = 
+(
+    select s1.salary
+    from 
+    salaries s1
+    join
+    salaries s2 
+    on s1.salary&lt;=s2.salary  --这里自连接 参考题目23的讲解；
+    and s1.to_date=&#39;9999-01-01&#39; and s2.to_date=&#39;9999-01-01&#39;
+    group by s1.salary   --这里别忘了
+    having count(distinct s2.salary)=2
+)</code></pre>
+<p> 括号内的自连接实现了 找到 第二高的工资数值，如果having count(distinct s2.salary)=1，则是找到第一高的工资数值=3 就是第三高的工资数值  </p>
+<p> 也可以使用窗口函数<br> #使用rank()函数</p>
+<pre><code>select emp_no,salary ,last_name,first_name
+from (
+    select e.emp_no,s.salary,e.last_name,e.first_name,
+            rank() over (order by salary desc) as rk  --dense_rank()也可以
+    from employees e
+    join salaries s 
+    on e.emp_no=s.emp_no
+    where s.to_date=&#39;9999-01-01&#39;
+    ) a
+where a.rk=2</code></pre>
+<h3 id="19-题目描述"><a href="#19-题目描述" class="headerlink" title="19.题目描述"></a>19.题目描述</h3><p>查找所有员工的last_name和first_name以及对应的dept_name，也包括暂时没有分配部门的员工</p>
+<pre><code>CREATE TABLE `departments` (
+`dept_no` char(4) NOT NULL,
+`dept_name` varchar(40) NOT NULL,
+PRIMARY KEY (`dept_no`));
+CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>第一步，将员工表employees与员工-部门关系表dept_emp进行外连接left join，连接条件是员工编号对应，这样得到的连表包含所有的员工信息+对应的部门编号信息（如果员工未分配部门，则按照外连接规则，默认填写null）；<br>第二步，将第一步中得到的连表，与部门信息表departments进行外连接，连接条件是部门编号对应，这样得到的新的连表即包含题目要求的所有记录。</p>
+<pre><code>select e.last_name,e.first_name,d.dept_name
+from
+employees e
+left join
+dept_emp de
+on e.emp_no = de.emp_no
+left join 
+departments d
+on de.dept_no = d.dept_no</code></pre>
+<h3 id="20-题目描述"><a href="#20-题目描述" class="headerlink" title="20.题目描述"></a>20.题目描述</h3><p>查找员工编号emp_no为10001其自入职以来的薪水salary涨幅(总共涨了多少)growth(可能有多次涨薪，没有降薪)</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>本题严谨的思路如下：（假设有降薪的情况，那么涨幅就是最近一次的工资-入职时的工资）  </p>
+<p>1、先分别找到emp_no=10001的员工的第一次工资记录与最后一次工资记录  </p>
+<p>2、再将最后一次工资记录减去第一次工资记录得到入职以来salary的涨幅，最后用别名growth代替  </p>
+<pre><code>SELECT ( 
+(SELECT salary FROM salaries WHERE emp_no = 10001 ORDER BY to_date DESC LIMIT 1) -
+(SELECT salary FROM salaries WHERE emp_no = 10001 ORDER BY to_date ASC LIMIT 1)
+) AS growth</code></pre>
+<h3 id="21-题目描述"><a href="#21-题目描述" class="headerlink" title="21.题目描述"></a>21.题目描述</h3><p>查找所有员工自入职以来的薪水涨幅情况，给出员工编号emp_no以及其对应的薪水涨幅growth，并按照growth进行升序<br>（注:可能有employees表和salaries表里存在记录的员工，有对应的员工编号和涨薪记录，但是已经离职了，<br>离职的员工salaries表的最新的to_date!=’9999-01-01’，这样的数据不显示在查找结果里面）</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL, --  &#39;入职时间&#39;
+PRIMARY KEY (`emp_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL, --  &#39;一条薪水记录开始时间&#39;
+`to_date` date NOT NULL, --  &#39;一条薪水记录结束时间&#39;
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>建立两张salary,第一张表记录员工目前的薪资水平，第二张表记录员工入职时的工资水平，两者做差值。</p>
+<pre><code>select a.emp_no, (b.salary - c.salary) as growth
+from
+    employees as a
+    join salaries as b
+    on a.emp_no = b.emp_no and b.to_date = &#39;9999-01-01&#39;
+    join salaries as c
+    on a.emp_no = c.emp_no and a.hire_date = c.from_date
+order by growth asc</code></pre>
+<h3 id="22-题目描述"><a href="#22-题目描述" class="headerlink" title="22.题目描述"></a>22.题目描述</h3><p>统计各个部门的工资记录数，给出部门编码dept_no、部门名称dept_name以及部门在salaries表里面有多少条记录sum</p>
+<pre><code>CREATE TABLE `departments` (
+`dept_no` char(4) NOT NULL,
+`dept_name` varchar(40) NOT NULL,
+PRIMARY KEY (`dept_no`));
+CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>解法：</p>
+<pre><code>select d.dept_no,d.dept_name,count(s.salary) as sum
+from
+dept_emp de
+join
+salaries s
+on de.emp_no = s.emp_no
+join
+departments d 
+on de.dept_no = d.dept_no
+group by de.dept_no</code></pre>
+<h3 id="23-题目描述-——自连接，注意理解，要能想象出自连接后返回的虚拟表的情况"><a href="#23-题目描述-——自连接，注意理解，要能想象出自连接后返回的虚拟表的情况" class="headerlink" title="23.题目描述 ——自连接，注意理解，要能想象出自连接后返回的虚拟表的情况"></a>23.题目描述 ——自连接，注意理解，要能想象出自连接后返回的虚拟表的情况</h3><p>对所有员工的当前(to_date=’9999-01-01’)薪水按照salary进行按照1-N的排名，相同salary并列且按照emp_no升序排列</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>输出描述:<br>    emp_no    salary    rank</p>
+<pre><code>10005    94692    1
+10009    94409    2
+10010    94409    2
+10001    88958    3
+10007    88070    4
+
+自连接 on s1.salary &lt;= s2.salary
+s1.emp_no   s1.salary   s2.emp_no     s2.salary
+10005        94692         10005             94692
+10009        94409         10005           94692
+10009        94409         10009            94409
+10009        94409         10010            94409
+……</code></pre>
+<p>在支持ROW_NUMBER、RANK、DENSE_RANK等函数的SQL<br>Server数据库中，有以下参考代码，可惜在本题的SQLite数据库中不支持。</p>
+<pre><code>SELECT emp_no, salary, DENSE_RANK() OVER(ORDER BY salary DESC) AS rank
+from salaries
+WHERE to_date = &#39;9999-01-01&#39; ORDER BY salary DESC, emp_no ASC</code></pre>
+<p>本题的主要思想是复用salaries表进行比较排名，具体思路如下：  </p>
+<p>1、从两张相同的salaries表（分别为s1与s2）进行对比分析，先将两表限定条件设为to_date =<br>‘9999-01-01’，挑选出当前所有员工的薪水情况。</p>
+<p>2、本题的精髓在于 s1.salary &lt;=<br>s2.salary，意思是在输出s1.salary的情况下，有多少个s2.salary大于等于s1.salary，比如当s1.salary=94409时，有3个s2.salary（分别为94692,94409,94409）大于等于它，但由于94409重复，利用COUNT(DISTINCT<br>s2.salary)去重可得工资为94409的rank等于2。其余排名以此类推。</p>
+<p>3、千万不要忘了GROUP BY<br>s1.emp_no，否则输出的记录只有一条（可能是第一条或者最后一条，根据不同的数据库而定），因为用了合计函数COUNT()</p>
+<p>4、最后先以 s1.salary 逆序排列，再以 s1.emp_no 顺序排列输出结果</p>
+<pre><code>SELECT s1.emp_no, s1.salary, COUNT(DISTINCT s2.salary) AS rank
+FROM salaries AS s1, salaries AS s2
+WHERE s1.to_date = &#39;9999-01-01&#39;  AND s2.to_date = &#39;9999-01-01&#39; AND s1.salary &lt;= s2.salary
+GROUP BY s1.emp_no
+ORDER BY s1.salary DESC, s1.emp_no ASC</code></pre>
+<h3 id="24-题目描述"><a href="#24-题目描述" class="headerlink" title="24.题目描述"></a>24.题目描述</h3><p>获取所有非manager员工当前的薪水情况，给出dept_no、emp_no以及salary ，当前表示to_date=’9999-01-01’ </p>
+<pre><code>CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `dept_manager` (
+`dept_no` char(4) NOT NULL,
+`emp_no` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>解题思路：<br>1、先用INNER JOIN连接employees和salaries，找出当前所有员工的工资情况<br>2、再用INNER JOIN连接dept_emp表，找到所有员工所在的部门<br>3、最后用限制条件de.emp_no NOT IN (SELECT emp_no FROM dept_manager WHERE to_date = ‘9999-01-01’)选出当前所有非manager员工，再依次输出dept_no、emp_no、salary</p>
+<pre><code>SELECT de.dept_no, s.emp_no, s.salary 
+FROM employees AS e 
+JOIN salaries AS s 
+ON s.emp_no = e.emp_no AND s.to_date = &#39;9999-01-01&#39;
+JOIN dept_emp AS de 
+ON e.emp_no = de.emp_no
+WHERE de.emp_no NOT IN (SELECT emp_no FROM dept_manager WHERE to_date = &#39;9999-01-01&#39;)</code></pre>
+<p>此外，还能作如下简化，不连接employees表也能完成：</p>
+<pre><code>SELECT de.dept_no, s.emp_no, s.salary 
+FROM dept_emp de 
+JOIN salaries s 
+ON s.emp_no = de.emp_no AND s.to_date = &#39;9999-01-01&#39;
+WHERE de.emp_no NOT IN (SELECT emp_no FROM dept_manager WHERE to_date = &#39;9999-01-01&#39;)</code></pre>
+<h3 id="25-题目描述"><a href="#25-题目描述" class="headerlink" title="25.题目描述"></a>25.题目描述</h3><p>获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to_date=’9999-01-01’,<br>结果第一列给出员工的emp_no，<br>第二列给出其manager的manager_no，<br>第三列给出该员工当前的薪水emp_salary,<br>第四列给该员工对应的manager当前的薪水manager_salary  </p>
+<pre><code>CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `dept_manager` (
+`dept_no` char(4) NOT NULL,
+`emp_no` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>本题主要思想是创建两张表（一张记录当前所有员工的工资，另一张只记录部门经理的工资）进行比较，具体思路如下：</p>
+<p>1、先用INNER JOIN连接salaries和demp_emp，建立当前所有员工的工资记录sem</p>
+<p>2、再用INNER JOIN连接salaries和demp_manager，建立当前所有部门经理的工资记录sdm</p>
+<p>3、最后用限制条件sem.dept_no = sdm.dept_no AND sem.salary &gt;<br>sdm.salary找出同一部门中工资比经理高的员工，并根据题意依次输出emp_no、manager_no、emp_salary、manager_salary</p>
+<pre><code>SELECT sem.emp_no AS emp_no, sdm.emp_no AS manager_no, sem.salary AS emp_salary, sdm.salary AS manager_salary
+FROM (SELECT s.salary, s.emp_no, de.dept_no 
+    FROM salaries s INNER JOIN dept_emp de 
+    ON s.emp_no = de.emp_no AND s.to_date = &#39;9999-01-01&#39; ) AS sem
+join 
+    (SELECT s.salary, s.emp_no, dm.dept_no 
+    FROM salaries s 
+    INNER JOIN dept_manager dm 
+    ON s.emp_no = dm.emp_no AND s.to_date = &#39;9999-01-01&#39; ) AS sdm
+on sem.dept_no = sdm.dept_no 
+where sem.salary &gt; sdm.salary</code></pre>
+<h3 id="26-题目描述"><a href="#26-题目描述" class="headerlink" title="26.题目描述"></a>26.题目描述</h3><p>汇总各个部门当前员工的title类型的分配数目，即结果给出部门编号dept_no、dept_name、其部门下所有的当前(dept_emp.to_date = ‘9999-01-01’)员工的当前(titles.to_date = ‘9999-01-01’)title以及该类型title对应的数目count<br>(注：因为员工可能有离职，所有dept_emp里面to_date不为’9999-01-01’就已经离职了，不计入统计，而且员工可能有晋升，所以如果titles.to_date 不为 ‘9999-01-01’，那么这个可能是员工之前的职位信息，也不计入统计)</p>
+<pre><code>CREATE TABLE `departments` (
+`dept_no` char(4) NOT NULL,
+`dept_name` varchar(40) NOT NULL,
+PRIMARY KEY (`dept_no`));
+CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+CREATE TABLE IF NOT EXISTS `titles` (
+`emp_no` int(11) NOT NULL,
+`title` varchar(50) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date DEFAULT NULL);</code></pre>
+<p>输出描述:</p>
+<pre><code>dept_no    dept_name    title                count
+
+d001    Marketing  Senior Engineer        1
+d001    Marketing   Staff                1
+d002    Finance        Senior Engineer        1</code></pre>
+<p>本题的关键在于用 GROUP BY 同时对 de.dept_no 和 t.title<br>进行分组，具体思路如下：</p>
+<p>1、先用 INNER JOIN 连接 dept_emp 与 salaries，根据测试数据添加限定条件 de.to_date =<br>‘9999-01-01’ AND t.to_date = ‘9999-01-01’，即当前员工的当前头衔</p>
+<p>2、再用 INNER JOIN 连接departments，限定条件为 de.dept_no =<br>dp.dept_no，即部门编号相同</p>
+<p>3、最后用 GROUP BY 同时对 de.dept_no 和 t.title 进行分组，用 COUNT(t.title)<br>统计相同部门下相同头衔的员工个数</p>
+<pre><code>SELECT de.dept_no, dp.dept_name, t.title, COUNT(t.title) AS count
+FROM titles t 
+JOIN dept_emp de 
+ON t.emp_no = de.emp_no AND de.to_date = &#39;9999-01-01&#39; AND t.to_date = &#39;9999-01-01&#39;
+JOIN departments AS dp 
+ON de.dept_no = dp.dept_no
+GROUP BY de.dept_no, t.title</code></pre>
+<p>也可以这样写</p>
+<pre><code>SELECT de.dept_no, dp.dept_name, t.title, COUNT(t.title) AS count
+FROM titles t 
+JOIN dept_emp de 
+ON t.emp_no = de.emp_no 
+JOIN departments AS dp 
+ON de.dept_no = dp.dept_no
+where de.to_date = &#39;9999-01-01&#39; AND t.to_date = &#39;9999-01-01&#39;
+GROUP BY de.dept_no, t.title</code></pre>
+<p>但是不能这么写</p>
+<pre><code>SELECT de.dept_no, dp.dept_name, t.title, COUNT(t.title) AS count
+FROM titles t 
+JOIN dept_emp de 
+ON t.emp_no = de.emp_no 
+where de.to_date = &#39;9999-01-01&#39; AND t.to_date = &#39;9999-01-01&#39;
+JOIN departments AS dp 
+ON de.dept_no = dp.dept_no
+GROUP BY de.dept_no, t.title</code></pre>
+<h3 id="27-题目描述"><a href="#27-题目描述" class="headerlink" title="27.题目描述"></a>27.题目描述</h3><p>给出每个员工每年薪水涨幅超过5000的员工编号emp_no、薪水变更开始日期from_date以及薪水涨幅值salary_growth，并按照salary_growth逆序排列。<br>提示：在sqlite中获取datetime时间对应的年份函数为strftime(‘%Y’, to_date)<br>(数据保证每个员工的每条薪水记录to_date-from_date=1年，而且同一员工的下一条薪水记录from_data=上一条薪水记录的to_data)</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>看大家争论的点都在一年的时间用年份去减不合理，然而题目其实规定了：数据保证每个员工的每条薪水记录to_data-from_data=1年，而且同一员工的下一条薪水记录from_data=上一条薪水记录的to_data   </p>
+<p>也就是说，每次提薪一定是一年期，而且一定是上条记录的to_data 等于 这次提薪的from_data，  </p>
+<pre><code>select b.emp_no, b.from_date, (b.salary-a.salary) as salary_growth
+from salaries as a
+join salaries as b
+on a.emp_no = b.emp_no
+where (b.salary-a.salary)&gt;5000
+        and strftime(&#39;%Y&#39;,b.to_date)-strftime(&#39;%Y&#39;,a.to_date)=1
+order by salary_growth desc;
+
+SELECT s1.emp_no,s2.from_date,(s2.salary-s1.salary) salary_growth
+FROM salaries s1
+join salaries s2
+on s1.emp_no = s2.emp_no
+WHERE strftime(&#39;%Y&#39;,s1.to_date) = strftime(&#39;%Y&#39;,s2.from_date) 
+    AND (s2.salary-s1.salary)&gt; 5000
+ORDER BY salary_growth DESC</code></pre>
+<h3 id="28-题目描述"><a href="#28-题目描述" class="headerlink" title="28.题目描述"></a>28.题目描述</h3><pre><code>film表
+字段                说明
+film_id              电影id
+title              电影名称
+description          电影描述信息
+
+CREATE TABLE IF NOT EXISTS film (
+film_id smallint(5)  NOT NULL DEFAULT &#39;0&#39;,
+title varchar(255) NOT NULL,
+description text,
+PRIMARY KEY (film_id));
+
+category表
+字段            说明
+category_id    电影分类id
+name        电影分类名称
+last_update    电影分类最后更新时间
+
+CREATE TABLE category  (
+category_id  tinyint(3)  NOT NULL ,
+name  varchar(25) NOT NULL, `last_update` timestamp,
+PRIMARY KEY ( category_id ));
+
+film_category表
+字段            说明
+film_id        电影id
+category_id    电影分类id
+last_update    电影id和分类id对应关系的最后更新时间
+
+CREATE TABLE film_category  (
+film_id  smallint(5)  NOT NULL,
+category_id  tinyint(3)  NOT NULL, `last_update` timestamp);</code></pre>
+<p>查找描述信息(film.description)中包含robot的电影对应的分类名称(category.name)以及电影数目(count(film.film_id))，而且还需要该分类包含电影总数量(count(film_category.category_id))&gt;=5部</p>
+<p>1、找到对应电影数量&gt;=5的所有分类，建立成虚表cc：  </p>
+<pre><code>(select category_id, count(film_id) as category_num 
+from  film_category  
+group by category_id 
+having count(film_id)&gt;=5) as cc</code></pre>
+<p>2、设定限制条件 f.description like ‘%robot%’<br>3、在表cc、f、fc、c中查找包括robot的电影对应的分类名称和对应的电影数目。</p>
+<pre><code>select c.name,count(f.film_id)
+from film f
+join film_category fc
+on f.film_id=fc.film_id
+join category c
+on fc.category_id = c.category_id    
+    and c.category_id in (select category_id 
+                        from film_category 
+                        group by category_id 
+                        having count(film_id)&gt;=5)
+where f.description like &#39;%robot%&#39;;</code></pre>
+<p>另一种写法：</p>
+<pre><code>select c.name,count(f.film_id)
+from film f
+join film_category fc
+on f.film_id=fc.film_id
+join category c
+on fc.category_id = c.category_id    
+join (select category_id 
+    from film_category 
+    group by category_id 
+    having count(film_id)&gt;=5) cc
+on c.category_id=cc.category_id
+where f.description like &#39;%robot%&#39;;</code></pre>
+<h3 id="29-表结构同上，使用join查询方式找出没有分类的电影id以及名称"><a href="#29-表结构同上，使用join查询方式找出没有分类的电影id以及名称" class="headerlink" title="29.表结构同上，使用join查询方式找出没有分类的电影id以及名称,"></a>29.表结构同上，使用join查询方式找出没有分类的电影id以及名称,</h3><p>解题思路：<br>是运用 LEFT JOIN 连接两表，用 IS NULL 语句限定条件：<br>1、用 LEFT JOIN 连接 film 和 film_category，限定条件为 f.film_id = fc.film_id，即连接电影 id 和电影分类 id，如果电影没有分类，则电影分类 id 显示 null</p>
+<p>2、再用 WHERE 来限定条件 fc.category_id IS NULL 选出没分类的电影</p>
+<p>/* 注意：最后一句若写成 ON f.film_id = fc.film_id AND fc.category_id IS NULL，则意义变成左连接两表 film_id 相同的记录，且 film_category 原表中的 fc.category 的值为 null。显然，原表中的 fc.category 的值恒不为 null，因此（f.film_id = fc.film_id AND fc.category_id IS NULL）恒为 FALSE，左连接后则只会显示 film 表的数据，而 film_category 表的数据全显示为 null */<br>这里可以帮助我们理解表连接的时候，什么时候使用on，什么时候使用where<br>如果是对连接后的虚拟表数据进行行筛选，我们要是用where<br>使用on 针对的原表的字段，而不是连接后的虚拟表的字段   </p>
+<pre><code>SELECT f.film_id, f.title 
+FROM film f 
+LEFT JOIN film_category fc
+ON f.film_id = fc.film_id 
+WHERE fc.category_id IS NULL</code></pre>
+<h3 id="30-题干同上，你能使用子查询的方式找出属于Action分类的所有电影对应的title-description吗"><a href="#30-题干同上，你能使用子查询的方式找出属于Action分类的所有电影对应的title-description吗" class="headerlink" title="30.题干同上，你能使用子查询的方式找出属于Action分类的所有电影对应的title,description吗"></a>30.题干同上，你能使用子查询的方式找出属于Action分类的所有电影对应的title,description吗</h3><p>自己的想法：<br>先在c表中找到action分类的ID，再去fc表中找到该ID下的所有电影id，再去f表中找到这些id对应的电影名称  </p>
+<pre><code>select f.title,f.description
+from film as f
+where f.film_id in (select fc.film_id from film_category as fc 
+                    where fc.category_id in (select c.category_id 
+                                            from category as c
+                                            where c.name = &#39;Action&#39;)); </code></pre>
+<p>非子查询的写法</p>
+<pre><code>select f.title,f.description 
+from film as f 
+join film_category as fc 
+on f.film_id = fc.film_id
+join category as c 
+on c.category_id = fc.category_id
+where c.name = &#39;Action&#39;;</code></pre>
+<h3 id="31-题目描述"><a href="#31-题目描述" class="headerlink" title="31.题目描述"></a>31.题目描述</h3><p>将employees表的所有员工的last_name和first_name拼接起来作为Name，中间以一个空格区分<br>(注：该数据库系统是sqllite,字符串拼接为 || 符号，不支持concat函数)</p>
+<pre><code>CREATE TABLE `employees` ( `emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>不同数据库连接字符串的方法不完全相同，MySQL、SQL<br>Server、Oracle等数据库支持CONCAT方法，而本题所用的SQLite数据库只支持用连接符号”||”来连接字符串</p>
+<pre><code>SELECT last_name||&quot; &quot;||first_name AS Name FROM employees</code></pre>
+<p>MySQL、SQL Server、Oracle等数据库支持CONCAT方法   </p>
+<p>CONCAT方法：  </p>
+<pre><code>select CONCAT(CONCAT(last_name,&quot; &quot;),first_name) as name  from employees</code></pre>
+<p>或者    </p>
+<pre><code>select CONCAT(last_name,&quot; &quot;，first_name) as name  from employees</code></pre>
+<p>本题中使用：<br>select last_name||” “||first_name as name  from employees</p>
+<h3 id="32-题目描述"><a href="#32-题目描述" class="headerlink" title="32.题目描述"></a>32.题目描述</h3><p>创建一个actor表，包含如下列信息(注：sqlite获取系统默认时间是datetime(‘now’,’localtime’))</p>
+<pre><code>列表            类型            是否为NULL    含义
+actor_id    smallint(5)    not null    主键id
+first_name    varchar(45)    not null    名字
+last_name    varchar(45)    not null    姓氏
+last_update    timestamp    not null    最后更新时间，默认是系统的当前时间</code></pre>
+<p>根据题意，本题关键点是actor_id的主键设置与last_update的默认获取系统时间：   </p>
+<p>1、在actor_id字段末尾加上PRIMARY KEY是将该字段设置为主键，或者在表的最后一行加上PRIMARY KEY(actor_id)<br>2、在last_update末尾加上DEFAULT是为该字段设置默认值，且默认值为(datetime(‘now’,’localtime’))，即获得系统时间，注意最外层的括号不可省略   </p>
+<pre><code>CREATE TABLE actor
+(
+actor_id smallint(5) NOT NULL PRIMARY KEY,
+first_name varchar(45) NOT NULL,
+last_name varchar(45) NOT NULL,
+last_update timestamp NOT NULL DEFAULT (datetime(&#39;now&#39;,&#39;localtime&#39;))
+);</code></pre>
+<p>或者：</p>
+<pre><code>CREATE TABLE actor
+(
+actor_id smallint(5) NOT NULL,
+first_name varchar(45) NOT NULL,
+last_name varchar(45) NOT NULL,
+last_update timestamp NOT NULL DEFAULT (datetime(&#39;now&#39;,&#39;localtime&#39;)),
+PRIMARY KEY(actor_id)
+);</code></pre>
+<h3 id="33-题目描述"><a href="#33-题目描述" class="headerlink" title="33.题目描述"></a>33.题目描述</h3><p>对于表actor批量插入如下数据(不能有2条insert语句哦!)</p>
+<pre><code>CREATE TABLE IF NOT EXISTS actor (
+actor_id smallint(5) NOT NULL PRIMARY KEY,
+first_name varchar(45) NOT NULL,
+last_name varchar(45) NOT NULL,
+last_update timestamp NOT NULL DEFAULT (datetime(&#39;now&#39;,&#39;localtime&#39;)))
+
+actor_id    first_name    last_name    last_update
+1            PENELOPE    GUINESS        2006-02-15 12:34:33
+2            NICK        WAHLBERG    2006-02-15 12:34:33</code></pre>
+<p>注意引号，除了数值类型，别的要加单引号</p>
+<pre><code>INSERT INTO actor 
+VALUES (1, &#39;PENELOPE&#39;, &#39;GUINESS&#39;, &#39;2006-02-15 12:34:33&#39;),
+    (2, &#39;NICK&#39;, &#39;WAHLBERG&#39;, &#39;2006-02-15 12:34:33&#39;)</code></pre>
+<h3 id="34-题目描述"><a href="#34-题目描述" class="headerlink" title="34.题目描述"></a>34.题目描述</h3><p>对于表actor批量插入如下数据,如果数据已经存在，请忽略(不支持使用replace操作)</p>
+<pre><code>CREATE TABLE IF NOT EXISTS actor (
+actor_id smallint(5) NOT NULL PRIMARY KEY,
+first_name varchar(45) NOT NULL,
+last_name varchar(45) NOT NULL,
+last_update timestamp NOT NULL DEFAULT (datetime(&#39;now&#39;,&#39;localtime&#39;)))
+
+actor_id    first_name    last_name    last_update
+&#39;3&#39;            &#39;ED&#39;        &#39;CHASE&#39;        &#39;2006-02-15 12:34:33&#39;</code></pre>
+<p>因为题目判定系统使用的是sqlite3，所以必须按sqlite3的写法来做</p>
+<pre><code>insert or ignore into actor 
+values(3,&#39;ED&#39;,&#39;CHASE&#39;,&#39;2006-02-15 12:34:33&#39;);</code></pre>
+<p>如果是mysql，那么把or去掉，像下面这样：</p>
+<pre><code>insert IGNORE into actor 
+values(3,&#39;ED&#39;,&#39;CHASE&#39;,&#39;2006-02-15 12:34:33&#39;);</code></pre>
+<p>这是对于mysql这么写，sqlite3这个中间要加or<br>insert into:插入数据,如果主键重复，则报错<br>insert repalce:插入替换数据,如果存在主键或unique数据则替换数据<br>insert ignore:如果存在主键或unique数据,则忽略。  </p>
+<pre><code>insert IGNORE into actor
+values(3,&#39;ED&#39;,&#39;CHASE&#39;,&#39;2006-02-15 12:34:33&#39;);</code></pre>
+<h3 id="35-题目描述"><a href="#35-题目描述" class="headerlink" title="35.题目描述"></a>35.题目描述</h3><p>对于如下表actor，其对应的数据为:</p>
+<pre><code>actor_id    first_name  last_name   last_update
+1           PENELOPE    GUINESS     2006-02-15 12:34:33
+2           NICK        WAHLBERG    2006-02-15 12:34:33</code></pre>
+<p>请你创建一个actor_name表，并且将actor表中的所有first_name以及last_name导入该表.<br>actor_name表结构如下：</p>
+<pre><code>列表         类型        是否为NULL   含义
+first_name  varchar(45) not null    名字
+last_name   varchar(45) not null    姓氏</code></pre>
+<p>题目使用的是sqlite3，可以这么做：</p>
+<pre><code>create table actor_name as 
+select first_name,last_name from actor;</code></pre>
+<p>如果是mysql，那么as可以去掉，也可以不去掉，例如：</p>
+<pre><code>create table actor_name
+select first_name,last_name from actor;</code></pre>
+<h3 id="36-题目描述"><a href="#36-题目描述" class="headerlink" title="36.题目描述"></a>36.题目描述</h3><p>针对如下表actor结构创建索引：<br>(注:在 SQLite 中,除了重命名表和在已有的表中添加列,ALTER TABLE 命令不支持其他操作)</p>
+<pre><code>CREATE TABLE IF NOT EXISTS actor (
+actor_id smallint(5) NOT NULL PRIMARY KEY,
+first_name varchar(45) NOT NULL,
+last_name varchar(45) NOT NULL,
+last_update timestamp NOT NULL DEFAULT (datetime(&#39;now&#39;,&#39;localtime&#39;)))</code></pre>
+<p>对first_name创建唯一索引uniq_idx_firstname，对last_name创建普通索引idx_lastname<br>(请先创建唯一索引，再创建普通索引)   </p>
+<p>根据题意，本题要用两条语句完成，先用 CREATE<br>UNIQUE INDEX … ON … 对first_name创建唯一索引值<br>再用 CREATE INDEX … ON …对last_name创建普通索引值  </p>
+<pre><code>CREATE UNIQUE INDEX uniq_idx_firstname ON actor(first_name);
+CREATE INDEX idx_lastname ON actor(last_name);</code></pre>
+<h3 id="37-题目描述"><a href="#37-题目描述" class="headerlink" title="37.题目描述"></a>37.题目描述</h3><p>针对actor表创建视图actor_name_view，只包含first_name以及last_name两列，<br>并对这两列重新命名，first_name为first_name_v，last_name修改为last_name_v：</p>
+<pre><code>CREATE TABLE IF NOT EXISTS actor (
+actor_id smallint(5) NOT NULL PRIMARY KEY,
+first_name varchar(45) NOT NULL,
+last_name varchar(45) NOT NULL,
+last_update timestamp NOT NULL DEFAULT (datetime(&#39;now&#39;,&#39;localtime&#39;)))</code></pre>
+<p>本题可用以下两种方法求解，区别在于命名VIEW中字段名的方法差异。<br>方法一：注意 CREATE VIEW … AS … 的 AS 是创建视图语法中的一部分，而后面的两个 AS 只是为字段创建别名</p>
+<pre><code>CREATE VIEW actor_name_view AS
+SELECT first_name AS first_name_v, last_name AS last_name_v
+FROM actor; </code></pre>
+<p>方法二：直接在视图名的后面用小括号创建视图中的字段名</p>
+<pre><code>CREATE VIEW actor_name_view (first_name_v, last_name_v) AS
+SELECT first_name, last_name FROM actor;</code></pre>
+<h3 id="39-题目描述"><a href="#39-题目描述" class="headerlink" title="39.题目描述"></a>39.题目描述</h3><p>针对salaries表emp_no字段创建索引idx_emp_no，查询emp_no为10005, 使用强制索引。</p>
+<pre><code>CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));
+create index idx_emp_no on salaries(emp_no);</code></pre>
+<p>SQLite中，使用 INDEXED BY 语句进行强制索引查询</p>
+<pre><code>SELECT * FROM salaries INDEXED BY idx_emp_no WHERE emp_no = 10005;</code></pre>
+<p>MySQL中，使用 FORCE INDEX 语句进行强制索引查询</p>
+<pre><code>SELECT * FROM salaries FORCE INDEX idx_emp_no WHERE emp_no = 10005;
+select * from salaries FORCE INDEX (idx_emp_no) where emp_no = 10005;</code></pre>
+<h3 id="40-题目描述–表结构修改使用alter-add"><a href="#40-题目描述–表结构修改使用alter-add" class="headerlink" title="40.题目描述–表结构修改使用alter add"></a>40.题目描述–表结构修改使用alter add</h3><p>存在actor表，包含如下列信息：</p>
+<pre><code>CREATE TABLE IF NOT EXISTS actor (
+actor_id smallint(5) NOT NULL PRIMARY KEY,
+first_name varchar(45) NOT NULL,
+last_name varchar(45) NOT NULL,
+last_update timestamp NOT NULL DEFAULT (datetime(&#39;now&#39;,&#39;localtime&#39;)));</code></pre>
+<p>现在在last_update后面新增加一列名字为create_date, 类型为datetime, NOT NULL，默认值为’0000-00-00 00:00:00’  </p>
+<p>用 ALTER TABLE … ADD … 语句可以向已存在的表插入新字段，并且能够与创建表时一样，在字段名和数据类型后加入NOT NULL、DEFAULT等限定，  </p>
+<pre><code>ALTER TABLE actor ADD create_date datetime NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;;</code></pre>
+<h3 id="41-题目描述"><a href="#41-题目描述" class="headerlink" title="41.题目描述"></a>41.题目描述</h3><p>构造一个触发器audit_log，在向employees_test表中插入一条数据的时候，触发插入相关的数据到audit中。</p>
+<pre><code>CREATE TABLE employees_test(
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL,
+ADDRESS CHAR(50),
+SALARY REAL
+);
+CREATE TABLE audit(
+EMP_no INT NOT NULL,
+NAME TEXT NOT NULL
+);</code></pre>
+<p>构造触发器时注意以下几点：<br>1、用 CREATE TRIGGER 语句构造触发器，用 BEFORE或AFTER 来指定在执行后面的SQL语句之前或之后来触发TRIGGER<br>2、触发器执行的内容写出 BEGIN与END 之间<br>3、可以使用 NEW与OLD 关键字访问触发后或触发前的employees_test表单记录  </p>
+<pre><code>CREATE TRIGGER audit_log AFTER INSERT ON employees_test
+BEGIN
+    INSERT INTO audit VALUES (NEW.ID, NEW.NAME);
+END; </code></pre>
+<ol>
+<li>create trigger ：创建触发器</li>
+<li>触发器要说明是在after 还是before事务发生时触发</li>
+<li>要指明是insert 、delete、update操作</li>
+<li>on 表名</li>
+<li>begin和end之间写触发的动作</li>
+<li>new 关键字表示更新后的表的字段 ，old表示更新前的表的字段 </li>
+</ol>
+<h3 id="42-题目描述"><a href="#42-题目描述" class="headerlink" title="42.题目描述"></a>42.题目描述</h3><p>删除emp_no重复的记录，只保留最小的id对应的记录。</p>
+<pre><code>CREATE TABLE IF NOT EXISTS titles_test (
+id int(11) not null primary key,
+emp_no int(11) NOT NULL,
+title varchar(50) NOT NULL,
+from_date date NOT NULL,
+to_date date DEFAULT NULL);</code></pre>
+<p>本题思路如下：先用 GROUP BY 和 MIN() 选出每个 emp_no 分组中最小的 id，然后用 DELETE FROM<br>… WHERE … NOT IN … 语句删除 “非每个分组最小id对应的所有记录”</p>
+<pre><code>DELETE FROM titles_test WHERE id NOT IN 
+(SELECT MIN(id) FROM titles_test GROUP BY emp_no)</code></pre>
+<p>上述代码在MySQL中会出错。抛出异常：</p>
+<pre><code>‘ERROR 1093 (HY000): You can&#39;t specify target table &#39;titles_test&#39; for update in FROM clause。’</code></pre>
+<p>经查询，MySQL的UPDATE或DELETE中子查询不能为同一张表，可将查询结果再次SELECT。</p>
+<pre><code>DELETE FROM titles_test 
+WHERE id NOT IN (
+        SELECT *
+        FROM(
+        SELECT MIN(id) 
+        FROM titles_test 
+        GROUP BY emp_no
+        ) AS a);</code></pre>
+<p>用*不是很好，可以改写成</p>
+<pre><code>DELETE FROM titles_test 
+WHERE id NOT IN (
+        SELECT a.id
+        FROM(
+        SELECT MIN(id) id
+        FROM titles_test 
+        GROUP BY emp_no
+        ) AS a);</code></pre>
+<h3 id="43-题目描述"><a href="#43-题目描述" class="headerlink" title="43.题目描述"></a>43.题目描述</h3><p>将所有to_date为9999-01-01的全部更新为NULL,且 from_date更新为2001-01-01。</p>
+<pre><code>CREATE TABLE IF NOT EXISTS titles_test (
+id int(11) not null primary key,
+emp_no int(11) NOT NULL,
+title varchar(50) NOT NULL,
+from_date date NOT NULL,
+to_date date DEFAULT NULL);</code></pre>
+<p>用 UPDATE 语句更新若干列的最基本用法<br>另外要注意若干列 to_date = NULL 和 from_date = ‘2001-01-01’ 之间只能用逗号连接，切勿用AND 连接。<br>需要注意的就是应该=NULL，而不是is NULL   </p>
+<pre><code>UPDATE titles_test SET to_date = NULL, from_date = &#39;2001-01-01&#39; 
+WHERE to_date = &#39;9999-01-01&#39;;</code></pre>
+<h3 id="44-题目描述"><a href="#44-题目描述" class="headerlink" title="44.题目描述"></a>44.题目描述</h3><p>将id=5以及emp_no=10001的行数据替换成id=5以及emp_no=10005,其他数据保持不变，使用replace实现。</p>
+<pre><code>CREATE TABLE IF NOT EXISTS titles_test (
+id int(11) not null primary key,
+emp_no int(11) NOT NULL,
+title varchar(50) NOT NULL,
+from_date date NOT NULL,
+to_date date DEFAULT NULL);</code></pre>
+<p>使用update是简单的  </p>
+<pre><code>update titles_test 
+set id = 5,
+    emp_no = 10005
+where id = 5 and emp_no = 10001;</code></pre>
+<p>本题考查的是replace函数，其中包含三个参数，第一个参数为该字段的名称，第二参数为该字段的需要被修改值，第三个参数为该字段修改后的值。</p>
+<pre><code>update titles_test 
+set emp_no = replace(emp_no,10001,10005)
+where id = 5</code></pre>
+<p>使用replace比较难<br>本题说用replace实现，在Mysql中，应该是考察replace into语句。</p>
+<pre><code>replace into &lt;表名&gt; (&lt;列名&gt;) values(值1,值2…) （列名可以省略）   </code></pre>
+<p>这题要把所有列的值都列出来的原因是：如果在replace语句中没有指定某列， 在replace之后这列的值会被置空 。<br>replace into 跟 insert （update同理）功能类似，不同点在于：replace into 首先尝试插入数据到表中， </p>
+<ul>
+<li>如果发现表中已经有此行数据（根据主键或者唯一索引判断）则先删除此行数据，然后插入新的数据。 </li>
+<li>否则，直接插入新数据。要注意的是：插入数据的表必须有主键或者是唯一索引！<br>否则的话，replace into 会直接插入数据，这将导致表中出现重复的数据。   </li>
+</ul>
+<p>MySQL replace into 有三种形式：</p>
+<ul>
+<li>replace &lt;表名&gt;(&lt;列名&gt;) values(…)</li>
+<li>replace &lt;表名&gt;(&lt;列名&gt;) select …</li>
+<li>replace &lt;表名&gt; set &lt;列名&gt;=value, …</li>
+</ul>
+<p>前两种形式用的多些。其中 “into” 关键字可以省略，不过最好加上 “into”，这样意思更加直观。</p>
+<pre><code>replace into titles_test
+    select 5,10005,title,from_date,to_date 
+    from titles_test 
+    where id=5;</code></pre>
+<p>不是很理解这种写法，但是确实where条件后面只需要写id=5即可，而不需要and emp_no = 10001，因为id是primary key，没有重复且不null，所有只有一个id=5，就可以实现条件的锁定<br>可以这么理解，找到id=5的输出其对应的title,from_date,to_date ，而id和emp_no字段使用我们写的5,10005，这里省略了列名  </p>
+<h3 id="45-题目描述"><a href="#45-题目描述" class="headerlink" title="45.题目描述"></a>45.题目描述</h3><p>将titles_test表名修改为titles_2017。</p>
+<pre><code>CREATE TABLE IF NOT EXISTS titles_test (
+id int(11) not null primary key,
+emp_no int(11) NOT NULL,
+title varchar(50) NOT NULL,
+from_date date NOT NULL,
+to_date date DEFAULT NULL);</code></pre>
+<p>两个方法在mysql控制台中都可以成功，sqlite只有第二条可以成功，记住通用的写法即可</p>
+<pre><code>RENAME TABLE titles_test to titles_2017;  --仅仅适用于MYSQL
+
+ALTER TABLE titles_test RENAME TO titles_2017;   --别忘了to</code></pre>
+<h3 id="46-题目描述"><a href="#46-题目描述" class="headerlink" title="46.题目描述"></a>46.题目描述</h3><p>在audit表上创建外键约束，其emp_no对应employees_test表的主键id。<br>(audit已经创建，需要先drop)</p>
+<pre><code>CREATE TABLE employees_test(
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL,
+ADDRESS CHAR(50),
+SALARY REAL
+);
+
+CREATE TABLE audit(
+EMP_no INT NOT NULL,
+create_date datetime NOT NULL
+);</code></pre>
+<p>(注：创建表的时候，字段的顺序不要改变)</p>
+<p>MySQL下，可以直接使用如下语句 修改：  </p>
+<pre><code>alter table audit
+add foreign key(emp_no) references employees_test(id)</code></pre>
+<h3 id="48-题目描述"><a href="#48-题目描述" class="headerlink" title="48.题目描述"></a>48.题目描述</h3><p>请你写出更新语句，将所有获取奖金的员工当前的(salaries.to_date=’9999-01-01’)薪水增加10%。(emp_bonus里面的emp_no都是当前获奖的所有员工)</p>
+<pre><code>create table emp_bonus(
+emp_no int not null,
+btype smallint not null);
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL, PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>解法：</p>
+<pre><code>UPDATE salaries 
+SET salary = salary * 1.1 
+WHERE emp_no IN
+    (SELECT s.emp_no 
+    FROM salaries s 
+    JOIN emp_bonus eb 
+    ON s.emp_no = eb.emp_no AND s.to_date = &#39;9999-01-01&#39;)
+    and to_date = &#39;9999-01-01&#39;</code></pre>
+<p>对于子查询中select语句的内连接来说，连接条件的 on 后面的and改成where也一样的；<br>但是对于left 和right 这两个外连接来说，连接条件后面的and 改成where 是不一样的，   因为where是对连接过后的虚拟表进行条件筛选，on 是针对用来连接的原始表的约束</p>
+<h3 id="49-题目描述"><a href="#49-题目描述" class="headerlink" title="49.题目描述"></a>49.题目描述</h3><p>针对库中的所有表生成select count(*)对应的SQL语句，如数据库里有以下表，<br>(注:在 SQLite 中用 “||” 符号连接字符串，无法使用concat函数)</p>
+<pre><code>employees
+departments
+dept_emp
+dept_manage
+salaries
+titles
+emp_bonus</code></pre>
+<p>那么就会输出以下的样子:</p>
+<pre><code>cnts
+select count(*) from employees;
+select count(*) from departments;
+select count(*) from dept_emp;
+select count(*) from dept_manager;
+select count(*) from salaries;
+select count(*) from titles;
+select count(*) from emp_bonus;</code></pre>
+<p> – mysql中针对库,获取所有表名字代码为</p>
+<pre><code>select table_name from information_schema.tables where table_schema=&#39;shop&#39; ; # （其中shop为数据库名字）</code></pre>
+<p>– 合并字段用concat()<br>– 上述两个步骤合并为一条语句   </p>
+<pre><code>select concat(&#39;select count(*) from&#39;, &#39; &#39;, TABLE_NAME, &#39;;&#39;) as cnts
+from (select table_name from information_schema.tables where table_schema=&#39;shop&#39;) a;</code></pre>
+<p>from 后面有个空格，千万别忘了，这里直接把空格单独写出来了’ ‘</p>
+<p>上面已给出在SQLite中的通过答案</p>
+<p>在Mysql中，针对库中的所有表生成select count(*)对应的SQL语句：</p>
+<pre><code>select concat(&quot;select count(*) from &quot;,table_name,&quot;;&quot;) as cnts 
+from information_schema.tables where table_schema=&#39;niuke&#39;;   </code></pre>
+<p>– （niuke是我做牛客sql题专门建立的一个数据库）<br>在Mysql中，针对所有数据库中的所有表生成select count(*)对应的SQL语句：</p>
+<pre><code>select concat(&quot;select count(*) from &quot;,table_name,&quot;;&quot;) as cnts
+from (select table_name from information_schema.tables) as new;</code></pre>
+<p>MySQL中获得所有表的名称：</p>
+<pre><code>select table name
+from information_schema.tables where table schema=&#39;mydata&#39;;</code></pre>
+<p>MySQL语句中，‘mydata’是当前数据库的名称的意思<br>information_schema.tables表示从表名中选择，<br>information_schema.xxx中xxx可选的还有很多字段，如information_schema.columns表示从所有表的所有字段中选择。<br>MySQL字符串的连接使用concat函数，多个字符串连接中间用逗号隔开。  </p>
+<p>另外，结果中from和表名之间是有一个空格的，所以在字符串”select count(*) from “的from后要加一个空格。</p>
+<h3 id="50-题目描述"><a href="#50-题目描述" class="headerlink" title="50.题目描述"></a>50.题目描述</h3><p>将employees表中的所有员工的last_name和first_name通过一个单引号连接起来。(不支持concat，请用||实现)</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>输出格式:</p>
+<pre><code>--name
+--Facello&#39;Georgi
+--Simmel&#39;Bezalel
+--Bamford&#39;Parto</code></pre>
+<p>— mysql中用concat()连接字符串</p>
+<pre><code>select concat(last_name,&quot;&#39;&quot;,first_name) as name 
+from employees;</code></pre>
+<p>在本题所用的SQLite数据库中，只支持用连接符号”||”来连接字符串，不支持用函数连接</p>
+<pre><code>SELECT last_name || &quot;&#39;&quot; || first_name FROM employees</code></pre>
+<h3 id="51-题目描述"><a href="#51-题目描述" class="headerlink" title="51.题目描述"></a>51.题目描述</h3><p>查找字符串’10,A,B’ 中逗号’,’出现的次数cnt。<br>运行代码:</p>
+<pre><code>SELECT length(&#39;10,A,B&#39;) - length(REPLACE( &#39;10,A,B&#39;,&#39;,&#39;,&#39;&#39;));</code></pre>
+<p>length():统计字符串长度<br>replace(字符串，“需要替换的子串”，“用于替换子串的字符串”）<br>将逗号替换为空，字符串缩短的长度就是逗号的个数</p>
+<h3 id="52-题目描述"><a href="#52-题目描述" class="headerlink" title="52.题目描述"></a>52.题目描述</h3><p>获取Employees中的first_name，查询按照first_name最后两个字母，按照升序进行排列  </p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>本题考查 substr(X,Y,Z) 或 substr(X,Y) 函数的使用。   </p>
+<ul>
+<li>其中X是要截取的字符串。   </li>
+<li>Y是字符串的起始位置（注意第一个字符的位置为1，而不为0），取值范围是±(1~length(X))，   <ul>
+<li>当Y等于length(X)时，则截取最后一个字符；   </li>
+<li>当Y等于负整数-n时，则从倒数第n个字符处截取。   </li>
+</ul>
+</li>
+<li>Z是要截取字符串的长度，取值范围是正整数，<ul>
+<li>若Z省略，则从Y处一直截取到字符串末尾；</li>
+<li>若Z大于剩下的字符串长度，也是截取到字符串末尾为止。</li>
+</ul>
+</li>
+</ul>
+<p>代码：</p>
+<pre><code>SELECT first_name FROM employees ORDER BY substr(first_name,length(first_name)-1) </code></pre>
+<p>或</p>
+<pre><code>SELECT first_name FROM employees ORDER BY substr(first_name,-2) </code></pre>
+<h3 id="53-题目描述"><a href="#53-题目描述" class="headerlink" title="53.题目描述"></a>53.题目描述</h3><p>按照dept_no进行汇总，属于同一个部门的emp_no按照逗号进行连接，结果给出dept_no以及连接出的结果employees</p>
+<pre><code>CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));</code></pre>
+<p>mysql写法</p>
+<pre><code>select dept_no,group_concat(emp_no SEPARATOR &#39;,&#39;) from dept_emp group by dept_no;</code></pre>
+<p>本题要用到SQLite的聚合函数group_concat(X,Y)，其中X是要连接的字段，Y是连接时用的符号，可省略，默认为逗号。<br>此函数必须与 GROUP BY 配合使用。<br>此题以 dept_no 作为分组，将每个分组中不同的emp_no用逗号连接起来（即可省略Y）。   </p>
+<pre><code>SELECT dept_no, group_concat(emp_no) AS employees
+FROM dept_emp GROUP BY dept_no</code></pre>
+<h2 id="54-题目描述"><a href="#54-题目描述" class="headerlink" title="54.题目描述"></a>54.题目描述</h2><p>查找排除最大、最小salary之后的当前(to_date = ‘9999-01-01’ )员工的平均工资avg_salary。</p>
+<pre><code>CREATE TABLE `salaries` ( `emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>解法：</p>
+<pre><code>SELECT AVG(salary) AS avg_salary FROM salaries 
+WHERE to_date = &#39;9999-01-01&#39; 
+    AND salary NOT IN (SELECT MAX(salary) FROM salaries WHERE to_date = &#39;9999-01-01&#39;)
+    AND salary NOT IN (SELECT MIN(salary) FROM salaries WHERE to_date = &#39;9999-01-01&#39;)</code></pre>
+<p>为什么不用如下写法呢？（注意写法是错的）</p>
+<pre><code>SELECT AVG(salary) AS avg_salary FROM salaries 
+WHERE to_date = &#39;9999-01-01&#39; 
+    AND salary NOT IN (SELECT MAX(salary),MIN(salary) FROM salaries WHERE to_date = &#39;9999-01-01&#39;);</code></pre>
+<p>因为not in后面处理的是一个集合，select max(salary),min(salary) 的查询结果是两个集合，<br>当然你可以写成</p>
+<pre><code>not in ((select max(salary) from salaries where...),(select min(salary) from salaries where...))</code></pre>
+<h3 id="55-题目描述"><a href="#55-题目描述" class="headerlink" title="55.题目描述"></a>55.题目描述</h3><p>分页查询employees表，每5行一页，返回第2页的数据</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>根据题意，每行5页，返回第2页的数据，即返回第6~10条记录，以下有两种方法可以解决：<br>方法一：利用 LIMIT 和 OFFSET 关键字。LIMIT 后的数字代表返回几条记录，OFFSET 后的数字代表从第几条记录开始返回（第一条记录序号为0），也可理解为跳过多少条记录后开始返回。</p>
+<pre><code>SELECT * FROM employees LIMIT 5 OFFSET 5;</code></pre>
+<p>方法二：只利用 LIMIT 关键字。注意：在 LIMIT X,Y 中，Y代表返回几条记录，X代表从第几条记录开始返回（第一条记录序号为0），切勿记反。  </p>
+<pre><code>SELECT * FROM employees LIMIT 5,5</code></pre>
+<h3 id="56-题目描述"><a href="#56-题目描述" class="headerlink" title="56.题目描述"></a>56.题目描述</h3><p>获取所有员工的emp_no、部门编号dept_no以及对应的bonus类型btype和received，没有分配奖金的员工不显示对应的bonus类型btype和received</p>
+<pre><code>CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+
+CREATE TABLE `emp_bonus`(
+emp_no int(11) NOT NULL,
+received datetime NOT NULL,
+btype smallint(5) NOT NULL);
+
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>解法：</p>
+<pre><code>SELECT em.emp_no, de.dept_no, eb.btype, eb.received
+FROM employees AS em 
+JOIN dept_emp AS de  
+ON em.emp_no = de.emp_no
+LEFT JOIN emp_bonus AS eb 
+ON de.emp_no = eb.emp_no</code></pre>
+<p>–严谨来说这里因为是left join 因为不是所有的员工大都是分配了部门的，不过题干想要我们返回的员工是已经分配部门的员工</p>
+<h3 id="57-题目描述"><a href="#57-题目描述" class="headerlink" title="57.题目描述"></a>57.题目描述</h3><p>使用含有关键字exists查找未分配具体部门的员工的所有信息。</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));
+CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));</code></pre>
+<p>解法：</p>
+<pre><code>SELECT * FROM employees WHERE NOT EXISTS 
+(SELECT emp_no FROM dept_emp WHERE emp_no = employees.emp_no)</code></pre>
+<p>本题可以用EXISTS和IN两种方法：</p>
+<p>/* 1. EXISTS */</p>
+<pre><code>SELECT *
+FROM employees
+WHERE NOT EXISTS (SELECT emp_no
+                FROM dept_emp
+                WHERE employees.emp_no = dept_emp.emp_no);</code></pre>
+<p>exists的内查询必须要和外查询有关联，因为要将外查询一条条代入内查询，所以这里的内查询需要用where条件构建量表之间对的联系<br>/* 2. IN */</p>
+<pre><code>SELECT *
+FROM employees
+WHERE emp_no NOT IN (SELECT emp_no
+                    FROM dept_emp);</code></pre>
+<p>什么时候用EXISTS，什么时候用IN？  </p>
+<ul>
+<li>主表为employees，从表为dept_emp，在主表和从表都对关联的列emp_no建立索引的前提下：<ul>
+<li>当主表比从表大时，IN查询的效率较高；</li>
+<li>当从表比主表大时，EXISTS查询的效率较高；  </li>
+</ul>
+</li>
+<li>原因如下：  <ul>
+<li>in是先执行子查询，得到一个结果集，将结果集代入外层谓词条件执行主查询，子查询只需要执行一次</li>
+<li>exists是先从主查询中取得一条数据，再代入到子查询中，执行一次子查询，判断子查询是否能返回结果，<br>主查询有多少条数据，子查询就要执行多少次</li>
+</ul>
+</li>
+</ul>
+<h3 id="58-题目描述"><a href="#58-题目描述" class="headerlink" title="58.题目描述"></a>58.题目描述</h3><p>存在如下的视图：</p>
+<pre><code>create view emp_v as select * from employees where emp_no &gt;10005;
+CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>获取employees中的行数据，且这些行也存在于emp_v中。注意不能使用intersect关键字。<br>(你能不用select * from employees where emp_no &gt;10005 这条语句完成吗，挑战一下自己对视图的理解)     </p>
+<p>根据题意，不能使用 INTERSECT 关键字，但由于视图 emp_v 的记录是从 employees 中导出的，<br>因此要判断两者中相等的数据，只需要判断emp_no相等即可。<br>方法一：用 WHERE 选取二者 emp_no 相等的记录</p>
+<pre><code>SELECT em.* 
+FROM employees AS em
+join emp_v AS ev 
+on em.emp_no = ev.emp_no;</code></pre>
+<p>方法二：由于emp_v的全部记录均由 employees 导出，因此可以投机取巧，直接输出 emp_v 所有记录</p>
+<pre><code>SELECT * FROM emp_v;</code></pre>
+<p>视图和表的区别在于“是否保存了实际的数据” ，在编写select语句时，不需要特别在意表和视图有什么不同，可以直接使用视图作为表进行查询 </p>
+<h3 id="59-题目描述"><a href="#59-题目描述" class="headerlink" title="59.题目描述"></a>59.题目描述</h3><p>获取有奖金的员工相关信息。</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));
+
+CREATE TABLE `dept_emp` (
+`emp_no` int(11) NOT NULL,
+`dept_no` char(4) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`dept_no`));
+create table emp_bonus(
+emp_no int not null,
+received datetime not null,
+btype smallint not null);
+
+CREATE TABLE `salaries` (
+`emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL, PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>给出emp_no、first_name、last_name、奖金类型btype、对应的当前薪水情况salary以及奖金金额bonus。<br>bonus类型btype为1其奖金为薪水salary的10%，btype为2其奖金为薪水的20%，其他类型均为薪水的30%。<br>当前薪水表示to_date=’9999-01-01’    </p>
+<p>本题主要考查 CASE 表达式的用法。<br>即当 btype = 1 时，得到 salary * 0.1；当 btype = 2 时，得到 salary * 0.2；其他情况得到 salary * 0.3   </p>
+<pre><code>SELECT e.emp_no, e.first_name, e.last_name, b.btype, s.salary, 
+        (CASE b.btype 
+        WHEN 1 THEN s.salary * 0.1
+        WHEN 2 THEN s.salary * 0.2
+        ELSE s.salary * 0.3 END) AS bonus
+FROM employees AS e 
+JOIN emp_bonus AS b 
+ON e.emp_no = b.emp_no
+JOIN salaries AS s 
+ON e.emp_no = s.emp_no and s.to_date = &#39;9999-01-01&#39;; </code></pre>
+<p>–这里的and可以直接改成where，因为是内连接</p>
+<h3 id="60-题目描述"><a href="#60-题目描述" class="headerlink" title="60.题目描述"></a>60.题目描述</h3><p>按照salary的累计和running_total，其中running_total为前N个当前( to_date = ‘9999-01-01’)员工的salary累计和，其他以此类推。<br>具体结果如下Demo展示。。</p>
+<pre><code>CREATE TABLE `salaries` ( `emp_no` int(11) NOT NULL,
+`salary` int(11) NOT NULL,
+`from_date` date NOT NULL,
+`to_date` date NOT NULL,
+PRIMARY KEY (`emp_no`,`from_date`));</code></pre>
+<p>输出格式:</p>
+<pre><code>emp_no  salary  running_total
+10001   88958   88958
+10002   72527   161485
+10003   43311   204796</code></pre>
+<p>本题的思路为复用 salaries 表进行子查询，最后以 s1.emp_no 排序输出求和结果。<br>1、输出的第三个字段，是由一个 SELECT 子查询构成。将子查询内复用的 salaries 表记为 s2，主查询的 salaries 表记为 s1，当主查询的 s1.emp_no 确定时，对子查询中不大于 s1.emp_no 的 s2.emp_no 所对应的薪水求和<br>2、注意是对员工当前的薪水求和，所以在主查询和子查询内都要加限定条件 to_date = ‘9999-01-01’  </p>
+<pre><code>SELECT s1.emp_no, s1.salary, (SELECT SUM(s2.salary) 
+                            FROM salaries AS s2 
+                            WHERE s2.emp_no &lt;= s1.emp_no AND s2.to_date = &#39;9999-01-01&#39;) AS running_total 
+FROM salaries AS s1 
+WHERE s1.to_date = &#39;9999-01-01&#39; 
+ORDER BY s1.emp_no;</code></pre>
+<p>– 使用窗口函数 over 更简单</p>
+<pre><code>select emp_no,salary,sum (salary) over (order by emp_no) as running_total 
+from salaries
+where to_date = &#39;9999-01-01&#39;
+order by emp_no;</code></pre>
+<h3 id="61-题目描述"><a href="#61-题目描述" class="headerlink" title="61.题目描述"></a>61.题目描述</h3><p>对于employees表中，输出first_name排名(按first_name升序排序)为奇数的first_name</p>
+<pre><code>CREATE TABLE `employees` (
+`emp_no` int(11) NOT NULL,
+`birth_date` date NOT NULL,
+`first_name` varchar(14) NOT NULL,
+`last_name` varchar(16) NOT NULL,
+`gender` char(1) NOT NULL,
+`hire_date` date NOT NULL,
+PRIMARY KEY (`emp_no`));</code></pre>
+<p>【对于employees表，在对first_name进行排名后，选出奇数排名对应的first_name】。<br>1、本题用到了三层 SELECT 查询，为了便于理解，采用缩进方式分层，且最外层对应e1，最内层对应e3；<br>2、在e3层中，采用 COUNT() 函数对 e2.first_name 进行排名标号，即在给定 e2.first_name的情况下，不大于 e2.first_name 的 e3.first_name 的个数有多少，该个数刚好与 e2.first_name 的排名标号匹配，且将该值命名为 rowid；<br>/<em>注意：排名标号后并未排序，即[Bob, Carter, Amy]的排名是[2,3,1]，选取奇数排名后输出[Carter, Amy]，所以可见参考答案中的first_name并未按字母大小排序</em>/<br>3、在e1层中，直接在限定条件 e1.rowid % 2 = 1 下，代表奇数行的 rowid，选取对应的 e1.first_name；<br>4、e2层则相当于连接e1层（选取表示层）与e3层（标号层）的桥梁。   </p>
+<p>思想上没觉得有错，但是oj不通过<br>为什么要放进子查询里面去，因为group by 会自动把结果排序，所以输出和答案顺序不一致，导致oj不通过  </p>
+<pre><code>select e3.first_name
+from
+    (select
+    e1.first_name, count(*) as rowid
+    from
+        employees e1
+    join
+        employees e2
+    on
+        e1.first_name &gt;= e2.first_name
+    group by e1.first_name) e3
+where e3.rowid % 2 = 1</code></pre>
+<p>或者</p>
+<pre><code>select e1.first_name 
+from employees e1
+join employees e2 
+on e1.first_name&gt;=e2.first_name 
+group by e1.first_name
+having count(*)%2=1;</code></pre>
+<p>计算行号的方法 : 有多少个小于等于e2.first_name的记录的个数就是 e2.first_name的行号（排名对应dense_rank()）</p>
+<pre><code>select first_name from  ( 
+    select e2.first_name,(select count(*) from employees as e1 where e1.first_name &lt;= e2.first_name) as rownum 
+    from employees as e2 
+    where rownum % 2 =1 
+)</code></pre>
+<h3 id="62-题目描述"><a href="#62-题目描述" class="headerlink" title="62.题目描述"></a>62.题目描述</h3><p>在牛客刷题的小伙伴们都有着牛客积分，积分(grade)表简化可以如下:</p>
+<pre><code>mysql&gt; select * from grade;
+id  number
+1   111
+2   333
+3   111
+4   111
+5   333
+
+5 rows in set (0.00 sec)</code></pre>
+<p>id为用户主键id，number代表积分情况，让你写一个sql查询，积分表里面出现三次以及三次以上的积分，查询结果如下:</p>
+<pre><code>111</code></pre>
+<p>解法：</p>
+<pre><code>SELECT number 
+FROM grade
+GROUP BY number
+HAVING COUNT(number) &gt;= 3;</code></pre>
+<h3 id="63-题目描述"><a href="#63-题目描述" class="headerlink" title="63.题目描述"></a>63.题目描述</h3><p>在牛客刷题有一个通过题目个数的(passing_number)表，id是主键，简化如下:</p>
+<pre><code>2个字段，id和number
+第1行表示id为1的用户通过了4个题目;
+……
+第6行表示id为6的用户通过了4个题目;</code></pre>
+<p>请你根据上表，输出通过的题目的排名，通过题目个数相同的，排名相同，此时按照id升序排列   </p>
+<pre><code>id为5的用户通过了5个，排名第1，
+
+id为1和id为6的都通过了2个，并列第2</code></pre>
+<p>两种解法：<br>1、两表自连接，通过查询比自己大的记录条数获取排名<br>先自连接，如 id 为5的记录，通过连接可以得出比自己大的只有本身，因此COUNT的结果为1，加 DISTINCT 是在 number 相同的情况下让排名相同。   </p>
+<pre><code>SELECT
+    p1.id,
+    p1.number,
+    count(DISTINCT p2.number) rank
+FROM
+    passing_number p1
+join
+    passing_number p2 
+on
+    p1.number &lt;= p2.number 
+GROUP BY
+    p1.id 
+ORDER BY
+    rank, p1.id;</code></pre>
+<p>2、对于支持窗口函数的，直接使用DENSE_RANK()进行排名<br>对于数据库支持分析函数的，可以使用分析函数将更简单，这里区别于 RANK（），详细用法请自行百度。注：mysql 8.0 开始才支持分析函数。   </p>
+<pre><code>SELECT
+    *,
+    dense_rank( ) over (ORDER BY number DESC) rank
+FROM
+    passing_number 
+ORDER BY
+    rank,
+    id</code></pre>
+
+      
+      <!-- 增加版权声明 -->
+
+      
+      
+      <div class="declare">
+        <strong>本文作者：</strong>
+        
+          Iris Yuan
+        
+        <br>
+        <strong>本文链接：</strong>
+        <a rel="license" href="http://example.com/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/">http://example.com/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/</a>
+        <br>
+        <strong>版权声明：</strong>
+        本作品采用
+        <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        进行许可。转载请注明出处！
+        
+          <br>
+          <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+        
+      </div>
+      
+
+      <!-- 增加版权声明结束 -->
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -188,171 +1770,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://irisyzy1018.github.io/020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-09-24T08:33:24.746Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">34道作业题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/">34道作业题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">2.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">3.</span> <span class="toc-text">3.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">4.</span> <span class="toc-text">4.题目描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">4.1.</span> <span class="toc-text">解题思路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">5.</span> <span class="toc-text">5.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">6.</span> <span class="toc-text">6.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">7.</span> <span class="toc-text">7.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">8.</span> <span class="toc-text">8.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">9.</span> <span class="toc-text">9.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">10.</span> <span class="toc-text">10.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">11.</span> <span class="toc-text">11.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E9%87%8D%E7%82%B9%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%86%8D%E7%9C%8B%E7%9C%8B%EF%BC%8C%E4%BD%BF%E7%94%A8dense-rank-%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0%E8%AF%95%E4%B8%80%E8%AF%95"><span class="toc-number">12.</span> <span class="toc-text">12.题目描述————重点，可以再看看，使用dense_rank()窗口函数试一试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">13.</span> <span class="toc-text">13.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">14.</span> <span class="toc-text">14.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">15.</span> <span class="toc-text">15.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">16.</span> <span class="toc-text">16.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">17.</span> <span class="toc-text">17.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">18.</span> <span class="toc-text">18.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">19.</span> <span class="toc-text">19.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">20.</span> <span class="toc-text">20.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">21.</span> <span class="toc-text">21.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">22.</span> <span class="toc-text">22.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-%E2%80%94%E2%80%94%E8%87%AA%E8%BF%9E%E6%8E%A5%EF%BC%8C%E6%B3%A8%E6%84%8F%E7%90%86%E8%A7%A3%EF%BC%8C%E8%A6%81%E8%83%BD%E6%83%B3%E8%B1%A1%E5%87%BA%E8%87%AA%E8%BF%9E%E6%8E%A5%E5%90%8E%E8%BF%94%E5%9B%9E%E7%9A%84%E8%99%9A%E6%8B%9F%E8%A1%A8%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-number">23.</span> <span class="toc-text">23.题目描述 ——自连接，注意理解，要能想象出自连接后返回的虚拟表的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">24.</span> <span class="toc-text">24.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">25.</span> <span class="toc-text">25.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">26.</span> <span class="toc-text">26.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">27.</span> <span class="toc-text">27.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#28-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">28.</span> <span class="toc-text">28.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29-%E8%A1%A8%E7%BB%93%E6%9E%84%E5%90%8C%E4%B8%8A%EF%BC%8C%E4%BD%BF%E7%94%A8join%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F%E6%89%BE%E5%87%BA%E6%B2%A1%E6%9C%89%E5%88%86%E7%B1%BB%E7%9A%84%E7%94%B5%E5%BD%B1id%E4%BB%A5%E5%8F%8A%E5%90%8D%E7%A7%B0"><span class="toc-number">29.</span> <span class="toc-text">29.表结构同上，使用join查询方式找出没有分类的电影id以及名称,</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#30-%E9%A2%98%E5%B9%B2%E5%90%8C%E4%B8%8A%EF%BC%8C%E4%BD%A0%E8%83%BD%E4%BD%BF%E7%94%A8%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%BE%E5%87%BA%E5%B1%9E%E4%BA%8EAction%E5%88%86%E7%B1%BB%E7%9A%84%E6%89%80%E6%9C%89%E7%94%B5%E5%BD%B1%E5%AF%B9%E5%BA%94%E7%9A%84title-description%E5%90%97"><span class="toc-number">30.</span> <span class="toc-text">30.题干同上，你能使用子查询的方式找出属于Action分类的所有电影对应的title,description吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">31.</span> <span class="toc-text">31.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">32.</span> <span class="toc-text">32.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">33.</span> <span class="toc-text">33.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">34.</span> <span class="toc-text">34.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">35.</span> <span class="toc-text">35.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">36.</span> <span class="toc-text">36.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">37.</span> <span class="toc-text">37.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#39-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">38.</span> <span class="toc-text">39.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#40-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%E2%80%93%E8%A1%A8%E7%BB%93%E6%9E%84%E4%BF%AE%E6%94%B9%E4%BD%BF%E7%94%A8alter-add"><span class="toc-number">39.</span> <span class="toc-text">40.题目描述–表结构修改使用alter add</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#41-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">40.</span> <span class="toc-text">41.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">41.</span> <span class="toc-text">42.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#43-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">42.</span> <span class="toc-text">43.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#44-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">43.</span> <span class="toc-text">44.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#45-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">44.</span> <span class="toc-text">45.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#46-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">45.</span> <span class="toc-text">46.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#48-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">46.</span> <span class="toc-text">48.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#49-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">47.</span> <span class="toc-text">49.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#50-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">48.</span> <span class="toc-text">50.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">49.</span> <span class="toc-text">51.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">50.</span> <span class="toc-text">52.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">51.</span> <span class="toc-text">53.题目描述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#54-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number"></span> <span class="toc-text">54.题目描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#55-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">55.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#56-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">56.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#57-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">3.</span> <span class="toc-text">57.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#58-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">4.</span> <span class="toc-text">58.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#59-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">5.</span> <span class="toc-text">59.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#60-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">6.</span> <span class="toc-text">60.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#61-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">7.</span> <span class="toc-text">61.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#62-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">8.</span> <span class="toc-text">62.题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#63-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">9.</span> <span class="toc-text">63.题目描述</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B003/" class="archive-article-date">
-  	<time datetime="2020-09-24T07:40:16.889Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B003/">MySQL笔记03</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/" class="archive-article-date">
-  	<time datetime="2020-09-24T07:09:02.806Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/">MySQL笔记02</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/" class="archive-article-date">
-  	<time datetime="2020-09-24T05:14:15.352Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/">MySQL笔记01</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -379,9 +1909,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

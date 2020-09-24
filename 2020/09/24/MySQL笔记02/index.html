@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>MySQL笔记02 | Iris Yuan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、关于查询结果集的去重？mysql&gt; select distinct job from emp; &#x2F;&#x2F; distinct关键字去除重复记录。 +-----------+ | job       | +-----------+ | CLERK     | | SALESMAN  |    | MANAGER   | | ANALYST   | | PRESIDENT | +---------">
+  <meta name="description" content="1、关于查询结果集的去重？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL笔记02">
 <meta property="og:url" content="http://example.com/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/index.html">
 <meta property="og:site_name" content="Iris Yuan">
-<meta property="og:description" content="1、关于查询结果集的去重？mysql&gt; select distinct job from emp; &#x2F;&#x2F; distinct关键字去除重复记录。 +-----------+ | job       | +-----------+ | CLERK     | | SALESMAN  |    | MANAGER   | | ANALYST   | | PRESIDENT | +---------">
+<meta property="og:description" content="1、关于查询结果集的去重？">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-24T07:09:02.806Z">
-<meta property="article:modified_time" content="2020-09-24T07:39:13.489Z">
+<meta property="article:modified_time" content="2020-09-24T08:21:51.033Z">
 <meta property="article:author" content="Iris Yuan">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
@@ -170,7 +170,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1、关于查询结果集的去重？"><a href="#1、关于查询结果集的去重？" class="headerlink" title="1、关于查询结果集的去重？"></a>1、关于查询结果集的去重？</h3><pre><code>mysql&gt; select distinct job from emp; // distinct关键字去除重复记录。
+        <h3 id="1、关于查询结果集的去重？"><a href="#1、关于查询结果集的去重？" class="headerlink" title="1、关于查询结果集的去重？"></a>1、关于查询结果集的去重？</h3><a id="more"></a>
+
+<pre><code>mysql&gt; select distinct job from emp; // distinct关键字去除重复记录。
 +-----------+
 | job       |
 +-----------+
@@ -1221,7 +1223,24 @@ insert into t_user(id,username,password) values(1,&#39;lisi&#39;,&#39;123&#39;);
 
       
       
-      <div class="declare" hidden="hidden"></div>
+      <div class="declare">
+        <strong>本文作者：</strong>
+        
+          Iris Yuan
+        
+        <br>
+        <strong>本文链接：</strong>
+        <a rel="license" href="http://example.com/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/">http://example.com/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/</a>
+        <br>
+        <strong>版权声明：</strong>
+        本作品采用
+        <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        进行许可。转载请注明出处！
+        
+          <br>
+          <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+        
+      </div>
       
 
       <!-- 增加版权声明结束 -->
@@ -1395,8 +1414,6 @@ insert into t_user(id,username,password) values(1,&#39;lisi&#39;,&#39;123&#39;);
     	<div class="footer-left">
     		&copy; 2020 Iris Yuan
 		</div>
-		<span id="busuanzi_container_site_pv">    本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-		<span id="busuanzi_container_site_uv">  本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
@@ -1527,7 +1544,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">Miracles &lt;br&gt;&lt;br&gt;happen every day&lt;br&gt;Be Happy</div>
   	  	
     	</section>
     

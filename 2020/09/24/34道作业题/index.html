@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: SQL | Iris Yuan</title>
+  <title>34道作业题 | Iris Yuan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Iris Yuan">
-<meta property="og:url" content="http://example.com/tags/SQL/index.html">
+  <meta name="description" content="1、取得每个部门最高薪水的人员名称">
+<meta property="og:type" content="article">
+<meta property="og:title" content="34道作业题">
+<meta property="og:url" content="http://example.com/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/index.html">
 <meta property="og:site_name" content="Iris Yuan">
-<meta property="og:description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
+<meta property="og:description" content="1、取得每个部门最高薪水的人员名称">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-24T08:33:24.746Z">
+<meta property="article:modified_time" content="2020-09-24T08:56:10.015Z">
 <meta property="article:author" content="Iris Yuan">
-<meta property="article:tag" content="Happy">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Iris Yuan" type="application/atom+xml">
@@ -148,73 +150,1132 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-34道作业题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-09-24T08:57:34.189Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/">SQL面试题汇总</a>
+    <h1 class="article-title" itemprop="name">
+      34道作业题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/" class="archive-article-date">
+        
+        <a href="/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/" class="archive-article-date">
   	<time datetime="2020-09-24T08:33:24.746Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/">34道作业题</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、取得每个部门最高薪水的人员名称"><a href="#1、取得每个部门最高薪水的人员名称" class="headerlink" title="1、取得每个部门最高薪水的人员名称"></a>1、取得每个部门最高薪水的人员名称</h2><a id="more"></a>
+<h3 id="第一步：取得每个部门最高薪水-按照部门编号分组，找出每一组最大值"><a href="#第一步：取得每个部门最高薪水-按照部门编号分组，找出每一组最大值" class="headerlink" title="第一步：取得每个部门最高薪水(按照部门编号分组，找出每一组最大值)"></a>第一步：取得每个部门最高薪水(按照部门编号分组，找出每一组最大值)</h3><pre><code>mysql&gt; select deptno,max(sal) as maxsal from emp group by deptno;
++--------+---------+
+| deptno | maxsal  |
++--------+---------+
+|     10 | 5000.00 |
+|     20 | 3000.00 |
+|     30 | 2850.00 |
++--------+---------+</code></pre>
+<h3 id="第二步：将以上的查询结果当做一张临时表t，t和emp表连接，条件：t-deptno-e-deptno-and-t-maxsal-e-sal；别忘了部门编号的条件"><a href="#第二步：将以上的查询结果当做一张临时表t，t和emp表连接，条件：t-deptno-e-deptno-and-t-maxsal-e-sal；别忘了部门编号的条件" class="headerlink" title="第二步：将以上的查询结果当做一张临时表t，t和emp表连接，条件：t.deptno = e.deptno and t.maxsal = e.sal；别忘了部门编号的条件"></a>第二步：将以上的查询结果当做一张临时表t，t和emp表连接，条件：t.deptno = e.deptno and t.maxsal = e.sal；别忘了部门编号的条件</h3><pre><code>select 
+    e.ename, t.*
+from 
+    emp e
+join
+    (select deptno,max(sal) as maxsal from emp group by deptno) t
+on
+    t.deptno = e.deptno and t.maxsal = e.sal;
 
-        <div class="article-info info-on-right">
-          
++-------+--------+---------+
+| ename | deptno | maxsal  |
++-------+--------+---------+
+| BLAKE |     30 | 2850.00 |
+| SCOTT |     20 | 3000.00 |
+| KING  |     10 | 5000.00 |
+| FORD  |     20 | 3000.00 |
++-------+--------+---------+</code></pre>
+<h2 id="2、哪些人的薪水在部门的平均薪水之上"><a href="#2、哪些人的薪水在部门的平均薪水之上" class="headerlink" title="2、哪些人的薪水在部门的平均薪水之上"></a>2、哪些人的薪水在部门的平均薪水之上</h2><h3 id="第一步：找出每个部门的平均薪水"><a href="#第一步：找出每个部门的平均薪水" class="headerlink" title="第一步：找出每个部门的平均薪水"></a>第一步：找出每个部门的平均薪水</h3><pre><code>select deptno,avg(sal) as avgsal from emp group by deptno;
++--------+-------------+
+| deptno | avgsal      |
++--------+-------------+
+|     10 | 2916.666667 |
+|     20 | 2175.000000 |
+|     30 | 1566.666667 |
++--------+-------------+</code></pre>
+<h3 id="第二步：将以上查询结果当做t表，t和emp表连接"><a href="#第二步：将以上查询结果当做t表，t和emp表连接" class="headerlink" title="第二步：将以上查询结果当做t表，t和emp表连接"></a>第二步：将以上查询结果当做t表，t和emp表连接</h3><p>条件：部门编号相同，并且emp的sal大于t表的avgsal   </p>
+<pre><code>select 
+    t.*, e.ename, e.sal
+from
+    emp e
+join
+    (select deptno,avg(sal) as avgsal from emp group by deptno) t
+on
+    e.deptno = t.deptno and e.sal &gt; t.avgsal;
++--------+-------------+-------+---------+
+| deptno | avgsal      | ename | sal     |
++--------+-------------+-------+---------+
+|     30 | 1566.666667 | ALLEN | 1600.00 |
+|     20 | 2175.000000 | JONES | 2975.00 |
+|     30 | 1566.666667 | BLAKE | 2850.00 |
+|     20 | 2175.000000 | SCOTT | 3000.00 |
+|     10 | 2916.666667 | KING  | 5000.00 |
+|     20 | 2175.000000 | FORD  | 3000.00 |
++--------+-------------+-------+---------+</code></pre>
+<h2 id="3、取得部门中（所有人的）平均的薪水等级"><a href="#3、取得部门中（所有人的）平均的薪水等级" class="headerlink" title="3、取得部门中（所有人的）平均的薪水等级"></a>3、取得部门中（所有人的）平均的薪水等级</h2><p>平均的薪水等级：先计算每一个薪水的等级，然后找出薪水等级的平均值。</p>
+<p>平均薪水的等级：先计算平均薪水，然后找出每个平均薪水的等级值。</p>
+<h3 id="第一步：找出每个人的薪水等级"><a href="#第一步：找出每个人的薪水等级" class="headerlink" title="第一步：找出每个人的薪水等级"></a>第一步：找出每个人的薪水等级</h3><p>emp e和salgrade s表连接。<br>连接条件：e.sal between s.losal and s.hisal  </p>
+<pre><code>select 
+    e.ename,e.sal,e.deptno,s.grade
+from
+    emp e
+join
+    salgrade s
+on
+    e.sal between s.losal and s.hisal;
+
++--------+---------+--------+-------+
+| ename  | sal     | deptno | grade |
++--------+---------+--------+-------+
+| CLARK  | 2450.00 |     10 |     4 |
+| KING   | 5000.00 |     10 |     5 |
+| MILLER | 1300.00 |     10 |     2 |
+
+| SMITH  |  800.00 |     20 |     1 |
+| ADAMS  | 1100.00 |     20 |     1 |
+| SCOTT  | 3000.00 |     20 |     4 |
+| FORD   | 3000.00 |     20 |     4 |
+| JONES  | 2975.00 |     20 |     4 |
+
+| MARTIN | 1250.00 |     30 |     2 |
+| TURNER | 1500.00 |     30 |     3 |
+| BLAKE  | 2850.00 |     30 |     4 |
+| ALLEN  | 1600.00 |     30 |     3 |
+| JAMES  |  950.00 |     30 |     1 |
+| WARD   | 1250.00 |     30 |     2 |
++--------+---------+--------+-------+</code></pre>
+<h3 id="第二步：基于以上的结果继续按照deptno分组，求grade的平均值。"><a href="#第二步：基于以上的结果继续按照deptno分组，求grade的平均值。" class="headerlink" title="第二步：基于以上的结果继续按照deptno分组，求grade的平均值。"></a>第二步：基于以上的结果继续按照deptno分组，求grade的平均值。</h3><pre><code>select 
+    e.deptno,avg(s.grade)
+from
+    emp e
+join
+    salgrade s
+on
+    e.sal between s.losal and s.hisal
+group by
+    e.deptno;
+
++--------+--------------+
+| deptno | avg(s.grade) |
++--------+--------------+
+|     10 |       3.6667 |
+|     20 |       2.8000 |
+|     30 |       2.5000 |
++--------+--------------+</code></pre>
+<h2 id="4、不准用分组函数（Max-），取得最高薪水"><a href="#4、不准用分组函数（Max-），取得最高薪水" class="headerlink" title="4、不准用分组函数（Max ），取得最高薪水"></a>4、不准用分组函数（Max ），取得最高薪水</h2><h3 id="第一种：sal降序，limit-1"><a href="#第一种：sal降序，limit-1" class="headerlink" title="第一种：sal降序，limit 1"></a>第一种：sal降序，limit 1</h3><pre><code>select ename,sal from emp order by sal desc limit 1;
++-------+---------+
+| ename | sal     |
++-------+---------+
+| KING  | 5000.00 |
++-------+---------+</code></pre>
+<h3 id="第二种方案："><a href="#第二种方案：" class="headerlink" title="第二种方案："></a>第二种方案：</h3><pre><code>select max(sal) from emp;</code></pre>
+<h3 id="第三种方案：表的自连接"><a href="#第三种方案：表的自连接" class="headerlink" title="第三种方案：表的自连接"></a>第三种方案：表的自连接</h3><pre><code>select sal from emp where sal not in(select distinct a.sal from emp a join emp b on a.sal &lt; b.sal);
+
++---------+
+| sal     |
++---------+
+| 5000.00 |
++---------+
+
+select 
+    distinct a.sal 
+from 
+    emp a 
+join 
+    emp b 
+on 
+    a.sal &lt; b.sal
+
+a表
++---------+
+| sal     |
++---------+
+|  800.00 |
+| 1600.00 |
+| 1250.00 |
+| 2975.00 |
+| 1250.00 |
+| 2850.00 |
+| 2450.00 |
+| 3000.00 |
+| 5000.00 |
+| 1500.00 |
+| 1100.00 |
+|  950.00 |
+| 3000.00 |
+| 1300.00 |
++---------+
+
+b表
++---------+
+| sal     |
++---------+
+|  800.00 |
+| 1600.00 |
+| 1250.00 |
+| 2975.00 |
+| 1250.00 |
+| 2850.00 |
+| 2450.00 |
+| 3000.00 |
+| 5000.00 |
+| 1500.00 |
+| 1100.00 |
+|  950.00 |
+| 3000.00 |
+| 1300.00 |
++---------+</code></pre>
+<h2 id="5、取得平均薪水最高的部门的部门编号"><a href="#5、取得平均薪水最高的部门的部门编号" class="headerlink" title="5、取得平均薪水最高的部门的部门编号"></a>5、取得平均薪水最高的部门的部门编号</h2><h2 id="第一种方案：降序取第一个。"><a href="#第一种方案：降序取第一个。" class="headerlink" title="第一种方案：降序取第一个。"></a>第一种方案：降序取第一个。</h2><p>第一步：找出每个部门的平均薪水</p>
+<pre><code>select deptno,avg(sal) as avgsal from emp group by deptno;
++--------+-------------+
+| deptno | avgsal      |
++--------+-------------+
+|     10 | 2916.666667 |
+|     20 | 2175.000000 |
+|     30 | 1566.666667 |
++--------+-------------+</code></pre>
+<p>第二步：降序选第一个。</p>
+<pre><code>select deptno,avg(sal) as avgsal from emp group by deptno order by avgsal desc limit 1;
++--------+-------------+
+| deptno | avgsal      |
++--------+-------------+
+|     10 | 2916.666667 |
++--------+-------------+</code></pre>
+<h3 id="第二种方案：max"><a href="#第二种方案：max" class="headerlink" title="第二种方案：max"></a>第二种方案：max</h3><p>第一步：找出每个部门的平均薪水</p>
+<pre><code>select deptno,avg(sal) as avgsal from emp group by deptno;
++--------+-------------+
+| deptno | avgsal      |
++--------+-------------+
+|     10 | 2916.666667 |
+|     20 | 2175.000000 |
+|     30 | 1566.666667 |
++--------+-------------+</code></pre>
+<p>第二步：找出以上结果中avgsal最大的值。</p>
+<pre><code>select max(t.avgsal) from (select avg(sal) as avgsal from emp group by deptno) t;
++---------------+
+| max(t.avgsal) |
++---------------+
+|   2916.666667 |
++---------------+</code></pre>
+<p>第三步：</p>
+<pre><code>select 
+    deptno,avg(sal) as avgsal 
+from 
+    emp 
+group by 
+    deptno
+having
+    avgsal = (select max(t.avgsal) from (select avg(sal) as avgsal from emp group by deptno) t);
+
++--------+-------------+
+| deptno | avgsal      |
++--------+-------------+
+|     10 | 2916.666667 |
++--------+-------------+</code></pre>
+<h2 id="6、取得平均薪水最高的部门的部门名称"><a href="#6、取得平均薪水最高的部门的部门名称" class="headerlink" title="6、取得平均薪水最高的部门的部门名称"></a>6、取得平均薪水最高的部门的部门名称</h2><pre><code>select 
+    d.dname,avg(e.sal) as avgsal 
+from 
+    emp e
+join
+    dept d
+on
+    e.deptno = d.deptno
+group by 
+    d.dname
+order by 
+    avgsal desc 
+limit 
+    1;
+
++------------+-------------+
+| dname      | avgsal      |
++------------+-------------+
+| ACCOUNTING | 2916.666667 |
++------------+-------------+</code></pre>
+<h3 id="7、求平均薪水的等级最低的部门的部门名称"><a href="#7、求平均薪水的等级最低的部门的部门名称" class="headerlink" title="7、求平均薪水的等级最低的部门的部门名称"></a>7、求平均薪水的等级最低的部门的部门名称</h3><p>平均薪水是800<br>平均薪水是900<br>那么他俩都是1级别。  </p>
+<p>第一步：找出每个部门的平均薪水</p>
+<pre><code>select deptno,avg(sal) as avgsal from emp group by deptno;
++--------+-------------+
+| deptno | avgsal      |
++--------+-------------+
+|     10 | 2916.666667 |
+|     20 | 2175.000000 |
+|     30 | 1566.666667 |
++--------+-------------+</code></pre>
+<p>第二步：找出每个部门的平均薪水的等级</p>
+<p>以上t表和salgrade表连接，条件：t.avgsal between s.losal and s.hisal  </p>
+<pre><code>select 
+    t.*,s.grade
+from
+    (select d.dname,avg(sal) as avgsal from emp e join dept d on e.deptno = d.deptno group by d.dname) t
+join
+    salgrade s
+on
+    t.avgsal between s.losal and s.hisal;
+
++------------+-------------+-------+
+| dname      | avgsal      | grade |
++------------+-------------+-------+
+| SALES      | 1566.666667 |     3 |
+| ACCOUNTING | 2916.666667 |     4 |
+| RESEARCH   | 2175.000000 |     4 |
++------------+-------------+-------+
+
+select 
+    t.*,s.grade
+from
+    (select d.dname,avg(sal) as avgsal from emp e join dept d on e.deptno = d.deptno group by d.dname) t
+join
+    salgrade s
+on
+    t.avgsal between s.losal and s.hisal
+where
+    s.grade = (select grade from salgrade where (select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1) between losal and hisal);
+
++-------+-------------+-------+
+| dname | avgsal      | grade |
++-------+-------------+-------+
+| SALES | 1566.666667 |     3 |
++-------+-------------+-------+</code></pre>
+<p>抛开之前的，最低等级你怎么看？<br>    平均薪水最低的对应的等级一定是最低的.</p>
+<pre><code>select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1;
++-------------+
+| avgsal      |
++-------------+
+| 1566.666667 |
++-------------+
+
+select grade from salgrade where (select avg(sal) as avgsal from emp group by deptno order by avgsal asc limit 1) between losal and hisal;
++-------+
+| grade |
++-------+
+|     3 |
++-------+</code></pre>
+<h2 id="8、取得比普通员工-员工代码没有在-mgr-字段上出现的-的最高薪水还要高的领导人姓名"><a href="#8、取得比普通员工-员工代码没有在-mgr-字段上出现的-的最高薪水还要高的领导人姓名" class="headerlink" title="8、取得比普通员工(员工代码没有在 mgr 字段上出现的) 的最高薪水还要高的领导人姓名"></a>8、取得比普通员工(员工代码没有在 mgr 字段上出现的) 的最高薪水还要高的领导人姓名</h2><p>比“普通员工的最高薪水”还要高的一定是领导！<br>    没毛病！！！！  ##这句话一定要理解啊，因为普通员工的最高工资已经出来了，比这高的肯定不是普通员工了<br>如果不加 is not null  的条件，mgr出现的结果列表总会有null值，因为最高领导没有上级领导</p>
+<pre><code>mysql&gt; select distinct mgr from emp where mgr is not null; 
++------+
+| mgr  |
++------+
+| 7902 |
+| 7698 |
+| 7839 |
+| 7566 |
+| 7788 |
+| 7782 |
++------+</code></pre>
+<p>员工编号没有在以上范围内的都是普通员工。</p>
+<p>第一步：找出普通员工的最高薪水！<br>not in在使用的时候，后面小括号中记得排除NULL。<br>如果小括号中的结果有null值，取他们的max,会导致返回null值，而不是最大值这里一定要注意  </p>
+<pre><code>select max(sal) from emp where empno not in(select distinct mgr from emp where mgr is not null);
++----------+
+| max(sal) |
++----------+
+|  1600.00 |
++----------+</code></pre>
+<p>第二步：找出高于1600的  </p>
+<pre><code>select ename,sal from emp where sal &gt; (select max(sal) from emp where empno not in(select distinct mgr from emp where mgr is not null));
++-------+---------+
+| ename | sal     |
++-------+---------+
+| JONES | 2975.00 |
+| BLAKE | 2850.00 |
+| CLARK | 2450.00 |
+| SCOTT | 3000.00 |
+| KING  | 5000.00 |
+| FORD  | 3000.00 |
++-------+---------+</code></pre>
+<h2 id="9、取得薪水最高的前五名员工"><a href="#9、取得薪水最高的前五名员工" class="headerlink" title="9、取得薪水最高的前五名员工"></a>9、取得薪水最高的前五名员工</h2><pre><code>select ename,sal from emp order by sal desc limit 5;
++-------+---------+
+| ename | sal     |
++-------+---------+
+| KING  | 5000.00 |
+| SCOTT | 3000.00 |
+| FORD  | 3000.00 |
+| JONES | 2975.00 |
+| BLAKE | 2850.00 |
++-------+---------+</code></pre>
+<h2 id="10、取得薪水最高的第六到第十名员工"><a href="#10、取得薪水最高的第六到第十名员工" class="headerlink" title="10、取得薪水最高的第六到第十名员工"></a>10、取得薪水最高的第六到第十名员工</h2><pre><code>select ename,sal from emp order by sal desc limit 5, 5;
++--------+---------+
+| ename  | sal     |
++--------+---------+
+| CLARK  | 2450.00 |
+| ALLEN  | 1600.00 |
+| TURNER | 1500.00 |
+| MILLER | 1300.00 |
+| MARTIN | 1250.00 |
++--------+---------+</code></pre>
+<h3 id="11、取得最后入职的-5-名员工"><a href="#11、取得最后入职的-5-名员工" class="headerlink" title="11、取得最后入职的 5 名员工"></a>11、取得最后入职的 5 名员工</h3><p>日期也可以降序，升序。</p>
+<pre><code>select ename,hiredate from emp order by hiredate desc limit 5;
+
++--------+------------+
+| ename  | hiredate   |
++--------+------------+
+| ADAMS  | 1987-05-23 |
+| SCOTT  | 1987-04-19 |
+| MILLER | 1982-01-23 |
+| FORD   | 1981-12-03 |
+| JAMES  | 1981-12-03 |
++--------+------------+</code></pre>
+<h2 id="12、取得每个薪水等级有多少员工"><a href="#12、取得每个薪水等级有多少员工" class="headerlink" title="12、取得每个薪水等级有多少员工"></a>12、取得每个薪水等级有多少员工</h2><p>分组count  </p>
+<p>第一步：找出每个员工的薪水等级</p>
+<pre><code>select 
+    e.ename,e.sal,s.grade 
+from 
+    emp e 
+join 
+    salgrade s 
+on 
+    e.sal between s.losal and s.hisal;
++--------+---------+-------+
+| ename  | sal     | grade |
++--------+---------+-------+
+| SMITH  |  800.00 |     1 |
+| ALLEN  | 1600.00 |     3 |
+| WARD   | 1250.00 |     2 |
+| JONES  | 2975.00 |     4 |
+| MARTIN | 1250.00 |     2 |
+| BLAKE  | 2850.00 |     4 |
+| CLARK  | 2450.00 |     4 |
+| SCOTT  | 3000.00 |     4 |
+| KING   | 5000.00 |     5 |
+| TURNER | 1500.00 |     3 |
+| ADAMS  | 1100.00 |     1 |
+| JAMES  |  950.00 |     1 |
+| FORD   | 3000.00 |     4 |
+| MILLER | 1300.00 |     2 |
++--------+---------+-------+</code></pre>
+<p>第二步：继续按照grade分组统计数量</p>
+<pre><code>select 
+    s.grade ,count(*)
+from 
+    emp e 
+join 
+    salgrade s 
+on 
+    e.sal between s.losal and s.hisal
+group by
+    s.grade;
+
++-------+----------+
+| grade | count(*) |
++-------+----------+
+|     1 |        3 |
+|     2 |        3 |
+|     3 |        2 |
+|     4 |        5 |
+|     5 |        1 |
++-------+----------+</code></pre>
+<h2 id="13、面试题：（这题没有视频讲解）"><a href="#13、面试题：（这题没有视频讲解）" class="headerlink" title="13、面试题：（这题没有视频讲解）"></a>13、面试题：（这题没有视频讲解）</h2><p>有 3 个表 S(学生表)，C（课程表），SC（学生选课表）  </p>
+<ul>
+<li>S（SNO，SNAME）代表（学号，姓名）  </li>
+<li>C（CNO，CNAME，CTEACHER）代表（课号，课名，教师）  </li>
+<li>SC（SNO，CNO，SCGRADE）代表（学号，课号，成绩） </li>
+</ul>
+<p>问题：<br>1，找出没选过“黎明”老师的所有学生姓名。<br>2，列出 2 门以上（含2 门）不及格学生姓名及平均成绩。<br>3，即学过 1 号课程又学过 2 号课所有学生的姓名。</p>
+<pre><code>S表
++------+-------+
+| SNO  | SNAME |
++------+-------+
+| 1    | 学生1 |
+| 2    | 学生2 |
+| 3    | 学生3 |
+| 4    | 学生4 |
++------+-------+
+
+C表
++------+-------+----------+
+| CNO  | CNAME | CTEACHER |
++------+-------+----------+
+| 1    | 语文  | 张       |
+| 2    | 政治  | 王       |
+| 3    | 英语  | 李       |
+| 4    | 数学  | 赵       |
+| 5    | 物理  | 黎明     |
++------+-------+----------+
+
+SC表
++------+------+---------+
+| SNO  | CNO  | SCGRADE |
++------+------+---------+
+| 1    | 1    | 40      |
+| 1    | 2    | 30      |
+| 1    | 3    | 20      |
+| 1    | 4    | 80      |
+| 1    | 5    | 60      |
+| 2    | 1    | 60      |
+| 2    | 2    | 60      |
+| 2    | 3    | 60      |
+| 2    | 4    | 60      |
+| 2    | 5    | 40      |
+| 3    | 1    | 60      |
+| 3    | 3    | 80      |
++------+------+---------+</code></pre>
+<h3 id="1，找出没选过“黎明”老师的所有学生姓名。"><a href="#1，找出没选过“黎明”老师的所有学生姓名。" class="headerlink" title="1，找出没选过“黎明”老师的所有学生姓名。"></a>1，找出没选过“黎明”老师的所有学生姓名。</h3><p>c.cteacher s.sname sc.sno sc.cno<br>先找出所有选黎明老师的学生编号，学生编号不在这里的就是 题目要求的没选过“黎明”老师的学生<br>找出黎明老师的教师编号   </p>
+<pre><code>select cno from c where cteacher=&#39;黎明&#39;;</code></pre>
+<p>找出选择黎明老师的所有学生编号  </p>
+<pre><code>select 
+    sno 
+from 
+    sc 
+where 
+    cno = (select cno from c where cteacher=&#39;黎明&#39;);</code></pre>
+<p>找出没选过“黎明”老师的所有学生姓名  </p>
+<pre><code>select 
+    sname
+from
+    s
+where 
+    sno not in (select sno from sc where cno = (select cno from c where cteacher=&#39;黎明&#39;));
+    +-------+
+    | sname |
+    +-------+
+    | 学生3 |
+    | 学生4 |
+    +-------+</code></pre>
+<h3 id="2，列出-2-门以上（含2-门）不及格学生姓名及平均成绩。"><a href="#2，列出-2-门以上（含2-门）不及格学生姓名及平均成绩。" class="headerlink" title="2，列出 2 门以上（含2 门）不及格学生姓名及平均成绩。"></a>2，列出 2 门以上（含2 门）不及格学生姓名及平均成绩。</h3><p>第一步找出2门以上不及格的学生编号 </p>
+<pre><code>select sno from sc where scgrade &lt; 60 group by sno having count(*)&gt;=2;</code></pre>
+<p>第二步每个学生的平均分  </p>
+<pre><code>select sno,avg(scgrade) as avg_grade from sc group by sno;</code></pre>
+<p>第三步 整合，将第一步和第二步都分别当做临时表进行连接</p>
+<pre><code>select s.sname ,avg_grade from s
+
+join
+
+     第一步的结果
+
+     on s.sno = t1.sno
+
+join
+
+    第二步的结果
+
+    on s.sno = t2.sno</code></pre>
+<p>即：</p>
+<pre><code>select s.sname,avg_grade from s join
+(select sno from sc where scgrade &lt; 60 group by sno having count(*)&gt;=2)t1
+on s.sno = t1.sno
+join
+(select sno,avg(scgrade) as avg_grade from sc group by sno)t2
+on s.sno = t2.sno;
++-------+-----------+
+| sname | avg_grade |
++-------+-----------+
+| 学生1 |        46 |
++-------+-----------+</code></pre>
+<h3 id="3，既学过-1-号课程又学过-2-号课所有学生的姓名。"><a href="#3，既学过-1-号课程又学过-2-号课所有学生的姓名。" class="headerlink" title="3，既学过 1 号课程又学过 2 号课所有学生的姓名。"></a>3，既学过 1 号课程又学过 2 号课所有学生的姓名。</h3><p>第一步:学过1号课程的学号</p>
+<pre><code>select sno from sc where cno = 1; </code></pre>
+<p>第二步:学过2号课程的学号</p>
+<pre><code>select sno from sc where cno = 2;</code></pre>
+<p>第三步:即学过1号课程又学过2号课的学号</p>
+<pre><code>select sno from sc where cno =1 and sno in (select sno from sc where cno = 2);</code></pre>
+<p>第四步:得到姓名</p>
+<pre><code>select sname from s where sno in
+(
+select sno from sc where cno = 1 and sno in (select sno from sc where cno = 2)
+);
+或者
+select sname from s where
+    sno in (select sno from sc where cno = 1)
+        and
+    sno in (select sno from sc where cno = 2);
+
++-------+
+| sname |
++-------+
+| 学生1 |
+| 学生2 |
++-------+</code></pre>
+<h2 id="14、列出所有员工及领导的姓名"><a href="#14、列出所有员工及领导的姓名" class="headerlink" title="14、列出所有员工及领导的姓名"></a>14、列出所有员工及领导的姓名</h2><pre><code>select 
+    a.ename &#39;员工&#39;, b.ename &#39;领导&#39;
+from
+    emp a
+left join
+    emp b
+on
+    a.mgr = b.empno;
+
++--------+-------+
+| 员工   | 领导    |
++--------+-------+
+| SMITH  | FORD  |
+| ALLEN  | BLAKE |
+| WARD   | BLAKE |
+| JONES  | KING  |
+| MARTIN | BLAKE |
+| BLAKE  | KING  |
+| CLARK  | KING  |
+| SCOTT  | JONES |
+| KING   | NULL  |
+| TURNER | BLAKE |
+| ADAMS  | SCOTT |
+| JAMES  | BLAKE |
+| FORD   | JONES |
+| MILLER | CLARK |
++--------+-------+</code></pre>
+<h2 id="15、列出受雇日期早于其直接上级的所有员工的编号-姓名-部门名称"><a href="#15、列出受雇日期早于其直接上级的所有员工的编号-姓名-部门名称" class="headerlink" title="15、列出受雇日期早于其直接上级的所有员工的编号,姓名,部门名称"></a>15、列出受雇日期早于其直接上级的所有员工的编号,姓名,部门名称</h2><pre><code>emp a 员工表
+emp b 领导表
+a.mgr = b.empno and a.hiredate &lt; b.hiredate
+
+select 
+    a.ename &#39;员工&#39;, a.hiredate, b.ename &#39;领导&#39;, b.hiredate, d.dname
+from
+    emp a
+join
+    emp b
+on
+    a.mgr = b.empno
+join
+    dept d
+on
+    a.deptno = d.deptno
+where
+    a.hiredate &lt; b.hiredate;
+
++-------+------------+-------+------------+------------+
+| 员工     | hiredate   | 领导    | hiredate   | dname      |
++-------+------------+-------+------------+------------+
+| CLARK | 1981-06-09 | KING  | 1981-11-17 | ACCOUNTING |
+| SMITH | 1980-12-17 | FORD  | 1981-12-03 | RESEARCH   |
+| JONES | 1981-04-02 | KING  | 1981-11-17 | RESEARCH   |
+| ALLEN | 1981-02-20 | BLAKE | 1981-05-01 | SALES      |
+| WARD  | 1981-02-22 | BLAKE | 1981-05-01 | SALES      |
+| BLAKE | 1981-05-01 | KING  | 1981-11-17 | SALES      |
++-------+------------+-------+------------+------------+</code></pre>
+<h2 id="16、-列出部门名称和这些部门的员工信息-同时列出那些没有员工的部门"><a href="#16、-列出部门名称和这些部门的员工信息-同时列出那些没有员工的部门" class="headerlink" title="16、 列出部门名称和这些部门的员工信息, 同时列出那些没有员工的部门"></a>16、 列出部门名称和这些部门的员工信息, 同时列出那些没有员工的部门</h2><pre><code>select 
+    e.*,d.dname
+from
+    emp e
+right join
+    dept d
+on
+    e.deptno = d.deptno;
+
++-------+--------+-----------+------+------------+---------+---------+--------+------------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO | dname      |
++-------+--------+-----------+------+------------+---------+---------+--------+------------+
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 | ACCOUNTING |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 | ACCOUNTING |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 | ACCOUNTING |
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 | RESEARCH   |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 | RESEARCH   |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1987-04-19 | 3000.00 |    NULL |     20 | RESEARCH   |
+|  7876 | ADAMS  | CLERK     | 7788 | 1987-05-23 | 1100.00 |    NULL |     20 | RESEARCH   |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 | RESEARCH   |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 | SALES      |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 | SALES      |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 | SALES      |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 | SALES      |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 | SALES      |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 | SALES      |
+|  NULL | NULL   | NULL      | NULL | NULL       |    NULL |    NULL |   NULL | OPERATIONS |
++-------+--------+-----------+------+------------+---------+---------+--------+------------+</code></pre>
+<h2 id="17、列出至少有-5-个员工的所有部门"><a href="#17、列出至少有-5-个员工的所有部门" class="headerlink" title="17、列出至少有 5 个员工的所有部门"></a>17、列出至少有 5 个员工的所有部门</h2><p>按照部门编号分组，计数，筛选出 &gt;= 5</p>
+<pre><code>select 
+    deptno
+from
+    emp
+group by
+    deptno
+having
+    count(*) &gt;= 5;
+
++--------+
+| deptno |
++--------+
+|     20 |
+|     30 |
++--------+</code></pre>
+<h2 id="18、列出薪金比”SMITH”-多的所有员工信息"><a href="#18、列出薪金比”SMITH”-多的所有员工信息" class="headerlink" title="18、列出薪金比”SMITH” 多的所有员工信息"></a>18、列出薪金比”SMITH” 多的所有员工信息</h2><pre><code>select ename,sal from emp where sal &gt; (select sal from emp where ename = &#39;SMITH&#39;);
++--------+---------+
+| ename  | sal     |
++--------+---------+
+| ALLEN  | 1600.00 |
+| WARD   | 1250.00 |
+| JONES  | 2975.00 |
+| MARTIN | 1250.00 |
+| BLAKE  | 2850.00 |
+| CLARK  | 2450.00 |
+| SCOTT  | 3000.00 |
+| KING   | 5000.00 |
+| TURNER | 1500.00 |
+| ADAMS  | 1100.00 |
+| JAMES  |  950.00 |
+| FORD   | 3000.00 |
+| MILLER | 1300.00 |
++--------+---------+</code></pre>
+<h2 id="19、-列出所有”CLERK”-办事员-的姓名及其部门名称-部门的人数"><a href="#19、-列出所有”CLERK”-办事员-的姓名及其部门名称-部门的人数" class="headerlink" title="19、 列出所有”CLERK”( 办事员) 的姓名及其部门名称, 部门的人数"></a>19、 列出所有”CLERK”( 办事员) 的姓名及其部门名称, 部门的人数</h2><pre><code>select ename,job from emp where job = &#39;CLERK&#39;;
++--------+-------+
+| ename  | job   |
++--------+-------+
+| SMITH  | CLERK |
+| ADAMS  | CLERK |
+| JAMES  | CLERK |
+| MILLER | CLERK |
++--------+-------+
+
+select 
+    e.ename,e.job,d.dname
+from 
+    emp e
+join
+    dept d
+on
+    e.deptno = d.deptno
+where 
+    e.job = &#39;CLERK&#39;;
+
++--------+-------+------------+
+| ename  | job   | dname      |
++--------+-------+------------+
+| MILLER | CLERK | ACCOUNTING |
+| SMITH  | CLERK | RESEARCH   |
+| ADAMS  | CLERK | RESEARCH   |
+| JAMES  | CLERK | SALES      |
++--------+-------+------------+
+
+select 
+    e.ename,e.job,d.dname,d.deptno
+from 
+    emp e
+join
+    dept d
+on
+    e.deptno = d.deptno
+where 
+    e.job = &#39;CLERK&#39;;
+
++--------+-------+------------+--------+
+| ename  | job   | dname      | deptno |
++--------+-------+------------+--------+
+| MILLER | CLERK | ACCOUNTING |     10 |
+| SMITH  | CLERK | RESEARCH   |     20 |
+| ADAMS  | CLERK | RESEARCH   |     20 |
+| JAMES  | CLERK | SALES      |     30 |
++--------+-------+------------+--------+</code></pre>
+<p>//每个部门的人数？</p>
+<pre><code>select deptno, count(*) as deptcount from emp group by deptno;
++--------+-----------+
+| deptno | deptcount |
++--------+-----------+
+|     10 |         3 |
+|     20 |         5 |
+|     30 |         6 |
++--------+-----------+
+
+select 
+    t1.*,t2.deptcount
+from
+    (select 
+        e.ename,e.job,d.dname,d.deptno
+    from 
+        emp e
+    join
+        dept d
+    on
+        e.deptno = d.deptno
+    where 
+        e.job = &#39;CLERK&#39;) t1
+join
+    (select deptno, count(*) as deptcount from emp group by deptno) t2
+on
+    t1.deptno = t2.deptno;
+
++--------+-------+------------+--------+-----------+
+| ename  | job   | dname      | deptno | deptcount |
++--------+-------+------------+--------+-----------+
+| MILLER | CLERK | ACCOUNTING |     10 |         3 |
+| SMITH  | CLERK | RESEARCH   |     20 |         5 |
+| ADAMS  | CLERK | RESEARCH   |     20 |         5 |
+| JAMES  | CLERK | SALES      |     30 |         6 |
++--------+-------+------------+--------+-----------+</code></pre>
+<h2 id="20、列出最低薪金大于-1500-的各种工作及从事此工作的全部雇员人数"><a href="#20、列出最低薪金大于-1500-的各种工作及从事此工作的全部雇员人数" class="headerlink" title="20、列出最低薪金大于 1500 的各种工作及从事此工作的全部雇员人数"></a>20、列出最低薪金大于 1500 的各种工作及从事此工作的全部雇员人数</h2><p>按照工作岗位分组求最小值。</p>
+<pre><code>select job,count(*) from emp group by job having min(sal) &gt; 1500;
+
++-----------+----------+
+| job       | count(*) |
++-----------+----------+
+| ANALYST   |        2 |
+| MANAGER   |        3 |
+| PRESIDENT |        1 |
++-----------+----------+</code></pre>
+<h2 id="21、列出在部门”SALES”-lt-销售部-gt-工作的员工的姓名-假定不知道销售部的部门编号"><a href="#21、列出在部门”SALES”-lt-销售部-gt-工作的员工的姓名-假定不知道销售部的部门编号" class="headerlink" title="21、列出在部门”SALES”&lt; 销售部&gt; 工作的员工的姓名, 假定不知道销售部的部门编号."></a>21、列出在部门”SALES”&lt; 销售部&gt; 工作的员工的姓名, 假定不知道销售部的部门编号.</h2><pre><code>select ename from emp where deptno = (select deptno from dept where dname = &#39;SALES&#39;);
+
++--------+
+| ename  |
++--------+
+| ALLEN  |
+| WARD   |
+| MARTIN |
+| BLAKE  |
+| TURNER |
+| JAMES  |
++--------+</code></pre>
+<h2 id="22、列出薪金高于公司平均薪金的所有员工-所在部门-上级领导-雇员的工资等级"><a href="#22、列出薪金高于公司平均薪金的所有员工-所在部门-上级领导-雇员的工资等级" class="headerlink" title="22、列出薪金高于公司平均薪金的所有员工, 所在部门, 上级领导, 雇员的工资等级."></a>22、列出薪金高于公司平均薪金的所有员工, 所在部门, 上级领导, 雇员的工资等级.</h2><pre><code>select 
+    e.ename &#39;员工&#39;,d.dname,l.ename &#39;领导&#39;,s.grade
+from
+    emp e
+join
+    dept d
+on
+    e.deptno = d.deptno
+left join
+    emp l
+on
+    e.mgr = l.empno
+join
+    salgrade s
+on
+    e.sal between s.losal and s.hisal
+where
+    e.sal &gt; (select avg(sal) from emp);
+
+
++-------+------------+-------+-------+
+| 员工     | dname      | 领导    | grade |
++-------+------------+-------+-------+
+| JONES | RESEARCH   | KING  |     4 |
+| BLAKE | SALES      | KING  |     4 |
+| CLARK | ACCOUNTING | KING  |     4 |
+| SCOTT | RESEARCH   | JONES |     4 |
+| KING  | ACCOUNTING | NULL  |     5 |
+| FORD  | RESEARCH   | JONES |     4 |
++-------+------------+-------+-------+</code></pre>
+<h2 id="23、-列出与”SCOTT”-从事相同工作的所有员工及部门名称"><a href="#23、-列出与”SCOTT”-从事相同工作的所有员工及部门名称" class="headerlink" title="23、 列出与”SCOTT” 从事相同工作的所有员工及部门名称"></a>23、 列出与”SCOTT” 从事相同工作的所有员工及部门名称</h2><pre><code>select job from emp where ename = &#39;SCOTT&#39;;
++---------+
+| job     |
++---------+
+| ANALYST |
++---------+
+
+select 
+    e.ename,e.job,d.dname
+from
+    emp e
+join
+    dept d
+on
+    e.deptno = d.deptno
+where
+    e.job = (select job from emp where ename = &#39;SCOTT&#39;)
+and
+    e.ename &lt;&gt; &#39;SCOTT&#39;;
+
++-------+---------+----------+
+| ename | job     | dname    |
++-------+---------+----------+
+| FORD  | ANALYST | RESEARCH |
++-------+---------+----------+</code></pre>
+<h2 id="24、列出薪金等于部门-30-中员工的薪金的其他员工的姓名和薪金"><a href="#24、列出薪金等于部门-30-中员工的薪金的其他员工的姓名和薪金" class="headerlink" title="24、列出薪金等于部门 30 中员工的薪金的其他员工的姓名和薪金."></a>24、列出薪金等于部门 30 中员工的薪金的其他员工的姓名和薪金.</h2><pre><code>select distinct sal from emp where deptno = 30;
++---------+
+| sal     |
++---------+
+| 1600.00 |
+| 1250.00 |
+| 2850.00 |
+| 1500.00 |
+|  950.00 |
++---------+
+
+select 
+    ename,sal 
+from 
+    emp 
+where 
+    sal in(select distinct sal from emp where deptno = 30) 
+and 
+    deptno &lt;&gt; 30;
+
+Empty set (0.00 sec)</code></pre>
+<h2 id="25、列出薪金高于在部门-30-工作的所有员工的薪金的员工姓名和薪金-部门名称"><a href="#25、列出薪金高于在部门-30-工作的所有员工的薪金的员工姓名和薪金-部门名称" class="headerlink" title="25、列出薪金高于在部门 30 工作的所有员工的薪金的员工姓名和薪金. 部门名称"></a>25、列出薪金高于在部门 30 工作的所有员工的薪金的员工姓名和薪金. 部门名称</h2><pre><code>select max(sal) from emp where deptno = 30;
++----------+
+| max(sal) |
++----------+
+|  2850.00 |
++----------+
+
+select
+    e.ename,e.sal,d.dname
+from
+    emp e
+join
+    dept d
+on
+    e.deptno = d.deptno
+where
+    e.sal &gt; (select max(sal) from emp where deptno = 30);
+
++-------+---------+------------+
+| ename | sal     | dname      |
++-------+---------+------------+
+| KING  | 5000.00 | ACCOUNTING |
+| JONES | 2975.00 | RESEARCH   |
+| SCOTT | 3000.00 | RESEARCH   |
+| FORD  | 3000.00 | RESEARCH   |
++-------+---------+------------+</code></pre>
+<h2 id="26、列出在每个部门工作的员工数量-平均工资和平均服务期限"><a href="#26、列出在每个部门工作的员工数量-平均工资和平均服务期限" class="headerlink" title="26、列出在每个部门工作的员工数量, 平均工资和平均服务期限"></a>26、列出在每个部门工作的员工数量, 平均工资和平均服务期限</h2><p>没有员工的部门，部门人数是0</p>
+<pre><code>select 
+    d.deptno, count(e.ename) ecount,ifnull(avg(e.sal),0) as avgsal, ifnull(avg(timestampdiff(YEAR, hiredate, now())), 0) as avgservicetime
+from
+    emp e
+right join
+    dept d
+on
+    e.deptno = d.deptno
+group by
+    d.deptno;
+
++--------+--------+-------------+----------------+
+| deptno | ecount | avgsal      | avgservicetime |
++--------+--------+-------------+----------------+
+|     10 |      3 | 2916.666667 |        38.0000 |
+|     20 |      5 | 2175.000000 |        35.8000 |
+|     30 |      6 | 1566.666667 |        38.3333 |
+|     40 |      0 |    0.000000 |         0.0000 |
++--------+--------+-------------+----------------+</code></pre>
+<p>在mysql当中怎么计算两个日期的“年差”，差了多少年？<br>    TimeStampDiff(间隔类型, 前一个日期, 后一个日期)</p>
+<pre><code>timestampdiff(YEAR, hiredate, now())
+
+间隔类型：
+    SECOND   秒，
+    MINUTE   分钟，
+    HOUR   小时，
+    DAY   天，
+    WEEK   星期
+    MONTH   月，
+    QUARTER   季度，
+    YEAR   年</code></pre>
+<h2 id="27、-列出所有员工的姓名、部门名称和工资。"><a href="#27、-列出所有员工的姓名、部门名称和工资。" class="headerlink" title="27、 列出所有员工的姓名、部门名称和工资。"></a>27、 列出所有员工的姓名、部门名称和工资。</h2><pre><code>select 
+    e.ename,d.dname,e.sal
+from
+    emp e
+join 
+    dept d
+on
+    e.deptno = d.deptno;
+
++--------+------------+---------+
+| ename  | dname      | sal     |
++--------+------------+---------+
+| CLARK  | ACCOUNTING | 2450.00 |
+| KING   | ACCOUNTING | 5000.00 |
+| MILLER | ACCOUNTING | 1300.00 |
+| SMITH  | RESEARCH   |  800.00 |
+| JONES  | RESEARCH   | 2975.00 |
+| SCOTT  | RESEARCH   | 3000.00 |
+| ADAMS  | RESEARCH   | 1100.00 |
+| FORD   | RESEARCH   | 3000.00 |
+| ALLEN  | SALES      | 1600.00 |
+| WARD   | SALES      | 1250.00 |
+| MARTIN | SALES      | 1250.00 |
+| BLAKE  | SALES      | 2850.00 |
+| TURNER | SALES      | 1500.00 |
+| JAMES  | SALES      |  950.00 |
++--------+------------+---------+</code></pre>
+<h2 id="28、列出所有部门的详细信息和人数"><a href="#28、列出所有部门的详细信息和人数" class="headerlink" title="28、列出所有部门的详细信息和人数"></a>28、列出所有部门的详细信息和人数</h2><pre><code>select 
+    d.deptno,d.dname,d.loc,count(e.ename)
+from
+    emp e
+right join
+    dept d
+on
+    e.deptno = d.deptno
+group by
+    d.deptno,d.dname,d.loc;
+
++--------+------------+----------+----------------+
+| deptno | dname      | loc      | count(e.ename) |
++--------+------------+----------+----------------+
+|     10 | ACCOUNTING | NEW YORK |              3 |
+|     20 | RESEARCH   | DALLAS   |              5 |
+|     30 | SALES      | CHICAGO  |              6 |
+|     40 | OPERATIONS | BOSTON   |              0 |
++--------+------------+----------+----------------+</code></pre>
+<h2 id="29、列出各种工作的最低工资及从事此工作的雇员姓名"><a href="#29、列出各种工作的最低工资及从事此工作的雇员姓名" class="headerlink" title="29、列出各种工作的最低工资及从事此工作的雇员姓名"></a>29、列出各种工作的最低工资及从事此工作的雇员姓名</h2><pre><code>select 
+    job,min(sal) as minsal
+from
+    emp
+group by
+    job;
+
++-----------+----------+
+| job       | minsal   |
++-----------+----------+
+| ANALYST   |  3000.00 |
+| CLERK     |   800.00 |
+| MANAGER   |  2450.00 |
+| PRESIDENT |  5000.00 |
+| SALESMAN  |  1250.00 |
++-----------+----------+</code></pre>
+<p>emp e和以上t连接</p>
+<pre><code>select 
+    e.ename,t.*
+from
+    emp e
+join
+    (select 
+        job,min(sal) as minsal
+    from
+        emp
+    group by
+        job) t
+on
+    e.job = t.job and e.sal = t.minsal;
+
++--------+-----------+---------+
+| ename  | job       | minsal  |
++--------+-----------+---------+
+| SMITH  | CLERK     |  800.00 |
+| WARD   | SALESMAN  | 1250.00 |
+| MARTIN | SALESMAN  | 1250.00 |
+| CLARK  | MANAGER   | 2450.00 |
+| SCOTT  | ANALYST   | 3000.00 |
+| KING   | PRESIDENT | 5000.00 |
+| FORD   | ANALYST   | 3000.00 |
++--------+-----------+---------+</code></pre>
+<h2 id="30、列出各个部门的-MANAGER-领导-的最低薪金"><a href="#30、列出各个部门的-MANAGER-领导-的最低薪金" class="headerlink" title="30、列出各个部门的 MANAGER( 领导) 的最低薪金"></a>30、列出各个部门的 MANAGER( 领导) 的最低薪金</h2><pre><code>select 
+    deptno, min(sal)
+from
+    emp
+where
+    job = &#39;MANAGER&#39;
+group by
+    deptno;
+
++--------+----------+
+| deptno | min(sal) |
++--------+----------+
+|     10 |  2450.00 |
+|     20 |  2975.00 |
+|     30 |  2850.00 |
++--------+----------+</code></pre>
+<h2 id="31、列出所有员工的-年工资-按-年薪从低到高排序"><a href="#31、列出所有员工的-年工资-按-年薪从低到高排序" class="headerlink" title="31、列出所有员工的 年工资, 按 年薪从低到高排序"></a>31、列出所有员工的 年工资, 按 年薪从低到高排序</h2><p>因为comm津贴有控制，所以使用ifnull函数进行处理，否则，经过算数处理后结果会为null值  </p>
+<pre><code>select 
+    ename,(sal + ifnull(comm,0)) * 12 as yearsal
+from
+    emp
+order by
+    yearsal asc;
+
++--------+----------+
+| ename  | yearsal  |
++--------+----------+
+| SMITH  |  9600.00 |
+| JAMES  | 11400.00 |
+| ADAMS  | 13200.00 |
+| MILLER | 15600.00 |
+| TURNER | 18000.00 |
+| WARD   | 21000.00 |
+| ALLEN  | 22800.00 |
+| CLARK  | 29400.00 |
+| MARTIN | 31800.00 |
+| BLAKE  | 34200.00 |
+| JONES  | 35700.00 |
+| FORD   | 36000.00 |
+| SCOTT  | 36000.00 |
+| KING   | 60000.00 |
++--------+----------+</code></pre>
+<h2 id="32、求出员工领导的薪水超过3000的员工名称与领导"><a href="#32、求出员工领导的薪水超过3000的员工名称与领导" class="headerlink" title="32、求出员工领导的薪水超过3000的员工名称与领导"></a>32、求出员工领导的薪水超过3000的员工名称与领导</h2><pre><code>select 
+    a.ename &#39;员工&#39;,b.ename &#39;领导&#39;
+from
+    emp a
+join
+    emp b
+on
+    a.mgr = b.empno
+where
+    b.sal &gt; 3000;
+
++-------+------+
+| 员工  | 领导   |
++-------+------+
+| JONES | KING |
+| BLAKE | KING |
+| CLARK | KING |
++-------+------+</code></pre>
+<h2 id="33、求出部门名称中-带’S’字符的部门员工的工资合计、部门人数"><a href="#33、求出部门名称中-带’S’字符的部门员工的工资合计、部门人数" class="headerlink" title="33、求出部门名称中, 带’S’字符的部门员工的工资合计、部门人数"></a>33、求出部门名称中, 带’S’字符的部门员工的工资合计、部门人数</h2><pre><code>select 
+    d.deptno,d.dname,d.loc,count(e.ename),ifnull(sum(e.sal),0) as sumsal
+from
+    emp e
+right join
+    dept d
+on
+    e.deptno = d.deptno
+where
+    d.dname like &#39;%S%&#39;
+group by
+    d.deptno,d.dname,d.loc;
+
++--------+------------+---------+----------------+----------+
+| deptno | dname      | loc     | count(e.ename) | sumsal   |
++--------+------------+---------+----------------+----------+
+|     20 | RESEARCH   | DALLAS  |              5 | 10875.00 |
+|     30 | SALES      | CHICAGO |              6 |  9400.00 |
+|     40 | OPERATIONS | BOSTON  |              0 |     0.00 |
++--------+------------+---------+----------------+----------+</code></pre>
+<h2 id="34、给任职日期超过-30-年的员工加薪-10"><a href="#34、给任职日期超过-30-年的员工加薪-10" class="headerlink" title="34、给任职日期超过 30 年的员工加薪 10%."></a>34、给任职日期超过 30 年的员工加薪 10%.</h2><pre><code>update emp set sal = sal * 1.1 where timestampdiff(YEAR, hiredate, now()) &gt; 30;</code></pre>
+
+      
+      <!-- 增加版权声明 -->
+
+      
+      
+      <div class="declare">
+        <strong>本文作者：</strong>
+        
+          Iris Yuan
+        
+        <br>
+        <strong>本文链接：</strong>
+        <a rel="license" href="http://example.com/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/">http://example.com/2020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/</a>
+        <br>
+        <strong>版权声明：</strong>
+        本作品采用
+        <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        进行许可。转载请注明出处！
+        
+          <br>
+          <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+        
+      </div>
+      
+
+      <!-- 增加版权声明结束 -->
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -226,133 +1287,128 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://irisyzy1018.github.io/020/09/24/34%E9%81%93%E4%BD%9C%E4%B8%9A%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B003/" class="archive-article-date">
-  	<time datetime="2020-09-24T07:40:16.889Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/09/24/%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SQL面试题汇总
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B003/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL笔记03</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B003/">MySQL笔记03</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%8F%96%E5%BE%97%E6%AF%8F%E4%B8%AA%E9%83%A8%E9%97%A8%E6%9C%80%E9%AB%98%E8%96%AA%E6%B0%B4%E7%9A%84%E4%BA%BA%E5%91%98%E5%90%8D%E7%A7%B0"><span class="toc-number">1.</span> <span class="toc-text">1、取得每个部门最高薪水的人员名称</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%8F%96%E5%BE%97%E6%AF%8F%E4%B8%AA%E9%83%A8%E9%97%A8%E6%9C%80%E9%AB%98%E8%96%AA%E6%B0%B4-%E6%8C%89%E7%85%A7%E9%83%A8%E9%97%A8%E7%BC%96%E5%8F%B7%E5%88%86%E7%BB%84%EF%BC%8C%E6%89%BE%E5%87%BA%E6%AF%8F%E4%B8%80%E7%BB%84%E6%9C%80%E5%A4%A7%E5%80%BC"><span class="toc-number">1.1.</span> <span class="toc-text">第一步：取得每个部门最高薪水(按照部门编号分组，找出每一组最大值)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%B0%86%E4%BB%A5%E4%B8%8A%E7%9A%84%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%BD%93%E5%81%9A%E4%B8%80%E5%BC%A0%E4%B8%B4%E6%97%B6%E8%A1%A8t%EF%BC%8Ct%E5%92%8Cemp%E8%A1%A8%E8%BF%9E%E6%8E%A5%EF%BC%8C%E6%9D%A1%E4%BB%B6%EF%BC%9At-deptno-e-deptno-and-t-maxsal-e-sal%EF%BC%9B%E5%88%AB%E5%BF%98%E4%BA%86%E9%83%A8%E9%97%A8%E7%BC%96%E5%8F%B7%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">第二步：将以上的查询结果当做一张临时表t，t和emp表连接，条件：t.deptno &#x3D; e.deptno and t.maxsal &#x3D; e.sal；别忘了部门编号的条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%93%AA%E4%BA%9B%E4%BA%BA%E7%9A%84%E8%96%AA%E6%B0%B4%E5%9C%A8%E9%83%A8%E9%97%A8%E7%9A%84%E5%B9%B3%E5%9D%87%E8%96%AA%E6%B0%B4%E4%B9%8B%E4%B8%8A"><span class="toc-number">2.</span> <span class="toc-text">2、哪些人的薪水在部门的平均薪水之上</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%89%BE%E5%87%BA%E6%AF%8F%E4%B8%AA%E9%83%A8%E9%97%A8%E7%9A%84%E5%B9%B3%E5%9D%87%E8%96%AA%E6%B0%B4"><span class="toc-number">2.1.</span> <span class="toc-text">第一步：找出每个部门的平均薪水</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%B0%86%E4%BB%A5%E4%B8%8A%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%BD%93%E5%81%9At%E8%A1%A8%EF%BC%8Ct%E5%92%8Cemp%E8%A1%A8%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.2.</span> <span class="toc-text">第二步：将以上查询结果当做t表，t和emp表连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%8F%96%E5%BE%97%E9%83%A8%E9%97%A8%E4%B8%AD%EF%BC%88%E6%89%80%E6%9C%89%E4%BA%BA%E7%9A%84%EF%BC%89%E5%B9%B3%E5%9D%87%E7%9A%84%E8%96%AA%E6%B0%B4%E7%AD%89%E7%BA%A7"><span class="toc-number">3.</span> <span class="toc-text">3、取得部门中（所有人的）平均的薪水等级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%89%BE%E5%87%BA%E6%AF%8F%E4%B8%AA%E4%BA%BA%E7%9A%84%E8%96%AA%E6%B0%B4%E7%AD%89%E7%BA%A7"><span class="toc-number">3.1.</span> <span class="toc-text">第一步：找出每个人的薪水等级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%9F%BA%E4%BA%8E%E4%BB%A5%E4%B8%8A%E7%9A%84%E7%BB%93%E6%9E%9C%E7%BB%A7%E7%BB%AD%E6%8C%89%E7%85%A7deptno%E5%88%86%E7%BB%84%EF%BC%8C%E6%B1%82grade%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC%E3%80%82"><span class="toc-number">3.2.</span> <span class="toc-text">第二步：基于以上的结果继续按照deptno分组，求grade的平均值。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E4%B8%8D%E5%87%86%E7%94%A8%E5%88%86%E7%BB%84%E5%87%BD%E6%95%B0%EF%BC%88Max-%EF%BC%89%EF%BC%8C%E5%8F%96%E5%BE%97%E6%9C%80%E9%AB%98%E8%96%AA%E6%B0%B4"><span class="toc-number">4.</span> <span class="toc-text">4、不准用分组函数（Max ），取得最高薪水</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%EF%BC%9Asal%E9%99%8D%E5%BA%8F%EF%BC%8Climit-1"><span class="toc-number">4.1.</span> <span class="toc-text">第一种：sal降序，limit 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">第二种方案：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%9A%E8%A1%A8%E7%9A%84%E8%87%AA%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.3.</span> <span class="toc-text">第三种方案：表的自连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E5%8F%96%E5%BE%97%E5%B9%B3%E5%9D%87%E8%96%AA%E6%B0%B4%E6%9C%80%E9%AB%98%E7%9A%84%E9%83%A8%E9%97%A8%E7%9A%84%E9%83%A8%E9%97%A8%E7%BC%96%E5%8F%B7"><span class="toc-number">5.</span> <span class="toc-text">5、取得平均薪水最高的部门的部门编号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%9A%E9%99%8D%E5%BA%8F%E5%8F%96%E7%AC%AC%E4%B8%80%E4%B8%AA%E3%80%82"><span class="toc-number">6.</span> <span class="toc-text">第一种方案：降序取第一个。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%A1%88%EF%BC%9Amax"><span class="toc-number">6.1.</span> <span class="toc-text">第二种方案：max</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E5%8F%96%E5%BE%97%E5%B9%B3%E5%9D%87%E8%96%AA%E6%B0%B4%E6%9C%80%E9%AB%98%E7%9A%84%E9%83%A8%E9%97%A8%E7%9A%84%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0"><span class="toc-number">7.</span> <span class="toc-text">6、取得平均薪水最高的部门的部门名称</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E6%B1%82%E5%B9%B3%E5%9D%87%E8%96%AA%E6%B0%B4%E7%9A%84%E7%AD%89%E7%BA%A7%E6%9C%80%E4%BD%8E%E7%9A%84%E9%83%A8%E9%97%A8%E7%9A%84%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0"><span class="toc-number">7.1.</span> <span class="toc-text">7、求平均薪水的等级最低的部门的部门名称</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E5%8F%96%E5%BE%97%E6%AF%94%E6%99%AE%E9%80%9A%E5%91%98%E5%B7%A5-%E5%91%98%E5%B7%A5%E4%BB%A3%E7%A0%81%E6%B2%A1%E6%9C%89%E5%9C%A8-mgr-%E5%AD%97%E6%AE%B5%E4%B8%8A%E5%87%BA%E7%8E%B0%E7%9A%84-%E7%9A%84%E6%9C%80%E9%AB%98%E8%96%AA%E6%B0%B4%E8%BF%98%E8%A6%81%E9%AB%98%E7%9A%84%E9%A2%86%E5%AF%BC%E4%BA%BA%E5%A7%93%E5%90%8D"><span class="toc-number">8.</span> <span class="toc-text">8、取得比普通员工(员工代码没有在 mgr 字段上出现的) 的最高薪水还要高的领导人姓名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81%E5%8F%96%E5%BE%97%E8%96%AA%E6%B0%B4%E6%9C%80%E9%AB%98%E7%9A%84%E5%89%8D%E4%BA%94%E5%90%8D%E5%91%98%E5%B7%A5"><span class="toc-number">9.</span> <span class="toc-text">9、取得薪水最高的前五名员工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E5%8F%96%E5%BE%97%E8%96%AA%E6%B0%B4%E6%9C%80%E9%AB%98%E7%9A%84%E7%AC%AC%E5%85%AD%E5%88%B0%E7%AC%AC%E5%8D%81%E5%90%8D%E5%91%98%E5%B7%A5"><span class="toc-number">10.</span> <span class="toc-text">10、取得薪水最高的第六到第十名员工</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11%E3%80%81%E5%8F%96%E5%BE%97%E6%9C%80%E5%90%8E%E5%85%A5%E8%81%8C%E7%9A%84-5-%E5%90%8D%E5%91%98%E5%B7%A5"><span class="toc-number">10.1.</span> <span class="toc-text">11、取得最后入职的 5 名员工</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12%E3%80%81%E5%8F%96%E5%BE%97%E6%AF%8F%E4%B8%AA%E8%96%AA%E6%B0%B4%E7%AD%89%E7%BA%A7%E6%9C%89%E5%A4%9A%E5%B0%91%E5%91%98%E5%B7%A5"><span class="toc-number">11.</span> <span class="toc-text">12、取得每个薪水等级有多少员工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13%E3%80%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%EF%BC%88%E8%BF%99%E9%A2%98%E6%B2%A1%E6%9C%89%E8%A7%86%E9%A2%91%E8%AE%B2%E8%A7%A3%EF%BC%89"><span class="toc-number">12.</span> <span class="toc-text">13、面试题：（这题没有视频讲解）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8C%E6%89%BE%E5%87%BA%E6%B2%A1%E9%80%89%E8%BF%87%E2%80%9C%E9%BB%8E%E6%98%8E%E2%80%9D%E8%80%81%E5%B8%88%E7%9A%84%E6%89%80%E6%9C%89%E5%AD%A6%E7%94%9F%E5%A7%93%E5%90%8D%E3%80%82"><span class="toc-number">12.1.</span> <span class="toc-text">1，找出没选过“黎明”老师的所有学生姓名。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8C%E5%88%97%E5%87%BA-2-%E9%97%A8%E4%BB%A5%E4%B8%8A%EF%BC%88%E5%90%AB2-%E9%97%A8%EF%BC%89%E4%B8%8D%E5%8F%8A%E6%A0%BC%E5%AD%A6%E7%94%9F%E5%A7%93%E5%90%8D%E5%8F%8A%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9%E3%80%82"><span class="toc-number">12.2.</span> <span class="toc-text">2，列出 2 门以上（含2 门）不及格学生姓名及平均成绩。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8C%E6%97%A2%E5%AD%A6%E8%BF%87-1-%E5%8F%B7%E8%AF%BE%E7%A8%8B%E5%8F%88%E5%AD%A6%E8%BF%87-2-%E5%8F%B7%E8%AF%BE%E6%89%80%E6%9C%89%E5%AD%A6%E7%94%9F%E7%9A%84%E5%A7%93%E5%90%8D%E3%80%82"><span class="toc-number">12.3.</span> <span class="toc-text">3，既学过 1 号课程又学过 2 号课所有学生的姓名。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14%E3%80%81%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E5%91%98%E5%B7%A5%E5%8F%8A%E9%A2%86%E5%AF%BC%E7%9A%84%E5%A7%93%E5%90%8D"><span class="toc-number">13.</span> <span class="toc-text">14、列出所有员工及领导的姓名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15%E3%80%81%E5%88%97%E5%87%BA%E5%8F%97%E9%9B%87%E6%97%A5%E6%9C%9F%E6%97%A9%E4%BA%8E%E5%85%B6%E7%9B%B4%E6%8E%A5%E4%B8%8A%E7%BA%A7%E7%9A%84%E6%89%80%E6%9C%89%E5%91%98%E5%B7%A5%E7%9A%84%E7%BC%96%E5%8F%B7-%E5%A7%93%E5%90%8D-%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0"><span class="toc-number">14.</span> <span class="toc-text">15、列出受雇日期早于其直接上级的所有员工的编号,姓名,部门名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16%E3%80%81-%E5%88%97%E5%87%BA%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0%E5%92%8C%E8%BF%99%E4%BA%9B%E9%83%A8%E9%97%A8%E7%9A%84%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF-%E5%90%8C%E6%97%B6%E5%88%97%E5%87%BA%E9%82%A3%E4%BA%9B%E6%B2%A1%E6%9C%89%E5%91%98%E5%B7%A5%E7%9A%84%E9%83%A8%E9%97%A8"><span class="toc-number">15.</span> <span class="toc-text">16、 列出部门名称和这些部门的员工信息, 同时列出那些没有员工的部门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17%E3%80%81%E5%88%97%E5%87%BA%E8%87%B3%E5%B0%91%E6%9C%89-5-%E4%B8%AA%E5%91%98%E5%B7%A5%E7%9A%84%E6%89%80%E6%9C%89%E9%83%A8%E9%97%A8"><span class="toc-number">16.</span> <span class="toc-text">17、列出至少有 5 个员工的所有部门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18%E3%80%81%E5%88%97%E5%87%BA%E8%96%AA%E9%87%91%E6%AF%94%E2%80%9DSMITH%E2%80%9D-%E5%A4%9A%E7%9A%84%E6%89%80%E6%9C%89%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF"><span class="toc-number">17.</span> <span class="toc-text">18、列出薪金比”SMITH” 多的所有员工信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19%E3%80%81-%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E2%80%9DCLERK%E2%80%9D-%E5%8A%9E%E4%BA%8B%E5%91%98-%E7%9A%84%E5%A7%93%E5%90%8D%E5%8F%8A%E5%85%B6%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0-%E9%83%A8%E9%97%A8%E7%9A%84%E4%BA%BA%E6%95%B0"><span class="toc-number">18.</span> <span class="toc-text">19、 列出所有”CLERK”( 办事员) 的姓名及其部门名称, 部门的人数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20%E3%80%81%E5%88%97%E5%87%BA%E6%9C%80%E4%BD%8E%E8%96%AA%E9%87%91%E5%A4%A7%E4%BA%8E-1500-%E7%9A%84%E5%90%84%E7%A7%8D%E5%B7%A5%E4%BD%9C%E5%8F%8A%E4%BB%8E%E4%BA%8B%E6%AD%A4%E5%B7%A5%E4%BD%9C%E7%9A%84%E5%85%A8%E9%83%A8%E9%9B%87%E5%91%98%E4%BA%BA%E6%95%B0"><span class="toc-number">19.</span> <span class="toc-text">20、列出最低薪金大于 1500 的各种工作及从事此工作的全部雇员人数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21%E3%80%81%E5%88%97%E5%87%BA%E5%9C%A8%E9%83%A8%E9%97%A8%E2%80%9DSALES%E2%80%9D-lt-%E9%94%80%E5%94%AE%E9%83%A8-gt-%E5%B7%A5%E4%BD%9C%E7%9A%84%E5%91%98%E5%B7%A5%E7%9A%84%E5%A7%93%E5%90%8D-%E5%81%87%E5%AE%9A%E4%B8%8D%E7%9F%A5%E9%81%93%E9%94%80%E5%94%AE%E9%83%A8%E7%9A%84%E9%83%A8%E9%97%A8%E7%BC%96%E5%8F%B7"><span class="toc-number">20.</span> <span class="toc-text">21、列出在部门”SALES”&lt; 销售部&gt; 工作的员工的姓名, 假定不知道销售部的部门编号.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22%E3%80%81%E5%88%97%E5%87%BA%E8%96%AA%E9%87%91%E9%AB%98%E4%BA%8E%E5%85%AC%E5%8F%B8%E5%B9%B3%E5%9D%87%E8%96%AA%E9%87%91%E7%9A%84%E6%89%80%E6%9C%89%E5%91%98%E5%B7%A5-%E6%89%80%E5%9C%A8%E9%83%A8%E9%97%A8-%E4%B8%8A%E7%BA%A7%E9%A2%86%E5%AF%BC-%E9%9B%87%E5%91%98%E7%9A%84%E5%B7%A5%E8%B5%84%E7%AD%89%E7%BA%A7"><span class="toc-number">21.</span> <span class="toc-text">22、列出薪金高于公司平均薪金的所有员工, 所在部门, 上级领导, 雇员的工资等级.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23%E3%80%81-%E5%88%97%E5%87%BA%E4%B8%8E%E2%80%9DSCOTT%E2%80%9D-%E4%BB%8E%E4%BA%8B%E7%9B%B8%E5%90%8C%E5%B7%A5%E4%BD%9C%E7%9A%84%E6%89%80%E6%9C%89%E5%91%98%E5%B7%A5%E5%8F%8A%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0"><span class="toc-number">22.</span> <span class="toc-text">23、 列出与”SCOTT” 从事相同工作的所有员工及部门名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24%E3%80%81%E5%88%97%E5%87%BA%E8%96%AA%E9%87%91%E7%AD%89%E4%BA%8E%E9%83%A8%E9%97%A8-30-%E4%B8%AD%E5%91%98%E5%B7%A5%E7%9A%84%E8%96%AA%E9%87%91%E7%9A%84%E5%85%B6%E4%BB%96%E5%91%98%E5%B7%A5%E7%9A%84%E5%A7%93%E5%90%8D%E5%92%8C%E8%96%AA%E9%87%91"><span class="toc-number">23.</span> <span class="toc-text">24、列出薪金等于部门 30 中员工的薪金的其他员工的姓名和薪金.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25%E3%80%81%E5%88%97%E5%87%BA%E8%96%AA%E9%87%91%E9%AB%98%E4%BA%8E%E5%9C%A8%E9%83%A8%E9%97%A8-30-%E5%B7%A5%E4%BD%9C%E7%9A%84%E6%89%80%E6%9C%89%E5%91%98%E5%B7%A5%E7%9A%84%E8%96%AA%E9%87%91%E7%9A%84%E5%91%98%E5%B7%A5%E5%A7%93%E5%90%8D%E5%92%8C%E8%96%AA%E9%87%91-%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0"><span class="toc-number">24.</span> <span class="toc-text">25、列出薪金高于在部门 30 工作的所有员工的薪金的员工姓名和薪金. 部门名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#26%E3%80%81%E5%88%97%E5%87%BA%E5%9C%A8%E6%AF%8F%E4%B8%AA%E9%83%A8%E9%97%A8%E5%B7%A5%E4%BD%9C%E7%9A%84%E5%91%98%E5%B7%A5%E6%95%B0%E9%87%8F-%E5%B9%B3%E5%9D%87%E5%B7%A5%E8%B5%84%E5%92%8C%E5%B9%B3%E5%9D%87%E6%9C%8D%E5%8A%A1%E6%9C%9F%E9%99%90"><span class="toc-number">25.</span> <span class="toc-text">26、列出在每个部门工作的员工数量, 平均工资和平均服务期限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#27%E3%80%81-%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E5%91%98%E5%B7%A5%E7%9A%84%E5%A7%93%E5%90%8D%E3%80%81%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0%E5%92%8C%E5%B7%A5%E8%B5%84%E3%80%82"><span class="toc-number">26.</span> <span class="toc-text">27、 列出所有员工的姓名、部门名称和工资。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#28%E3%80%81%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E9%83%A8%E9%97%A8%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF%E5%92%8C%E4%BA%BA%E6%95%B0"><span class="toc-number">27.</span> <span class="toc-text">28、列出所有部门的详细信息和人数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#29%E3%80%81%E5%88%97%E5%87%BA%E5%90%84%E7%A7%8D%E5%B7%A5%E4%BD%9C%E7%9A%84%E6%9C%80%E4%BD%8E%E5%B7%A5%E8%B5%84%E5%8F%8A%E4%BB%8E%E4%BA%8B%E6%AD%A4%E5%B7%A5%E4%BD%9C%E7%9A%84%E9%9B%87%E5%91%98%E5%A7%93%E5%90%8D"><span class="toc-number">28.</span> <span class="toc-text">29、列出各种工作的最低工资及从事此工作的雇员姓名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#30%E3%80%81%E5%88%97%E5%87%BA%E5%90%84%E4%B8%AA%E9%83%A8%E9%97%A8%E7%9A%84-MANAGER-%E9%A2%86%E5%AF%BC-%E7%9A%84%E6%9C%80%E4%BD%8E%E8%96%AA%E9%87%91"><span class="toc-number">29.</span> <span class="toc-text">30、列出各个部门的 MANAGER( 领导) 的最低薪金</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#31%E3%80%81%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E5%91%98%E5%B7%A5%E7%9A%84-%E5%B9%B4%E5%B7%A5%E8%B5%84-%E6%8C%89-%E5%B9%B4%E8%96%AA%E4%BB%8E%E4%BD%8E%E5%88%B0%E9%AB%98%E6%8E%92%E5%BA%8F"><span class="toc-number">30.</span> <span class="toc-text">31、列出所有员工的 年工资, 按 年薪从低到高排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32%E3%80%81%E6%B1%82%E5%87%BA%E5%91%98%E5%B7%A5%E9%A2%86%E5%AF%BC%E7%9A%84%E8%96%AA%E6%B0%B4%E8%B6%85%E8%BF%873000%E7%9A%84%E5%91%98%E5%B7%A5%E5%90%8D%E7%A7%B0%E4%B8%8E%E9%A2%86%E5%AF%BC"><span class="toc-number">31.</span> <span class="toc-text">32、求出员工领导的薪水超过3000的员工名称与领导</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33%E3%80%81%E6%B1%82%E5%87%BA%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0%E4%B8%AD-%E5%B8%A6%E2%80%99S%E2%80%99%E5%AD%97%E7%AC%A6%E7%9A%84%E9%83%A8%E9%97%A8%E5%91%98%E5%B7%A5%E7%9A%84%E5%B7%A5%E8%B5%84%E5%90%88%E8%AE%A1%E3%80%81%E9%83%A8%E9%97%A8%E4%BA%BA%E6%95%B0"><span class="toc-number">32.</span> <span class="toc-text">33、求出部门名称中, 带’S’字符的部门员工的工资合计、部门人数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34%E3%80%81%E7%BB%99%E4%BB%BB%E8%81%8C%E6%97%A5%E6%9C%9F%E8%B6%85%E8%BF%87-30-%E5%B9%B4%E7%9A%84%E5%91%98%E5%B7%A5%E5%8A%A0%E8%96%AA-10"><span class="toc-number">33.</span> <span class="toc-text">34、给任职日期超过 30 年的员工加薪 10%.</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/" class="archive-article-date">
-  	<time datetime="2020-09-24T07:09:02.806Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/">MySQL笔记02</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/" class="archive-article-date">
-  	<time datetime="2020-09-24T05:14:15.352Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/">MySQL笔记01</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -379,9 +1435,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
