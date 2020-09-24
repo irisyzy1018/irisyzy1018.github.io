@@ -6,19 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>MySQL笔记01 | Iris Yuan</title>
+  <title>Tag: SQL | Iris Yuan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、sql、DB、DBMS分别是什么，他们之间的关系？">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MySQL笔记01">
-<meta property="og:url" content="http://example.com/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/index.html">
+  <meta name="description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Iris Yuan">
+<meta property="og:url" content="http://example.com/tags/SQL/index.html">
 <meta property="og:site_name" content="Iris Yuan">
-<meta property="og:description" content="1、sql、DB、DBMS分别是什么，他们之间的关系？">
+<meta property="og:description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-24T05:14:15.352Z">
-<meta property="article:modified_time" content="2020-09-24T07:01:02.256Z">
 <meta property="article:author" content="Iris Yuan">
-<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="Happy">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Iris Yuan" type="application/atom+xml">
@@ -150,764 +148,35 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-MySQL笔记01" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 class="article-title" itemprop="name">
-      MySQL笔记01
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B003/" class="archive-article-date">
+  	<time datetime="2020-09-24T07:40:16.889Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B003/">MySQL笔记03</a>
     </h1>
   
 
-        
-        <a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/" class="archive-article-date">
-  	<time datetime="2020-09-24T05:14:15.352Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1、sql、DB、DBMS分别是什么，他们之间的关系？"><a href="#1、sql、DB、DBMS分别是什么，他们之间的关系？" class="headerlink" title="1、sql、DB、DBMS分别是什么，他们之间的关系？"></a>1、sql、DB、DBMS分别是什么，他们之间的关系？</h3><a id="more"></a>    
-<pre><code>DB: 
-    DataBase（数据库，数据库实际上在硬盘上以文件的形式存在）
-
-DBMS: 
-    DataBase Management System（数据库管理系统，常见的有：MySQL Oracle DB2 Sybase SqlServer...）
-
-SQL: 
-    结构化查询语言，是一门标准通用的语言。标准的sql适合于所有的数据库产品。
-    SQL属于高级语言。只要能看懂英语单词的，写出来的sql语句，可以读懂什么意思。
-    SQL语句在执行的时候，实际上内部也会先进行编译，然后再执行sql。（sql语句的编译由DBMS完成。）
-
-DBMS负责执行sql语句，通过执行sql语句来操作DB当中的数据。
-DBMS -(执行)-&gt; SQL -(操作)-&gt; DB</code></pre>
-<h3 id="2、什么是表？"><a href="#2、什么是表？" class="headerlink" title="2、什么是表？"></a>2、什么是表？</h3><pre><code>表：table
-
-表：table是数据库的基本组成单元，所有的数据都以表格的形式组织，目的是可读性强。
-
-一个表包括行和列：
-    行：被称为数据/记录(data)
-    列：被称为字段(column)
-
-学号(int)    姓名(varchar)    年龄(int)
-------------------------------------
-110            张三                20
-120            李四                21
-
-每一个字段应该包括哪些属性？
-    字段名、数据类型、相关的约束。</code></pre>
-<h3 id="3、学习MySQL主要还是学习通用的SQL语句，那么SQL语句包括增删改查，SQL语句怎么分类呢？"><a href="#3、学习MySQL主要还是学习通用的SQL语句，那么SQL语句包括增删改查，SQL语句怎么分类呢？" class="headerlink" title="3、学习MySQL主要还是学习通用的SQL语句，那么SQL语句包括增删改查，SQL语句怎么分类呢？"></a>3、学习MySQL主要还是学习通用的SQL语句，那么SQL语句包括增删改查，SQL语句怎么分类呢？</h3><pre><code>DQL（数据查询语言Data Query Language）: 查询语句，凡是select语句都是DQL。
-
-DML（数据操作语言Data Manipulation Language）：insert delete update，对表当中的数据进行增删改。
-
-DDL（数据定义语言Data Defination Language）：create drop alter，对表结构的增删改。
-TCL（事务控制语言Transaction Control Language）：commit提交事务，rollback回滚事务。
-
-DCL（数据控制语言Data Control Language）: grant授权、revoke撤销权限等。</code></pre>
-<h3 id="4、导入数据（演示的数据）"><a href="#4、导入数据（演示的数据）" class="headerlink" title="4、导入数据（演示的数据）"></a>4、导入数据（演示的数据）</h3><pre><code>第一步：登录mysql数据库管理系统
-    dos命令窗口：
-        mysql -u用户名 -p密码
-第二步：查看有哪些数据库
-    show databases; (这个不是SQL语句，属于MySQL的命令。)
-    +--------------------+
-    | Database           |
-    +--------------------+
-    | information_schema |
-    | mysql              |
-    | performance_schema |
-    | test               |
-    +--------------------+
-第三步：创建属于我们自己的数据库
-    create database bjpowernode; (这个不是SQL语句，属于MySQL的命令。)
-第四步：使用bjpowernode数据
-    use bjpowernode; (这个不是SQL语句，属于MySQL的命令。)
-第五步：查看当前使用的数据库中有哪些表？
-    show tables; (这个不是SQL语句，属于MySQL的命令。)
-第六步：初始化数据
-    mysql&gt; source D:\course\05-MySQL\resources\bjpowernode.sql
-
-注意：数据初始化完成之后，有三张表：
-+-----------------------+
-| Tables_in_bjpowernode |
-+-----------------------+
-| dept                  |
-| emp                   |
-| salgrade              |
-+-----------------------+</code></pre>
-<h3 id="5、bjpowernode-sql，这个文件以sql结尾，这样的文件被称为“sql脚本”。什么是sql脚本呢？"><a href="#5、bjpowernode-sql，这个文件以sql结尾，这样的文件被称为“sql脚本”。什么是sql脚本呢？" class="headerlink" title="5、bjpowernode.sql，这个文件以sql结尾，这样的文件被称为“sql脚本”。什么是sql脚本呢？"></a>5、bjpowernode.sql，这个文件以sql结尾，这样的文件被称为“sql脚本”。什么是sql脚本呢？</h3><pre><code>当一个文件的扩展名是.sql，并且该文件中编写了大量的sql语句，我们称这样的文件为sql脚本。
-注意：直接使用source命令可以执行sql脚本。
-sql脚本中的数据量太大的时候，无法打开，请使用source命令完成初始化。</code></pre>
-<h3 id="6、删除数据库："><a href="#6、删除数据库：" class="headerlink" title="6、删除数据库："></a>6、删除数据库：</h3><pre><code>drop database bjpowernode;</code></pre>
-<h3 id="7、查看表结构："><a href="#7、查看表结构：" class="headerlink" title="7、查看表结构："></a>7、查看表结构：</h3><pre><code>+-----------------------+
-| Tables_in_bjpowernode |
-+-----------------------+
-| dept                  |   (部门表)
-| emp                   |   (员工表)
-| salgrade              |   (工资等级表)
-+-----------------------+
-
-
-mysql&gt; desc dept;
-+--------+-------------+------+-----+---------+-------+
-| Field  | Type        | Null | Key | Default | Extra |
-+--------+-------------+------+-----+---------+-------+
-| DEPTNO | int(2)      | NO   | PRI | NULL    |       |        部门编号
-| DNAME  | varchar(14) | YES  |     | NULL    |       |        部门名称
-| LOC    | varchar(13) | YES  |     | NULL    |       |        部门位置
-+--------+-------------+------+-----+---------+-------+
-
-mysql&gt; desc emp;
-+----------+-------------+------+-----+---------+-------+
-| Field    | Type        | Null | Key | Default | Extra |
-+----------+-------------+------+-----+---------+-------+
-| EMPNO    | int(4)      | NO   | PRI | NULL    |       |    员工编号
-| ENAME    | varchar(10) | YES  |     | NULL    |       |    员工姓名
-| JOB      | varchar(9)  | YES  |     | NULL    |       |    工作岗位
-| MGR      | int(4)      | YES  |     | NULL    |       |    上级领导编号
-| HIREDATE | date        | YES  |     | NULL    |       |    入职日期
-| SAL      | double(7,2) | YES  |     | NULL    |       |    月薪
-| COMM     | double(7,2) | YES  |     | NULL    |       |    补助/津贴
-| DEPTNO   | int(2)      | YES  |     | NULL    |       |    部门编号
-+----------+-------------+------+-----+---------+-------+
-
-mysql&gt; desc salgrade;
-+-------+---------+------+-----+---------+-------+
-| Field | Type    | Null | Key | Default | Extra |
-+-------+---------+------+-----+---------+-------+
-| GRADE | int(11) | YES  |     | NULL    |       |        等级
-| LOSAL | int(11) | YES  |     | NULL    |       |        最低薪资
-| HISAL | int(11) | YES  |     | NULL    |       |        最高薪资
-+-------+---------+------+-----+---------+-------+</code></pre>
-<h3 id="8、表中的数据？"><a href="#8、表中的数据？" class="headerlink" title="8、表中的数据？"></a>8、表中的数据？</h3><pre><code>mysql&gt; select * from emp;
-
-+-------+--------+-----------+------+------------+---------+---------+--------+
-| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
-+-------+--------+-----------+------+------------+---------+---------+--------+
-|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
-|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
-|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
-|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
-|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
-|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
-|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
-|  7788 | SCOTT  | ANALYST   | 7566 | 1987-04-19 | 3000.00 |    NULL |     20 |
-|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
-|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
-|  7876 | ADAMS  | CLERK     | 7788 | 1987-05-23 | 1100.00 |    NULL |     20 |
-|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
-|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
-|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
-+-------+--------+-----------+------+------------+---------+---------+--------+
-
-
-mysql&gt; select * from dept;
-
-+--------+------------+----------+
-| DEPTNO | DNAME      | LOC      |
-+--------+------------+----------+
-|     10 | ACCOUNTING | NEW YORK |
-|     20 | RESEARCH   | DALLAS   |
-|     30 | SALES      | CHICAGO  |
-|     40 | OPERATIONS | BOSTON   |
-+--------+------------+----------+
-
-mysql&gt; select * from salgrade;
-+-------+-------+-------+
-| GRADE | LOSAL | HISAL |
-+-------+-------+-------+
-|     1 |   700 |  1200 |
-|     2 |  1201 |  1400 |
-|     3 |  1401 |  2000 |
-|     4 |  2001 |  3000 |
-|     5 |  3001 |  9999 |
-+-------+-------+-------+</code></pre>
-<h3 id="9、常用命令？"><a href="#9、常用命令？" class="headerlink" title="9、常用命令？"></a>9、常用命令？</h3><pre><code>mysql&gt; select database(); 查看当前使用的是哪个数据库
-+-------------+
-| database()  |
-+-------------+
-| bjpowernode |
-+-------------+
-
-mysql&gt; select version(); 查看mysql的版本号。
-+-----------+
-| version() |
-+-----------+
-| 5.5.36    |
-+-----------+</code></pre>
-<p>\c   命令，结束一条语句。</p>
-<p>exit 命令，退出mysql。</p>
-<h3 id="10、查看创建表的语句："><a href="#10、查看创建表的语句：" class="headerlink" title="10、查看创建表的语句："></a>10、查看创建表的语句：</h3><pre><code>show create table emp;</code></pre>
-<h3 id="11、简单的查询语句（DQL）"><a href="#11、简单的查询语句（DQL）" class="headerlink" title="11、简单的查询语句（DQL）"></a>11、简单的查询语句（DQL）</h3><p>语法格式：<br>    select 字段名1,字段名2,字段名3,…. from 表名;</p>
-<p>提示：<br>    1、任何一条sql语句以“;”结尾。<br>    2、sql语句不区分大小写。</p>
-<p>查询员工的年薪？（字段可以参与数学运算。）</p>
-<pre><code>    select ename,sal * 12 from emp;
-    +--------+----------+
-    | ename  | sal * 12 |
-    +--------+----------+
-    | SMITH  |  9600.00 |
-    | ALLEN  | 19200.00 |
-    | WARD   | 15000.00 |
-    | JONES  | 35700.00 |
-    | MARTIN | 15000.00 |
-    | BLAKE  | 34200.00 |
-    | CLARK  | 29400.00 |
-    | SCOTT  | 36000.00 |
-    | KING   | 60000.00 |
-    | TURNER | 18000.00 |
-    | ADAMS  | 13200.00 |
-    | JAMES  | 11400.00 |
-    | FORD   | 36000.00 |
-    | MILLER | 15600.00 |
-    +--------+----------+</code></pre>
-<p>给查询结果的列重命名？</p>
-<pre><code>select ename,sal * 12 as yearsal from emp;</code></pre>
-<p>别名中有中文？</p>
-<pre><code>    select ename,sal * 12 as 年薪 from emp; // 错误
-    select ename,sal * 12 as &#39;年薪&#39; from emp;
-    +--------+----------+
-    | ename  | 年薪        |
-    +--------+----------+
-    | SMITH  |  9600.00 |
-    | ALLEN  | 19200.00 |
-    | WARD   | 15000.00 |
-    | JONES  | 35700.00 |
-    | MARTIN | 15000.00 |
-    | BLAKE  | 34200.00 |
-    | CLARK  | 29400.00 |
-    | SCOTT  | 36000.00 |
-    | KING   | 60000.00 |
-    | TURNER | 18000.00 |
-    | ADAMS  | 13200.00 |
-    | JAMES  | 11400.00 |
-    | FORD   | 36000.00 |
-    | MILLER | 15600.00 |
-    +--------+----------+</code></pre>
-<p>注意：标准sql语句中要求字符串使用单引号括起来。虽然mysql支持双引号，尽量别用。</p>
-<p>as关键字可以省略？</p>
-<pre><code>    mysql&gt; select empno,ename,sal * 12 yearsal from emp;
-    +-------+--------+----------+
-    | empno | ename  | yearsal  |
-    +-------+--------+----------+
-    |  7369 | SMITH  |  9600.00 |
-    |  7499 | ALLEN  | 19200.00 |
-    |  7521 | WARD   | 15000.00 |
-    |  7566 | JONES  | 35700.00 |
-    |  7654 | MARTIN | 15000.00 |
-    |  7698 | BLAKE  | 34200.00 |
-    |  7782 | CLARK  | 29400.00 |
-    |  7788 | SCOTT  | 36000.00 |
-    |  7839 | KING   | 60000.00 |
-    |  7844 | TURNER | 18000.00 |
-    |  7876 | ADAMS  | 13200.00 |
-    |  7900 | JAMES  | 11400.00 |
-    |  7902 | FORD   | 36000.00 |
-    |  7934 | MILLER | 15600.00 |
-    +-------+--------+----------+</code></pre>
-<p>查询所有字段？</p>
-<pre><code>    select * from emp; // 实际开发中不建议使用*，效率较低。</code></pre>
-<h3 id="12、条件查询。"><a href="#12、条件查询。" class="headerlink" title="12、条件查询。"></a>12、条件查询。</h3><pre><code>语法格式：
-
-    select 
-        字段,字段...
-    from
-        表名
-    where
-        条件;</code></pre>
-<p>执行顺序：先from，然后where，最后select</p>
-<p>查询工资等于5000的员工姓名？</p>
-<pre><code>    select ename from emp where sal = 5000;
-    +-------+
-    | ename |
-    +-------+
-    | KING  |
-    +-------+</code></pre>
-<p>查询SMITH的工资？</p>
-<pre><code>    select sal from emp where ename = &#39;SMITH&#39;; // 字符串使用单引号括起来。
-    +--------+
-    | sal    |
-    +--------+
-    | 800.00 |
-    +--------+</code></pre>
-<p>找出工资高于3000的员工？</p>
-<pre><code>    select ename,sal from emp where sal &gt; 3000;
-
-    select ename,sal from emp where sal &gt;= 3000;
-
-    select ename,sal from emp where sal &lt; 3000;
-
-    select ename,sal from emp where sal &lt;= 3000;</code></pre>
-<p>找出工资不等于3000的？</p>
-<pre><code>    select ename,sal from emp where sal &lt;&gt; 3000;
-    select ename,sal from emp where sal != 3000;</code></pre>
-<p>找出工资在1100和3000之间的员工，包括1100和3000？</p>
-<pre><code>    select ename,sal from emp where sal &gt;= 1100 and sal &lt;= 3000;
-
-    select ename,sal from emp where sal between 1100 and 3000; // between...and...是闭区间 [1100 ~ 3000]
-
-    select ename,sal from emp where sal between 3000 and 1100; // 查询不到任何数据</code></pre>
-<p>between and在使用的时候必须左小右大。</p>
-<p>between and除了可以使用在数字方面之外，还可以使用在字符串方面。</p>
-<pre><code>    select ename from emp where ename between &#39;A&#39; and &#39;C&#39;;
-    +-------+
-    | ename |
-    +-------+
-    | ALLEN |
-    | BLAKE |
-    | ADAMS |
-    +-------+
-    select ename from emp where ename between &#39;A&#39; and &#39;D&#39;; // 左闭右开。</code></pre>
-<p>找出哪些人津贴为NULL？<br>    在数据库当中NULL不是一个值，代表什么也没有，为空。<br>    空不是一个值，不能用等号衡量。<br>    必须使用 is null或者is not null</p>
-<pre><code>        select ename,sal,comm from emp where comm is null;
-        +--------+---------+------+
-        | ename  | sal     | comm |
-        +--------+---------+------+
-        | SMITH  |  800.00 | NULL |
-        | JONES  | 2975.00 | NULL |
-        | BLAKE  | 2850.00 | NULL |
-        | CLARK  | 2450.00 | NULL |
-        | SCOTT  | 3000.00 | NULL |
-        | KING   | 5000.00 | NULL |
-        | ADAMS  | 1100.00 | NULL |
-        | JAMES  |  950.00 | NULL |
-        | FORD   | 3000.00 | NULL |
-        | MILLER | 1300.00 | NULL |
-        +--------+---------+------+
-        select ename,sal,comm from emp where comm = null; //错误
-        Empty set (0.00 sec)</code></pre>
-<p>找出哪些人津贴不为NULL？</p>
-<pre><code>        select ename,sal,comm from emp where comm is not null;
-        +--------+---------+---------+
-        | ename  | sal     | comm    |
-        +--------+---------+---------+
-        | ALLEN  | 1600.00 |  300.00 |
-        | WARD   | 1250.00 |  500.00 |
-        | MARTIN | 1250.00 | 1400.00 |
-        | TURNER | 1500.00 |    0.00 |
-        +--------+---------+---------+</code></pre>
-<p>找出哪些人没有津贴？</p>
-<pre><code>        select ename,sal,comm from emp where comm is null or comm = 0;
-        +--------+---------+------+
-        | ename  | sal     | comm |
-        +--------+---------+------+
-        | SMITH  |  800.00 | NULL |
-        | JONES  | 2975.00 | NULL |
-        | BLAKE  | 2850.00 | NULL |
-        | CLARK  | 2450.00 | NULL |
-        | SCOTT  | 3000.00 | NULL |
-        | KING   | 5000.00 | NULL |
-        | TURNER | 1500.00 | 0.00 |
-        | ADAMS  | 1100.00 | NULL |
-        | JAMES  |  950.00 | NULL |
-        | FORD   | 3000.00 | NULL |
-        | MILLER | 1300.00 | NULL |
-        +--------+---------+------+</code></pre>
-<p>找出工作岗位是MANAGER和SALESMAN的员工？</p>
-<pre><code>        select ename,job from emp where job = &#39;MANAGER&#39; or job = &#39;SALESMAN&#39;;
-        +--------+----------+
-        | ename  | job      |
-        +--------+----------+
-        | ALLEN  | SALESMAN |
-        | WARD   | SALESMAN |
-        | JONES  | MANAGER  |
-        | MARTIN | SALESMAN |
-        | BLAKE  | MANAGER  |
-        | CLARK  | MANAGER  |
-        | TURNER | SALESMAN |
-        +--------+----------+</code></pre>
-<p>and和or联合起来用：找出薪资大于1000的并且部门编号是20或30部门的员工。</p>
-<pre><code>        select ename,sal,deptno from emp where sal &gt; 1000 and deptno = 20 or deptno = 30; // 错误的
-        select ename,sal,deptno from emp where sal &gt; 1000 and (deptno = 20 or deptno = 30); // 正确的。</code></pre>
-<p>注意：当运算符的优先级不确定的时候加小括号。</p>
-<p>in等同于or：找出工作岗位是MANAGER和SALESMAN的员工？</p>
-<pre><code>        select ename,job from emp where job = &#39;SALESMAN&#39; or job = &#39;MANAGER&#39;;
-        select ename,job from emp where job in(&#39;SALESMAN&#39;, &#39;MANAGER&#39;);
-
-        select ename,job from emp where sal in(800, 5000); // in后面的值不是区间，是具体的值。
-        +-------+-----------+
-        | ename | job       |
-        +-------+-----------+
-        | SMITH | CLERK     |
-        | KING  | PRESIDENT |
-        +-------+-----------+</code></pre>
-<p>not in: 不在这几个值当中。</p>
-<pre><code>        select ename,job from emp where sal not in(800, 5000);</code></pre>
-<p>模糊查询like:<br>找出名字当中含有O的<br>在模糊查询当中，必须掌握两个特殊的符号，一个是%，一个是_;<br>百分号代表任意多个字符，下划线代表任意1个字符。</p>
-<pre><code>    select ename from emp where ename like &#39;%O%&#39;;
-    +-------+
-    | ename |
-    +-------+
-    | JONES |
-    | SCOTT |
-    | FORD  |
-    +-------+</code></pre>
-<p>找出名字中第二个字母是A的？</p>
-<pre><code>    select ename from emp where ename like &#39;_A%&#39;;
-    +--------+
-    | ename  |
-    +--------+
-    | WARD   |
-    | MARTIN |
-    | JAMES  |
-    +--------+</code></pre>
-<p>找出名字中有下划线的？</p>
-<pre><code>    mysql&gt; select * from t_user;
-    +------+----------+
-    | id   | name     |
-    +------+----------+
-    |    1 | zhangsan |
-    |    2 | lisi     |
-    |    3 | WANG_WU  |
-    +------+----------+
-
-    select name from t_user where name like &#39;%_%&#39;; 错误的
-    +----------+
-    | name     |
-    +----------+
-    | zhangsan |
-    | lisi     |
-    | WANG_WU  |
-    +----------+
-
-    select name from t_user where name like &#39;%\_%&#39;; 下划线有特殊含义，这里使用转义符号
-    +---------+
-    | name    |
-    +---------+
-    | WANG_WU |
-    +---------+</code></pre>
-<p>找出名字中最后一个字母是T的？</p>
-<pre><code>    select ename from emp where ename like &#39;%T&#39;;
-    +-------+
-    | ename |
-    +-------+
-    | SCOTT | 
-    +-------+</code></pre>
-<h3 id="13、排序（升序、降序）"><a href="#13、排序（升序、降序）" class="headerlink" title="13、排序（升序、降序）"></a>13、排序（升序、降序）</h3><p>按照工资升序，找出员工名和薪资？  </p>
-<pre><code>select 
-    ename,sal 
-from 
-    emp 
-order by
-    sal;  
-
-+--------+---------+
-| ename  | sal     |
-+--------+---------+
-| SMITH  |  800.00 |
-| JAMES  |  950.00 |
-| ADAMS  | 1100.00 |
-| WARD   | 1250.00 |
-| MARTIN | 1250.00 |
-| MILLER | 1300.00 |
-| TURNER | 1500.00 |
-| ALLEN  | 1600.00 |
-| CLARK  | 2450.00 |
-| BLAKE  | 2850.00 |
-| JONES  | 2975.00 |
-| FORD   | 3000.00 |
-| SCOTT  | 3000.00 |
-| KING   | 5000.00 |
-+--------+---------+</code></pre>
-<p>注意：默认是升序。怎么指定升序或者降序呢？asc表示升序，desc表示降序。 </p>
-<pre><code>select ename , sal from emp order by sal; // 升序
-select ename , sal from emp order by sal asc; // 升序
-select ename , sal from emp order by sal desc; // 降序。  </code></pre>
-<p>按照工资的降序排列，当工资相同的时候再按照名字的升序排列。  </p>
-<pre><code>select ename,sal from emp order by sal desc;
-select ename,sal from emp order by sal desc , ename asc;  
-注意：越靠前的字段越能起到主导作用。只有当前面的字段无法完成排序的时候，才会启用后面的字段。</code></pre>
-<p>找出工作岗位是SALESMAN的员工，并且要求按照薪资的降序排列。  </p>
-<pre><code>select 
-    ename,job,sal
-from
-    emp
-where 
-    job = &#39;SALESMAN&#39;
-order by
-    sal desc;  
-
-+--------+----------+---------+
-| ename  | job      | sal     |
-+--------+----------+---------+
-| ALLEN  | SALESMAN | 1600.00 |
-| TURNER | SALESMAN | 1500.00 |
-| WARD   | SALESMAN | 1250.00 |
-| MARTIN | SALESMAN | 1250.00 |
-+--------+----------+---------+
-
-
-select 
-    字段                        3
-from
-    表名                        1
-where
-    条件                        2
-order by
-    ....                        4
-
-order by是最后执行的。</code></pre>
-<h3 id="14、分组函数？"><a href="#14、分组函数？" class="headerlink" title="14、分组函数？"></a>14、分组函数？</h3><pre><code>count 计数  
-sum 求和  
-avg 平均值  
-max 最大值  
-min 最小值  
-
-记住：所有的分组函数都是对“某一组”数据进行操作的。</code></pre>
-<p>找出工资总和？</p>
-<pre><code>    select sum(sal) from emp;</code></pre>
-<p>找出最高工资？</p>
-<pre><code>    select max(sal) from emp;</code></pre>
-<p>找出最低工资？</p>
-<pre><code>    select min(sal) from emp;</code></pre>
-<p>找出平均工资？</p>
-<pre><code>    select avg(sal) from emp;</code></pre>
-<p>找出总人数？</p>
-<pre><code>    select count(*) from emp;
-    select count(ename) from emp;</code></pre>
-<p>分组函数一共5个。<br>分组函数还有另一个名字：多行处理函数。<br>多行处理函数的特点：输入多行，最终输出的结果是1行。</p>
-<p>分组函数自动忽略NULL。</p>
-<pre><code>    select count(comm) from emp;
-    +-------------+
-    | count(comm) |
-    +-------------+
-    |           4 |
-    +-------------+
-
-    select sum(comm) from emp;
-    +-----------+
-    | sum(comm) |
-    +-----------+
-    |   2200.00 |
-    +-----------+
-
-    select sum(comm) from emp where comm is not null; // 不需要额外添加这个过滤条件。sum函数自动忽略NULL。</code></pre>
-<p>找出工资高于平均工资的员工？</p>
-<pre><code>        select avg(sal) from emp; // 平均工资
-        +-------------+
-        | avg(sal)    |
-        +-------------+
-        | 2073.214286 |
-        +-------------+
-
-        select ename,sal from emp where sal &gt; avg(sal); //ERROR 1111 (HY000): Invalid use of group function</code></pre>
-<p>思考以上的错误信息：无效的使用了分组函数？<br>    原因：SQL语句当中有一个语法规则，分组函数不可直接使用在where子句当中。why????<br>    怎么解释？<br>        因为group by是在where执行之后才会执行的。</p>
-<pre><code>            select        5
-                ..            
-            from            1
-                ..
-            where            2
-                ..
-            group by        3
-                ..
-            having        4
-                ..
-            order by        6
-                ..</code></pre>
-<p>count(<em>)和count(具体的某个字段)，他们有什么区别？<br>    count(</em>):不是统计某个字段中数据的个数，而是统计总记录条数。（和某个字段无关）<br>    count(comm): 表示统计comm字段中不为NULL的数据总数量。</p>
-<p>分组函数也能组合起来用：</p>
-<pre><code>    select count(*),sum(sal),avg(sal),max(sal),min(sal) from emp;
-
-    +----------+----------+-------------+----------+----------+
-    | count(*) | sum(sal) | avg(sal)    | max(sal) | min(sal) |
-    +----------+----------+-------------+----------+----------+
-    |       14 | 29025.00 | 2073.214286 |  5000.00 |   800.00 |
-    +----------+----------+-------------+----------+----------+</code></pre>
-<p>找出工资高于平均工资的员工？</p>
-<p>第一步：找出平均工资</p>
-<pre><code>        select avg(sal) from emp;
-        +-------------+
-        | avg(sal)    |
-        +-------------+
-        | 2073.214286 |
-        +-------------+</code></pre>
-<p>第二步：找出高于平均工资的员工</p>
-<pre><code>        select ename,sal from emp where sal &gt; 2073.214286;
-        +-------+---------+
-        | ename | sal     |
-        +-------+---------+
-        | JONES | 2975.00 |
-        | BLAKE | 2850.00 |
-        | CLARK | 2450.00 |
-        | SCOTT | 3000.00 |
-        | KING  | 5000.00 |
-        | FORD  | 3000.00 |
-        +-------+---------+
-
-        select ename,sal from emp where sal &gt; (select avg(sal) from emp);</code></pre>
-<h3 id="15、单行处理函数"><a href="#15、单行处理函数" class="headerlink" title="15、单行处理函数"></a>15、单行处理函数</h3><pre><code>什么是单行处理函数？  
-    输入一行，输出一行。</code></pre>
-<p>计算每个员工的年薪？</p>
-<pre><code>    select ename,(sal+comm)*12 as yearsal from emp;</code></pre>
-<p>重点：所有数据库都是这样规定的，只要有NULL参与的运算结果一定是NULL。<br>但是对于分组函数来说，自动忽略null<br>使用ifnull函数：</p>
-<pre><code>    select ename,(sal+ifnull(comm,0))*12 as yearsal from emp;</code></pre>
-<p>ifnull() 空处理函数？<br>    ifnull(可能为NULL的数据,被当做什么处理) ： 属于单行处理函数。</p>
-<pre><code>    select ename,ifnull(comm,0) as comm from emp;
-    +--------+---------+
-    | ename  | comm    |
-    +--------+---------+
-    | SMITH  |    0.00 |
-    | ALLEN  |  300.00 |
-    | WARD   |  500.00 |
-    | JONES  |    0.00 |
-    | MARTIN | 1400.00 |
-    | BLAKE  |    0.00 |
-    | CLARK  |    0.00 |
-    | SCOTT  |    0.00 |
-    | KING   |    0.00 |
-    | TURNER |    0.00 |
-    | ADAMS  |    0.00 |
-    | JAMES  |    0.00 |
-    | FORD   |    0.00 |
-    | MILLER |    0.00 |
-    +--------+---------+</code></pre>
-<h3 id="16、group-by-和-having"><a href="#16、group-by-和-having" class="headerlink" title="16、group by 和 having"></a>16、group by 和 having</h3><p>group by ： 按照某个字段或者某些字段进行分组。<br>having : having是对分组之后的数据进行再次过滤。</p>
-<p>案例：找出每个工作岗位的最高薪资。</p>
-<pre><code>select max(sal),job from emp group by job;
-
-+----------+-----------+
-| max(sal) | job       |
-+----------+-----------+
-|  3000.00 | ANALYST   |
-|  1300.00 | CLERK     |
-|  2975.00 | MANAGER   |
-|  5000.00 | PRESIDENT |
-|  1600.00 | SALESMAN  |
-+----------+-----------+</code></pre>
-<p>注意：分组函数一般都会和group by联合使用，这也是为什么它被称为分组函数的原因。<br>并且任何一个分组函数（count sum avg max min）都是在group by语句执行结束之后才会执行的。<br>当一条sql语句没有group by的话，整张表的数据会自成一组。  </p>
-<pre><code>select ename,max(sal),job from emp group by job;  </code></pre>
-<p>以上在mysql当中，查询结果是有的，但是结果没有意义，在Oracle数据库当中会报错。语法错误。<br>Oracle的语法规则比MySQL语法规则严谨。<br>记住一个规则：当一条语句中有group by的话，select后面只能跟分组函数和参与分组的字段。</p>
-<p>每个工作岗位的平均薪资？</p>
-<pre><code>    select job,avg(sal) from emp group by job;
-    +-----------+-------------+
-    | job       | avg(sal)    |
-    +-----------+-------------+
-    | ANALYST   | 3000.000000 |
-    | CLERK     | 1037.500000 |
-    | MANAGER   | 2758.333333 |
-    | PRESIDENT | 5000.000000 |
-    | SALESMAN  | 1400.000000 |
-    +-----------+-------------+</code></pre>
-<p>多个字段能不能联合起来一块分组？<br>案例：找出每个部门不同工作岗位的最高薪资。</p>
-<pre><code>    select 
-        deptno,job,max(sal)
-    from
-        emp
-    group by
-        deptno,job;</code></pre>
-<p>找出每个部门的最高薪资，要求显示薪资大于2900的数据。</p>
-<p>第一步：找出每个部门的最高薪资</p>
-<pre><code>    select max(sal),deptno from emp group by deptno;
-    +----------+--------+
-    | max(sal) | deptno |
-    +----------+--------+
-    |  5000.00 |     10 |
-    |  3000.00 |     20 |
-    |  2850.00 |     30 |
-    +----------+--------+</code></pre>
-<p>第二步：找出薪资大于2900</p>
-<pre><code>    select max(sal),deptno from emp group by deptno having max(sal) &gt; 2900; // 这种方式效率低。
-    +----------+--------+
-    | max(sal) | deptno |
-    +----------+--------+
-    |  5000.00 |     10 |
-    |  3000.00 |     20 |
-    +----------+--------+
-
-    select max(sal),deptno from emp where sal &gt; 2900 group by deptno;  // 效率较高，建议能够使用where过滤的尽量使用where。
-    +----------+--------+
-    | max(sal) | deptno |
-    +----------+--------+
-    |  5000.00 |     10 |
-    |  3000.00 |     20 |
-    +----------+--------+</code></pre>
-<p>找出每个部门的平均薪资，要求显示薪资大于2000的数据。</p>
-<p>第一步：找出每个部门的平均薪资</p>
-<pre><code>select deptno,avg(sal) from emp group by deptno;
-+--------+-------------+
-| deptno | avg(sal)    |
-+--------+-------------+
-|     10 | 2916.666667 |
-|     20 | 2175.000000 |
-|     30 | 1566.666667 |
-+--------+-------------+</code></pre>
-<p>第二步：要求显示薪资大于2000的数据</p>
-<pre><code>select deptno,avg(sal) from emp group by deptno having avg(sal) &gt; 2000;    
-+--------+-------------+
-| deptno | avg(sal)    |
-+--------+-------------+
-|     10 | 2916.666667 |
-|     20 | 2175.000000 |
-+--------+-------------+</code></pre>
-<p>where后面不能使用分组函数：</p>
-<pre><code>    select deptno,avg(sal) from emp where avg(sal) &gt; 2000 group by deptno;    // 错误了。
-    这种情况只能使用having过滤。</code></pre>
-<h3 id="17、总结一个完整的DQL语句怎么写？"><a href="#17、总结一个完整的DQL语句怎么写？" class="headerlink" title="17、总结一个完整的DQL语句怎么写？"></a>17、总结一个完整的DQL语句怎么写？</h3><pre><code>select        5
-    ..
-from            1    
-    ..
-where            2
-    ..
-group by        3
-    ..
-having        4
-    ..
-order by        6
-    ..</code></pre>
-
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare">
-        <strong>本文作者：</strong>
-        
-          Iris Yuan
-        
-        <br>
-        <strong>本文链接：</strong>
-        <a rel="license" href="http://example.com/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/">http://example.com/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/</a>
-        <br>
-        <strong>版权声明：</strong>
-        本作品采用
-        <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
-        进行许可。转载请注明出处！
-        
-          <br>
-          <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
-        
-      </div>
-      
-
-      <!-- 增加版权声明结束 -->
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -919,123 +188,95 @@ order by        6
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://irisyzy1018.github.io/020/09/24/MySQL%E7%AC%94%E8%AE%B001/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
-  
-    <a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MySQL笔记02
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/" class="archive-article-date">
+  	<time datetime="2020-09-24T07:09:02.806Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
+</a>
         </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81sql%E3%80%81DB%E3%80%81DBMS%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E4%BB%96%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">1、sql、DB、DBMS分别是什么，他们之间的关系？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%A1%A8%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">2、什么是表？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%AD%A6%E4%B9%A0MySQL%E4%B8%BB%E8%A6%81%E8%BF%98%E6%98%AF%E5%AD%A6%E4%B9%A0%E9%80%9A%E7%94%A8%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%EF%BC%8C%E9%82%A3%E4%B9%88SQL%E8%AF%AD%E5%8F%A5%E5%8C%85%E6%8B%AC%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%EF%BC%8CSQL%E8%AF%AD%E5%8F%A5%E6%80%8E%E4%B9%88%E5%88%86%E7%B1%BB%E5%91%A2%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">3、学习MySQL主要还是学习通用的SQL语句，那么SQL语句包括增删改查，SQL语句怎么分类呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%88%E6%BC%94%E7%A4%BA%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4、导入数据（演示的数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81bjpowernode-sql%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6%E4%BB%A5sql%E7%BB%93%E5%B0%BE%EF%BC%8C%E8%BF%99%E6%A0%B7%E7%9A%84%E6%96%87%E4%BB%B6%E8%A2%AB%E7%A7%B0%E4%B8%BA%E2%80%9Csql%E8%84%9A%E6%9C%AC%E2%80%9D%E3%80%82%E4%BB%80%E4%B9%88%E6%98%AFsql%E8%84%9A%E6%9C%AC%E5%91%A2%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">5、bjpowernode.sql，这个文件以sql结尾，这样的文件被称为“sql脚本”。什么是sql脚本呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">6、删除数据库：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number">7.</span> <span class="toc-text">7、查看表结构：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">8、表中的数据？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">9、常用命令？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10%E3%80%81%E6%9F%A5%E7%9C%8B%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%9A%84%E8%AF%AD%E5%8F%A5%EF%BC%9A"><span class="toc-number">10.</span> <span class="toc-text">10、查看创建表的语句：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11%E3%80%81%E7%AE%80%E5%8D%95%E7%9A%84%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%EF%BC%88DQL%EF%BC%89"><span class="toc-number">11.</span> <span class="toc-text">11、简单的查询语句（DQL）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12%E3%80%81%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2%E3%80%82"><span class="toc-number">12.</span> <span class="toc-text">12、条件查询。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13%E3%80%81%E6%8E%92%E5%BA%8F%EF%BC%88%E5%8D%87%E5%BA%8F%E3%80%81%E9%99%8D%E5%BA%8F%EF%BC%89"><span class="toc-number">13.</span> <span class="toc-text">13、排序（升序、降序）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14%E3%80%81%E5%88%86%E7%BB%84%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="toc-number">14.</span> <span class="toc-text">14、分组函数？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15%E3%80%81%E5%8D%95%E8%A1%8C%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-number">15.</span> <span class="toc-text">15、单行处理函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16%E3%80%81group-by-%E5%92%8C-having"><span class="toc-number">16.</span> <span class="toc-text">16、group by 和 having</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17%E3%80%81%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84DQL%E8%AF%AD%E5%8F%A5%E6%80%8E%E4%B9%88%E5%86%99%EF%BC%9F"><span class="toc-number">17.</span> <span class="toc-text">17、总结一个完整的DQL语句怎么写？</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B002/">MySQL笔记02</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
         </div>
-        
-    </div>
-</aside>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/" class="archive-article-date">
+  	<time datetime="2020-09-24T05:14:15.352Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/24/MySQL%E7%AC%94%E8%AE%B001/">MySQL笔记01</a>
+    </h1>
+  
 
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
+          
 
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
   
   
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -1064,9 +305,9 @@ order by        6
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
