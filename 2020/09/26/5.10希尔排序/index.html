@@ -6,18 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: Python | Iris Yuan</title>
+  <title>5.10希尔排序 | Iris Yuan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Iris Yuan">
-<meta property="og:url" content="http://example.com/tags/Python/page/2/index.html">
+  <meta name="description" content="5.10.希尔排序（Shell Sort）我们注意到插入排序的比对次数，在最好的情况下是$O(n)$，这种情况发生在列表已是有序的情况下，实际上，列表越接近有序，插入排序的比对次数就越少。从这个情况入手，谢尔排序以插入排序作为基础，对无序表进行“间隔”划分子列表，每个子列表都执行插入排序 希尔排序（有时称为“递减递增排序”）通过将原始列表分解为多个较小的子列表来改进插入排序，每个子列表使用插入排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.10希尔排序">
+<meta property="og:url" content="http://example.com/2020/09/26/5.10%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Iris Yuan">
-<meta property="og:description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
+<meta property="og:description" content="5.10.希尔排序（Shell Sort）我们注意到插入排序的比对次数，在最好的情况下是$O(n)$，这种情况发生在列表已是有序的情况下，实际上，列表越接近有序，插入排序的比对次数就越少。从这个情况入手，谢尔排序以插入排序作为基础，对无序表进行“间隔”划分子列表，每个子列表都执行插入排序 希尔排序（有时称为“递减递增排序”）通过将原始列表分解为多个较小的子列表来改进插入排序，每个子列表使用插入排序">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.10.shell%E6%8E%92%E5%BA%8F.figure6.png">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.10.shell%E6%8E%92%E5%BA%8F.figure8.png">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.10.shell%E6%8E%92%E5%BA%8F.figure9.png">
+<meta property="article:published_time" content="2020-09-26T08:38:33.086Z">
+<meta property="article:modified_time" content="2020-09-26T08:55:37.744Z">
 <meta property="article:author" content="Iris Yuan">
-<meta property="article:tag" content="Happy">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.10.shell%E6%8E%92%E5%BA%8F.figure6.png">
   
     <link rel="alternative" href="/atom.xml" title="Iris Yuan" type="application/atom+xml">
   
@@ -160,214 +167,216 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-5.10希尔排序" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      5.10希尔排序
+    </h1>
+  
+
+        
+        <a href="/2020/09/26/5.10%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-09-26T08:38:33.086Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="5-10-希尔排序（Shell-Sort）"><a href="#5-10-希尔排序（Shell-Sort）" class="headerlink" title="5.10.希尔排序（Shell Sort）"></a>5.10.希尔排序（Shell Sort）</h2><p>我们注意到插入排序的比对次数，在最好的情况下是$O(n)$，这种情况发生在列表已是有序的情况下，实际上，列表越接近有序，插入排序的比对次数就越少。从这个情况入手，谢尔排序以插入排序作为基础，对无序表进行“间隔”划分子列表，每个子列表都执行插入排序</p>
+<p>希尔排序（有时称为“递减递增排序”）通过将原始列表分解为多个较小的子列表来改进插入排序，每个子列表使用插入排序进行排序。 选择这些子列表的方式是希尔排序的关键。不是将列表拆分为连续项的子列表，希尔排序使用增量i（有时称为 <code>gap</code>），通过选择 i 个项的所有项来创建子列表。</p>
+<a id="more"></a>
+
+<p>这可以在 Figure 6 中看到。该列表有九个项。如果我们使用三的增量，有三个子列表，每个子列表可以通过插入排序进行排序。完成这些排序后，我们得到如 Figure 7 所示的列表。虽然这个列表没有完全排序，但发生了很有趣的事情。 通过排序子列表，我们已将项目移动到更接近他们实际所属的位置。</p>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.10.shell%E6%8E%92%E5%BA%8F.figure6.png"></p>
+<p><em>Figure 6-7</em></p>
+<p>Figure 8 展示了使用增量为 1 的插入排序; 换句话说，标准插入排序。注意，通过执行之前的子列表排序，我们减少了将列表置于其最终顺序所需的移位操作的总数。对于这种情况，我们只需要四次移位完成该过程。</p>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.10.shell%E6%8E%92%E5%BA%8F.figure8.png"></p>
+<p><em>Figure 8</em></p>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.10.shell%E6%8E%92%E5%BA%8F.figure9.png"></p>
+<p><em>Figure 9</em></p>
+<p>我们之前说过，增量的选择方式是希尔排序的独特特征。 ActiveCode 1中展示的函数使用不同的增量集。在这种情况下，我们从 n/2 子列表开始。下一次，n/4 子列表排序。 最后，单个列表按照基本插入排序进行排序。 Figure 9 展示了我们使用此增量的示例的第一个子列表。子列表的间隔一般从n/2开始，每趟倍增：n/4, n/8……直到1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shellSort</span>(<span class="params">alist</span>):</span></span><br><span class="line">    <span class="comment"># 设定间隔</span></span><br><span class="line">    sublistcount = len(alist)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> sublistcount &gt; <span class="number">0</span>:</span><br><span class="line">	  <span class="comment"># 子列表排序	</span></span><br><span class="line">      <span class="keyword">for</span> startposition <span class="keyword">in</span> range(sublistcount):</span><br><span class="line">        gapInsertionSort(alist,startposition,sublistcount)</span><br><span class="line"></span><br><span class="line">      print(<span class="string">&quot;After increments of size&quot;</span>,sublistcount,</span><br><span class="line">                                   <span class="string">&quot;The list is&quot;</span>,alist)</span><br><span class="line">	  <span class="comment"># 缩小间隔</span></span><br><span class="line">      sublistcount = sublistcount // <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gapInsertionSort</span>(<span class="params">alist,start,gap</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(start+gap,len(alist),gap):</span><br><span class="line"></span><br><span class="line">        currentvalue = alist[i]</span><br><span class="line">        position = i</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> position&gt;=gap <span class="keyword">and</span> alist[position-gap]&gt;currentvalue:</span><br><span class="line">            alist[position]=alist[position-gap]</span><br><span class="line">            position = position-gap</span><br><span class="line"></span><br><span class="line">        alist[position]=currentvalue</span><br><span class="line"></span><br><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>]</span><br><span class="line">shellSort(alist)</span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+
+<p><em>Activecode 1</em></p>
+<p>乍一看，你可能认为希尔排序不会比插入排序更好，因为它最后一步执行了完整的插入排序。 然而，结果是，该最终插入排序不需要进行非常多的比较（或移位），因为如上所述，该列表已经被较早的增量插入排序预排序。 换句话说，每个遍历产生比前一个“更有序”的列表。 这使得最终遍历非常有效。</p>
+<p>虽然对希尔排序的一般分析远远超出了本文的范围，我们可以说，它倾向于落在 $O(n)$ 和 $O(n^2)$ 之间的某处，基于以上所描述的行为。对于 Listing 5中显示的增量，性能为 $O(n^2)$ 。 通过改变增量，例如使用$2^k -1$（1,3,7,15,31等等），希尔排序可以在 $O(n^{\frac{3}{2}})$处执行。</p>
+
+      
+      <!-- 增加版权声明 -->
+
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/05.%E6%9E%84%E9%80%A0%E7%A8%8B%E5%BA%8F%E9%80%BB%E8%BE%91/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.110Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/05.%E6%9E%84%E9%80%A0%E7%A8%8B%E5%BA%8F%E9%80%BB%E8%BE%91/">05.构造程序逻辑</a>
-    </h1>
-  
+      <div class="declare" hidden="hidden"></div>
+      
 
-        <div class="article-info info-on-right">
-          
+      <!-- 增加版权声明结束 -->
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/04.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.095Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/04.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/">04.循环结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://irisyzy1018.github.io/020/09/26/5.10%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/03.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.077Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/09/26/5.11%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          5.11归并排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/26/5.9%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">5.9插入排序</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/03.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">03.分支结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-10-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%EF%BC%88Shell-Sort%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">5.10.希尔排序（Shell Sort）</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/02.%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.060Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/02.%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0/">02.语言元素</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/01.%E5%88%9D%E8%AF%86Python/" class="archive-article-date">
-  	<time datetime="2020-09-25T04:36:33.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/01.%E5%88%9D%E8%AF%86Python/">01初识Python</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/Python/">&amp;laquo; Prev</a><a class="page-number" href="/tags/Python/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -395,9 +404,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -6,18 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: Python | Iris Yuan</title>
+  <title>5.12快速排序 | Iris Yuan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Iris Yuan">
-<meta property="og:url" content="http://example.com/tags/Python/page/2/index.html">
+  <meta name="description" content="5.12.快速排序快速排序使用分而治之来获得与归并排序相同的优点，而不使用额外的存储。然而，作为权衡，有可能列表不能被分成两半。当这种情况发生时，我们将看到性能降低。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.12快速排序">
+<meta property="og:url" content="http://example.com/2020/09/26/5.12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Iris Yuan">
-<meta property="og:description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
+<meta property="og:description" content="5.12.快速排序快速排序使用分而治之来获得与归并排序相同的优点，而不使用额外的存储。然而，作为权衡，有可能列表不能被分成两半。当这种情况发生时，我们将看到性能降低。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.12.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.figure12.png">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.12.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.figure13.png">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.12.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.figure14.png">
+<meta property="article:published_time" content="2020-09-26T11:55:29.070Z">
+<meta property="article:modified_time" content="2020-09-26T12:37:31.007Z">
 <meta property="article:author" content="Iris Yuan">
-<meta property="article:tag" content="Happy">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.12.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.figure12.png">
   
     <link rel="alternative" href="/atom.xml" title="Iris Yuan" type="application/atom+xml">
   
@@ -160,214 +167,218 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-5.12快速排序" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      5.12快速排序
+    </h1>
+  
+
+        
+        <a href="/2020/09/26/5.12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-09-26T11:55:29.070Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="5-12-快速排序"><a href="#5-12-快速排序" class="headerlink" title="5.12.快速排序"></a>5.12.快速排序</h2><p>快速排序使用分而治之来获得与归并排序相同的优点，而不使用额外的存储。然而，作为权衡，有可能列表不能被分成两半。当这种情况发生时，我们将看到性能降低。</p>
+<a id="more"></a>
+
+<p>快速排序首先选择一个值，该值称为 <code>枢轴值</code>。虽然有很多不同的方法来选择枢轴值，我们将使用列表中的第一项。枢轴值的作用是帮助拆分列表。枢轴值属于最终排序列表（通常称为拆分点）的实际位置，将用于将列表划分为快速排序的后续调用。</p>
+<blockquote>
+<p>快速排序的思路是依据一个“中值”数据项来把数据表分为两半：小于中值的一半和大于中值的一半，然后每部分分别进行快速排序（递归）<br>如果希望这两半拥有相等数量的数据项，则应该找到数据表的“中位数”</p>
+<p>但找中位数需要计算开销！要想没有开销，只能随意找一个数来充当“中值”比如，第1个数。</p>
+</blockquote>
+<p>Figure 12 展示 54 将作为我们的第一个枢纽值。由于我们已经看过这个例子几次，我们知道 54 最终将会在当前持有 31 的位置。接下来将发生分区过程。它将找到拆分点，同时将其他项移动到列表的适当侧，小于或大于枢轴值。</p>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.12.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.figure12.png"></p>
+<p><em>Figure 12</em></p>
+<p>快速排序：图示</p>
+<blockquote>
+<p>分裂数据表的目标：找到“中值”的位置<br>分裂数据表的手段<br>设置左右标（left/rightmark）<br>左标向右移动，右标向左移动<br>• 左标一直向右移动，碰到比中值大的就停止<br>• 右标一直向左移动，碰到比中值小的就停止<br>• 然后把左右标所指的数据项交换<br>继续移动，直到左标移到右标的右侧(cross)，停止移动<br>这时右标所指位置就是“中值”应处的位置<br>将中值和这个位置交换<br>分裂完成，左半部比中值小，右半部比中值大</p>
+</blockquote>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.12.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.figure13.png"></p>
+<p><em>Figure 13</em></p>
+<p>现在可以在分割点处划分列表，并且可以在两半上递归调用快速排序。</p>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.12.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.figure14.png"></p>
+<p><em>Figure14</em></p>
+<p>ActiveCode 1中显示 <code>quickSort</code> 函数调用递归函数<code>quickSortHelper</code>。 <code>quickSortHelper</code> 以与合并排序相同的基本情况开始。如果列表的长度小于或等于一，它已经排序。 如果它更大，那么它可以被分区和递归排序。 分区函数实现前面描述的过程。</p>
+<blockquote>
+<p>快速排序的递归算法“递归三要素”如下<br>❖基本结束条件：数据表仅有1个数据项，自然是排好序的<br>❖缩小规模：根据“中值”，将数据表分为两半，最好情况是相等规模的两半<br>❖调用自身：将两半分别调用自身进行排序<br>（排序基本操作在分裂过程中）</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSort</span>(<span class="params">alist</span>):</span></span><br><span class="line">   quickSortHelper(alist,<span class="number">0</span>,len(alist)<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSortHelper</span>(<span class="params">alist,first,last</span>):</span></span><br><span class="line">   <span class="keyword">if</span> first&lt;last:  <span class="comment">#基本结束条件</span></span><br><span class="line"></span><br><span class="line">       splitpoint = partition(alist,first,last)</span><br><span class="line"></span><br><span class="line">       quickSortHelper(alist,first,splitpoint<span class="number">-1</span>)</span><br><span class="line">       quickSortHelper(alist,splitpoint+<span class="number">1</span>,last)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span>(<span class="params">alist,first,last</span>):</span></span><br><span class="line">   pivotvalue = alist[first] <span class="comment"># 选定中值</span></span><br><span class="line"></span><br><span class="line">   leftmark = first+<span class="number">1</span>  <span class="comment">#左右标初值</span></span><br><span class="line">   rightmark = last</span><br><span class="line"></span><br><span class="line">   done = <span class="literal">False</span></span><br><span class="line">   <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line"></span><br><span class="line">       <span class="keyword">while</span> leftmark &lt;= rightmark <span class="keyword">and</span> alist[leftmark] &lt;= pivotvalue:</span><br><span class="line">           leftmark = leftmark + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">       <span class="keyword">while</span> alist[rightmark] &gt;= pivotvalue <span class="keyword">and</span> rightmark &gt;= leftmark:</span><br><span class="line">           rightmark = rightmark <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> rightmark &lt; leftmark:  <span class="comment"># 两标相错就结束移动</span></span><br><span class="line">           done = <span class="literal">True</span></span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           temp = alist[leftmark]    <span class="comment">#左右标的值互换</span></span><br><span class="line">           alist[leftmark] = alist[rightmark]</span><br><span class="line">           alist[rightmark] = temp</span><br><span class="line"></span><br><span class="line">   temp = alist[first]   <span class="comment"># 中值就位</span></span><br><span class="line">   alist[first] = alist[rightmark]</span><br><span class="line">   alist[rightmark] = temp</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> rightmark  <span class="comment">#中值点，也就是分裂点</span></span><br><span class="line"></span><br><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>]</span><br><span class="line">quickSort(alist)</span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+
+<p>快速排序过程分为两部分：分裂和移动。如果分裂总能把数据表分为相等的两部分，那么就是$O(log n)$的复杂度；而移动需要将每项都与中值进行比对，还是$O(n)$，综合起来就是$O(nlog n)$；而且，算法运行过程中不需要额外的存储空间。</p>
+<p>不幸的是，在最坏的情况下，分裂点可能不在中间，并且可能非常偏向左边或右边，造成左右两部分数量不平衡。极端情况，有一部分始终没有数据，这样时间复杂度就退化到$O(n2)$，还要加上递归调用的开销（比冒泡排序还糟糕）。</p>
+<p>我们之前提到过，有不同的方法来选择枢纽值。特别地，我们可以尝试通过使用称为“三点取样”的技术来减轻一些不均匀分割的可能性。要选择枢轴值，我们将考虑列表中的第一个，中间和最后一个元素。在我们的示例中，这些是54,77和20，现在选择中值，在我们的示例中为54，并将其用于枢轴值（当然，这是我们最初使用的枢轴值）。想法是，在列表中的第一项不属于列表的中间的情况下，三点取样将选择更好的“中间”值。当原始列表部分有序时，这将特别有用。我们将此枢轴值选择的实现作为练习。</p>
+
+      
+      <!-- 增加版权声明 -->
+
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/05.%E6%9E%84%E9%80%A0%E7%A8%8B%E5%BA%8F%E9%80%BB%E8%BE%91/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.110Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/05.%E6%9E%84%E9%80%A0%E7%A8%8B%E5%BA%8F%E9%80%BB%E8%BE%91/">05.构造程序逻辑</a>
-    </h1>
-  
+      <div class="declare" hidden="hidden"></div>
+      
 
-        <div class="article-info info-on-right">
-          
+      <!-- 增加版权声明结束 -->
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/04.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.095Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/04.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/">04.循环结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://irisyzy1018.github.io/020/09/26/5.12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/03.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.077Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/26/5.11%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">5.11归并排序</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/03.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">03.分支结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-12-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">5.12.快速排序</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/02.%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.060Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/02.%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0/">02.语言元素</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/01.%E5%88%9D%E8%AF%86Python/" class="archive-article-date">
-  	<time datetime="2020-09-25T04:36:33.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/01.%E5%88%9D%E8%AF%86Python/">01初识Python</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/Python/">&amp;laquo; Prev</a><a class="page-number" href="/tags/Python/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -395,9 +406,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -6,18 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: Python | Iris Yuan</title>
+  <title>5.7冒泡排序 | Iris Yuan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Iris Yuan">
-<meta property="og:url" content="http://example.com/tags/Python/page/2/index.html">
+  <meta name="description" content="5.7.冒泡排序冒泡排序的算法思路在于对无序表进行多趟比较交换，每趟包括了多次两两相邻比较，并将逆序的数据项互换位置，最终能将本趟的最大项就位。经过n-1趟比较交换，实现整表排序，每趟的过程类似于“气泡”在水中不断上浮到水面的经过。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.7冒泡排序">
+<meta property="og:url" content="http://example.com/2020/09/26/5.7%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Iris Yuan">
-<meta property="og:description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
+<meta property="og:description" content="5.7.冒泡排序冒泡排序的算法思路在于对无序表进行多趟比较交换，每趟包括了多次两两相邻比较，并将逆序的数据项互换位置，最终能将本趟的最大项就位。经过n-1趟比较交换，实现整表排序，每趟的过程类似于“气泡”在水中不断上浮到水面的经过。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.7.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.figure1.png">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.7.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.figure2.png">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.7.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.table1.png">
+<meta property="article:published_time" content="2020-09-26T07:08:45.754Z">
+<meta property="article:modified_time" content="2020-09-26T08:37:46.452Z">
 <meta property="article:author" content="Iris Yuan">
-<meta property="article:tag" content="Happy">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="Bubble Sort">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.7.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.figure1.png">
   
     <link rel="alternative" href="/atom.xml" title="Iris Yuan" type="application/atom+xml">
   
@@ -160,214 +168,252 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-5.7冒泡排序" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      5.7冒泡排序
+    </h1>
+  
+
+        
+        <a href="/2020/09/26/5.7%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-09-26T07:08:45.754Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="5-7-冒泡排序"><a href="#5-7-冒泡排序" class="headerlink" title="5.7.冒泡排序"></a>5.7.冒泡排序</h2><p>冒泡排序的算法思路在于对无序表进行多趟比较交换，每趟包括了多次两两相邻比较，并将逆序的数据项互换位置，最终能将本趟的最大<br>项就位。经过n-1趟比较交换，实现整表排序，每趟的过程类似于“气泡”在水中不断上浮到水面的经过。</p>
+<a id="more"></a>
+
+<p>Figure 1 展示了冒泡排序的第一次遍历。阴影项正在比较它们是否乱序。如果在列表中有 n 个项目，则第一遍有 n-1 个项需要比较。重要的是要注意，一旦列表中的最大值是一个对的一部分，它将不断地被移动，直到遍历完成。</p>
+<blockquote>
+<ul>
+<li>第1趟比较交换，共有n-1对相邻数据进行比较。一旦经过最大项，则最大项会一路交换到达最后一项</li>
+<li>第2趟比较交换时，最大项已经就位，需要排序的数据减少为n-1，共有n-2对相邻数据进行比较</li>
+<li>直到第n-1趟完成后，最小项一定在列表首位，就无需再处理了。</li>
+</ul>
+</blockquote>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.7.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.figure1.png"></p>
+<p><em>Figure 1</em></p>
+<p>在第二次遍历的开始，现在最大的值已经在正确的位置。有 n-1 个项留下排序，意味着将有 n-2 对。由于每次通过将下一个最大值放置在适当位置，所需的遍历的总数将是 n-1。 在完成 n-1 遍之后，最小的项肯定在正确的位置，不需要进一步处理。 ActiveCode 1 显示完整的 <code>bubbleSort</code> 函数。它将列表作为参数，并根据需要交换项来修改它。</p>
+<p>交换操作，有时称为 <code>swap</code>，在 Python 中与在大多数其他编程语言略有不同。通常，交换列表中的两个元素需要临时存储位置（额外的内存位置）。 代码片段如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">temp = alist[i]</span><br><span class="line">alist[i] = alist[j]</span><br><span class="line">alist[j] = temp</span><br></pre></td></tr></table></figure>
+
+<p>将交换列表中的第 i 项和第 j 项。没有临时存储，其中一个值将被覆盖。</p>
+<p>在Python中，可以执行同时赋值。 语句 <code>a，b = b，a</code> 两个赋值语句同时完成（参见 Figure 2）。使用同时分配，交换操作可以在一个语句中完成。</p>
+<p>ActiveCode 1 中的行 5-7 使用先前描述的三步过程执行$ i $和第 $i + 1 $个项的交换。 注意，我们也可以使用同时分配来交换项目。</p>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.7.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.figure2.png"></p>
+<p><em>Figure 2</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span>(<span class="params">alist</span>):</span></span><br><span class="line">    <span class="keyword">for</span> passnum <span class="keyword">in</span> range(len(alist)<span class="number">-1</span>,<span class="number">0</span>,<span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(passnum):</span><br><span class="line">            <span class="keyword">if</span> alist[i]&gt;alist[i+<span class="number">1</span>]:</span><br><span class="line">                temp = alist[i]</span><br><span class="line">                alist[i] = alist[i+<span class="number">1</span>]</span><br><span class="line">                alist[i+<span class="number">1</span>] = temp</span><br><span class="line">                <span class="comment"># 上面三行语句，在python中可以直接写成一行代码</span></span><br><span class="line">                <span class="comment"># alist[i],alist[i+1] = alist[i+1],alist[i]</span></span><br><span class="line"></span><br><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>]</span><br><span class="line">bubbleSort(alist)</span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+
+<p><em>ActiveCode 1</em></p>
+<p>为了分析气泡排序，我们应该注意，不管项如何在初始列表中排列，将进行 n-1 次遍历以排序大小为 n 的列表。 Figure 1 展示了每次通过的比较次数。比较的总数是第 n-1 个整数的和。回想起来，前 n 个整数的和是$ 1/2n^2 + 1/2n$。 第 n-1 个整数的和为 $1/2n^2 + 1/2n -n$，其为 $1/2n^2 - 1/2n$。 这仍然是 $O(n^2)$ 比较。在最好的情况下，如果列表已经排序，则不会进行交换。 但是，在最坏的情况下，每次比较都会导致交换元素。 平均来说，我们交换了一半时间。</p>
+<blockquote>
+<p>无序表初始数据项的排列状况对冒泡排序没有影响</p>
+<p>算法过程总需要n-1趟，随着趟数的增加，比对次数逐步从n-1减少到1，并包括可能发生的数据项交换。</p>
+<p>1.比对次数是1～n-1的累加：$1/2n^2 - 1/2n$,比对的时间复杂度是$O(n2)$</p>
+<p>2.关于交换次数，时间复杂度也是$O(n2)$，通常每次交换包括3次赋值</p>
+<ul>
+<li>最好的情况是列表在排序前已经有序，交换次数为0</li>
+<li>最差的情况是每次比对都要进行交换，交换次数等于比对次数</li>
+<li>平均情况则是最差情况的一半</li>
+</ul>
+</blockquote>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.7.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.table1.png"></p>
+<p><em>Table1</em></p>
+<p>冒泡排序通常被认为是最低效的排序方法，因为它必须在最终位置被知道之前交换项。 这些“浪费”的交换操作是非常昂贵的。 然而，因为冒泡排序遍历列表的整个未排序部分，它有能力做大多数排序算法不能做的事情。特别地，如果在遍历期间没有交换，则我们知道该列表已排序。 如果发现列表已排序，可以修改冒泡排序提前停止。这意味着对于只需要遍历几次列表，冒泡排序具有识别排序列表和停止的优点。 ActiveCode 2 展示了这种修改，通常称为 <code>短冒泡排序</code>。</p>
+<blockquote>
+<ul>
+<li>冒泡排序通常作为时间效率较差的排序算法，来作为其它算法的对比基准。</li>
+<li>其效率主要差在每个数据项在找到其最终位置之前，必须要经过多次比对和交换，其中大部分的操作是无效的。</li>
+<li>但有一点优势，就是无需任何额外的存储空间开销。</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shortBubbleSort</span>(<span class="params">alist</span>):</span></span><br><span class="line">    exchanges = <span class="literal">True</span></span><br><span class="line">    passnum = len(alist)<span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> passnum &gt; <span class="number">0</span> <span class="keyword">and</span> exchanges:</span><br><span class="line">       exchanges = <span class="literal">False</span></span><br><span class="line">       <span class="keyword">for</span> i <span class="keyword">in</span> range(passnum):</span><br><span class="line">           <span class="keyword">if</span> alist[i]&gt;alist[i+<span class="number">1</span>]:</span><br><span class="line">               exchanges = <span class="literal">True</span></span><br><span class="line">               temp = alist[i]</span><br><span class="line">               alist[i] = alist[i+<span class="number">1</span>]</span><br><span class="line">               alist[i+<span class="number">1</span>] = temp</span><br><span class="line">       passnum = passnum<span class="number">-1</span></span><br><span class="line"></span><br><span class="line">alist=[<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">90</span>,<span class="number">50</span>,<span class="number">60</span>,<span class="number">70</span>,<span class="number">80</span>,<span class="number">100</span>,<span class="number">110</span>]</span><br><span class="line">shortBubbleSort(alist)</span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+
+<p><em>Activecode 2</em></p>
+
+      
+      <!-- 增加版权声明 -->
+
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/05.%E6%9E%84%E9%80%A0%E7%A8%8B%E5%BA%8F%E9%80%BB%E8%BE%91/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.110Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/05.%E6%9E%84%E9%80%A0%E7%A8%8B%E5%BA%8F%E9%80%BB%E8%BE%91/">05.构造程序逻辑</a>
-    </h1>
-  
+      <div class="declare" hidden="hidden"></div>
+      
 
-        <div class="article-info info-on-right">
-          
+      <!-- 增加版权声明结束 -->
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/04.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.095Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/04.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/">04.循环结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Bubble Sort</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/03.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.077Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/03.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">03.分支结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://irisyzy1018.github.io/020/09/26/5.7%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/02.%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.060Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/09/26/5.8%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          5.8选择排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/26/16-20.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">16-20.Python语言进阶</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/02.%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0/">02.语言元素</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-7-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">5.7.冒泡排序</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/01.%E5%88%9D%E8%AF%86Python/" class="archive-article-date">
-  	<time datetime="2020-09-25T04:36:33.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/01.%E5%88%9D%E8%AF%86Python/">01初识Python</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/Python/">&amp;laquo; Prev</a><a class="page-number" href="/tags/Python/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
   
 
 
@@ -395,9 +441,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

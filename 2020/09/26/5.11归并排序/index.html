@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: Python | Iris Yuan</title>
+  <title>5.11归并排序 | Iris Yuan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Iris Yuan">
-<meta property="og:url" content="http://example.com/tags/Python/page/2/index.html">
+  <meta name="description" content="5.11.归并排序我们现在将注意力转向使用分而治之策略作为提高排序算法性能的一种方法。 我们将研究的第一个算法是归并排序。归并排序是一种递归算法，不断将列表拆分为一半。 如果列表为空或有一个项，则按定义（基本情况）进行排序。如果列表有多个项，我们分割列表，并递归调用两个半部分的合并排序。 一旦对这两半排序完成，就执行称为合并的基本操作。合并是获取两个较小的排序列表并将它们组合成单个排序的新列表的过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.11归并排序">
+<meta property="og:url" content="http://example.com/2020/09/26/5.11%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Iris Yuan">
-<meta property="og:description" content="Life was like a box of chocolate, you never know what you&#39;re gonna get.">
+<meta property="og:description" content="5.11.归并排序我们现在将注意力转向使用分而治之策略作为提高排序算法性能的一种方法。 我们将研究的第一个算法是归并排序。归并排序是一种递归算法，不断将列表拆分为一半。 如果列表为空或有一个项，则按定义（基本情况）进行排序。如果列表有多个项，我们分割列表，并递归调用两个半部分的合并排序。 一旦对这两半排序完成，就执行称为合并的基本操作。合并是获取两个较小的排序列表并将它们组合成单个排序的新列表的过">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.11.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.figure10.png">
+<meta property="og:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.11.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.figure11.png">
+<meta property="article:published_time" content="2020-09-26T08:56:23.504Z">
+<meta property="article:modified_time" content="2020-09-26T11:53:56.726Z">
 <meta property="article:author" content="Iris Yuan">
-<meta property="article:tag" content="Happy">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.11.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.figure10.png">
   
     <link rel="alternative" href="/atom.xml" title="Iris Yuan" type="application/atom+xml">
   
@@ -160,214 +166,228 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-5.11归并排序" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      5.11归并排序
+    </h1>
+  
+
+        
+        <a href="/2020/09/26/5.11%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-09-26T08:56:23.504Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="5-11-归并排序"><a href="#5-11-归并排序" class="headerlink" title="5.11.归并排序"></a>5.11.归并排序</h2><p>我们现在将注意力转向使用分而治之策略作为提高排序算法性能的一种方法。 我们将研究的第一个算法是归并排序。归并排序是一种递归算法，不断将列表拆分为一半。 如果列表为空或有一个项，则按定义（基本情况）进行排序。如果列表有多个项，我们分割列表，并递归调用两个半部分的合并排序。 一旦对这两半排序完成，就执行称为合并的基本操作。合并是获取两个较小的排序列表并将它们组合成单个排序的新列表的过程。 Figure 10 展示了我们熟悉的示例列表，它被mergeSort 分割。 Figure 11 展示了归并后的简单排序列表。</p>
+<a id="more"></a>
+
+<blockquote>
+<p>归并排序是递归算法，思路是将数据表持续分裂为两半，对两半分别进行归并排序</p>
+<ul>
+<li>递归的基本结束条件是：数据表仅有1个数据项，自然是排好序的；</li>
+<li>缩小规模：将数据表分裂为相等的两半，规模减为原来的二分之一；</li>
+<li>调用自身：将两半分别调用自身排序，然后将分别排好序的两半进行归并，得到排好序的数据表</li>
+</ul>
+</blockquote>
+<p><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.11.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.figure10.png"></p>
+<p><em>Figure 10</em><br><img src="https://gitee.com/irisyzy/picbed/raw/master/picbag/5.11.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.figure11.png"></p>
+<p><em>Figure 11</em></p>
+<p>ActiveCode 1 中展示的 <code>mergeSort</code> 函数从询问基本情况开始。 如果列表的长度小于或等于1，则我们已经有有序的列表，并且不需要更多的处理。另一方面，长度大于 1，那么我们使用 Python 切片操作来提取左右两半。 重要的是要注意，列表可能没有偶数个项。这并不重要，因为长度最多相差一个。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span>(<span class="params">alist</span>):</span></span><br><span class="line">  <span class="comment"># print(&quot;Splitting &quot;,alist)</span></span><br><span class="line">    <span class="keyword">if</span> len(alist)&gt;<span class="number">1</span>:   	<span class="comment"># 基本结束条件：len(alist) = 1</span></span><br><span class="line">        mid = len(alist)//<span class="number">2</span></span><br><span class="line">        lefthalf = alist[:mid]</span><br><span class="line">        righthalf = alist[mid:]</span><br><span class="line">		<span class="comment"># 递归调用</span></span><br><span class="line">        mergeSort(lefthalf)</span><br><span class="line">        mergeSort(righthalf)</span><br><span class="line"></span><br><span class="line">        i= j= k= <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; len(lefthalf) <span class="keyword">and</span> j &lt; len(righthalf):        <span class="comment"># 拉链式交错把左右半部从小到大归并到结果列表中</span></span><br><span class="line">            <span class="keyword">if</span> lefthalf[i] &lt; righthalf[j]:</span><br><span class="line">                alist[k]=lefthalf[i]</span><br><span class="line">                i=i+<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                alist[k]=righthalf[j]</span><br><span class="line">                j=j+<span class="number">1</span></span><br><span class="line">            k=k+<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; len(lefthalf):		<span class="comment"># 归并左半部分剩余项</span></span><br><span class="line">            alist[k]=lefthalf[i]</span><br><span class="line">            i=i+<span class="number">1</span></span><br><span class="line">            k=k+<span class="number">1</span></span><br><span class="line">		<span class="comment"># 归并右半部分剩余项</span></span><br><span class="line">        <span class="keyword">while</span> j &lt; len(righthalf):</span><br><span class="line">            alist[k]=righthalf[j]</span><br><span class="line">            j=j+<span class="number">1</span></span><br><span class="line">            k=k+<span class="number">1</span></span><br><span class="line">    <span class="comment">#print(&quot;Merging &quot;,alist)</span></span><br><span class="line"></span><br><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>]</span><br><span class="line">mergeSort(alist)</span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+
+<p><em>Activecode1</em></p>
+<p>另一个归并排序代码（更Pythonic）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># merge sort </span></span><br><span class="line"><span class="comment"># 归并排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span>(<span class="params">lst</span>):</span></span><br><span class="line">    <span class="comment"># 递归结束条件</span></span><br><span class="line">    <span class="keyword">if</span> len(lst)&lt;=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> lst</span><br><span class="line">    <span class="comment"># 分解问题，并调用递归</span></span><br><span class="line">    middle = len(lst)//<span class="number">2</span></span><br><span class="line">    left = merge_sort(lst[:mid])</span><br><span class="line">    right = merge_sort(lst[mid:])</span><br><span class="line">    <span class="comment"># 合并左右半部，完成排序</span></span><br><span class="line">    merge = []</span><br><span class="line">    <span class="keyword">while</span> left <span class="keyword">and</span> right:</span><br><span class="line">        <span class="keyword">if</span> left[<span class="number">0</span>] &lt;= right[<span class="number">0</span>]:</span><br><span class="line">            merged.append(left.pop(<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            merged.append(right.pop(<span class="number">0</span>))</span><br><span class="line">    </span><br><span class="line">    merged.extend(right <span class="keyword">if</span> right <span class="keyword">else</span> left)</span><br><span class="line">    <span class="keyword">return</span> merged</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>一旦在左半部分和右半部分（行8-9）上调用 mergeSort 函数，就假定它们已被排序。函数的其余部分（行11-31）负责将两个较小的排序列表合并成一个较大的排序列表。请注意，合并操作通过重复从排序列表中取最小的项目，将项目逐个放回原始列表（alist）。</p>
+<p>mergeSort 函数已经增加了一个打印语句（行2），以显示在每次调用开始时排序的列表的内容。 还有一个打印语句（第32行）来显示合并过程。 脚本显示了在我们的示例列表中执行函数的结果。 请注意，<code>44,55</code> 和 <code>20 </code>的列表不会均匀分配。第一个分割出 [44]，第二个 [55,20]。 很容易看到分割过程最终产生可以立即与其他排序列表合并的列表。</p>
+<p>将归并排序分为两个过程来分析：分裂和归并</p>
+<blockquote>
+<p>分裂的过程，借鉴二分查找中的分析结果，是对数复杂度，时间复杂度为O(log n)<br>归并的过程，相对于分裂的每个部分，其所有数据项都会被比较和放置一次，所以是线性复杂度，其时间复杂度是O(n)<br>综合考虑，每次分裂的部分都进行一次O(n)的数据项归并，总的时间复杂度是O(nlog n)</p>
+</blockquote>
+<p>最后，我们还是注意到两个切片操作为了时间复杂度分析精确起见，可以通过取消切片操作，改为传递两个分裂部分的起始点和终止点，也是没问题的，只是算法可读性稍微牺牲一点点。<br>我们注意到归并排序算法使用了额外1倍的存储空间用于归并，这个特性在对特大数据集进行排序的时候要考虑进去。</p>
+
+      
+      <!-- 增加版权声明 -->
+
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/05.%E6%9E%84%E9%80%A0%E7%A8%8B%E5%BA%8F%E9%80%BB%E8%BE%91/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.110Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/05.%E6%9E%84%E9%80%A0%E7%A8%8B%E5%BA%8F%E9%80%BB%E8%BE%91/">05.构造程序逻辑</a>
-    </h1>
-  
+      <div class="declare" hidden="hidden"></div>
+      
 
-        <div class="article-info info-on-right">
-          
+      <!-- 增加版权声明结束 -->
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/04.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.095Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/04.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/">04.循环结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://irisyzy1018.github.io/020/09/26/5.11%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/03.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.077Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/09/26/5.12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          5.12快速排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/26/5.10%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">5.10希尔排序</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/03.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84/">03.分支结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-11-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">5.11.归并排序</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/02.%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.060Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/02.%E8%AF%AD%E8%A8%80%E5%85%83%E7%B4%A0/">02.语言元素</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/25/01.%E5%88%9D%E8%AF%86Python/" class="archive-article-date">
-  	<time datetime="2020-09-25T04:36:33.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/25/01.%E5%88%9D%E8%AF%86Python/">01初识Python</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/Python/">&amp;laquo; Prev</a><a class="page-number" href="/tags/Python/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -395,9 +415,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
