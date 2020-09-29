@@ -62,6 +62,8 @@
 	        
 				<li><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
 	        
+				<li><a href="/tags/Leetcode/">Leetcode</a></li>
+	        
 				<li><a href="/tags/Python/">Python</a></li>
 	        
 				<li><a href="/tags/SQL/">SQL</a></li>
@@ -122,6 +124,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -136,15 +140,17 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="/">主页</a></li>
+					<li style="width: 16.666666666666668%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/Python/">Python</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/Leetcode/">Leetcode</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/SQL/">SQL</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/Python/">Python</a></li>
 		        
-					<li style="width: 20%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/SQL/">SQL</a></li>
+		        
+					<li style="width: 16.666666666666668%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -161,27 +167,30 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-5.12快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-257.Binary-Tree-Paths" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/26/5.12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">5.12快速排序</a>
+      <a class="article-title" href="/2020/09/29/257.Binary-Tree-Paths/">257.Binary Tree Paths</a>
     </h1>
   
 
         
-        <a href="/2020/09/26/5.12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-09-26T11:55:29.070Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+        <a href="/2020/09/29/257.Binary-Tree-Paths/" class="archive-article-date">
+  	<time datetime="2020-09-29T12:03:00.064Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="5-12-快速排序"><a href="#5-12-快速排序" class="headerlink" title="5.12.快速排序"></a>5.12.快速排序</h2><p>快速排序使用分而治之来获得与归并排序相同的优点，而不使用额外的存储。然而，作为权衡，有可能列表不能被分成两半。当这种情况发生时，我们将看到性能降低。</p>
+        <h4 id="257-二叉树的所有路径-简单"><a href="#257-二叉树的所有路径-简单" class="headerlink" title="257. 二叉树的所有路径(简单)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-paths/">257. 二叉树的所有路径</a>(简单)</h4><p>给定一个二叉树，返回所有从根节点到叶子节点的路径。</p>
+<p><strong>说明:</strong> 叶子节点是指没有子节点的节点。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line"></span><br><span class="line">   1</span><br><span class="line"> &#x2F;   \</span><br><span class="line">2     3</span><br><span class="line"> \</span><br><span class="line">  5</span><br><span class="line"></span><br><span class="line">输出: [&quot;1-&gt;2-&gt;5&quot;, &quot;1-&gt;3&quot;]</span><br><span class="line"></span><br><span class="line">解释: 所有根节点到叶子节点的路径为: 1-&gt;2-&gt;5, 1-&gt;3</span><br></pre></td></tr></table></figure>
         
       
       <!-- 增加版权声明 -->
@@ -202,11 +211,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
         		</li>
       		
 		</ul>
@@ -216,7 +229,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/26/5.12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/29/257.Binary-Tree-Paths/">展开全文 >></a>
         </p>
       
 
@@ -246,27 +259,29 @@
 
 
   
-    <article id="post-5.11归并排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-200.Number-of-Islands" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/26/5.11%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">5.11归并排序</a>
+      <a class="article-title" href="/2020/09/29/200.Number-of-Islands/">200.Number of Islands</a>
     </h1>
   
 
         
-        <a href="/2020/09/26/5.11%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-09-26T08:56:23.504Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+        <a href="/2020/09/29/200.Number-of-Islands/" class="archive-article-date">
+  	<time datetime="2020-09-29T09:52:17.576Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="5-11-归并排序"><a href="#5-11-归并排序" class="headerlink" title="5.11.归并排序"></a>5.11.归并排序</h2><p>我们现在将注意力转向使用分而治之策略作为提高排序算法性能的一种方法。 我们将研究的第一个算法是归并排序。归并排序是一种递归算法，不断将列表拆分为一半。 如果列表为空或有一个项，则按定义（基本情况）进行排序。如果列表有多个项，我们分割列表，并递归调用两个半部分的合并排序。 一旦对这两半排序完成，就执行称为合并的基本操作。合并是获取两个较小的排序列表并将它们组合成单个排序的新列表的过程。 Figure 10 展示了我们熟悉的示例列表，它被mergeSort 分割。 Figure 11 展示了归并后的简单排序列表。</p>
+        <h4 id="200-岛屿数量-中等"><a href="#200-岛屿数量-中等" class="headerlink" title="200. 岛屿数量(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">200. 岛屿数量</a>(中等)</h4><p>给你一个由 <code>&#39;1&#39;</code>（陆地）和 <code>&#39;0&#39;</code>（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
+<p>岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成。</p>
+<p>此外，你可以假设该网格的四条边均被水包围。</p>
         
       
       <!-- 增加版权声明 -->
@@ -287,11 +302,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
         		</li>
       		
 		</ul>
@@ -301,7 +320,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/26/5.11%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/29/200.Number-of-Islands/">展开全文 >></a>
         </p>
       
 
@@ -331,28 +350,30 @@
 
 
   
-    <article id="post-5.10希尔排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-90.Subsets-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/26/5.10%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">5.10希尔排序</a>
+      <a class="article-title" href="/2020/09/29/90.Subsets-II/">90.Subsets II</a>
     </h1>
   
 
         
-        <a href="/2020/09/26/5.10%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-09-26T08:38:33.086Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+        <a href="/2020/09/29/90.Subsets-II/" class="archive-article-date">
+  	<time datetime="2020-09-29T09:50:08.001Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="5-10-希尔排序（Shell-Sort）"><a href="#5-10-希尔排序（Shell-Sort）" class="headerlink" title="5.10.希尔排序（Shell Sort）"></a>5.10.希尔排序（Shell Sort）</h2><p>我们注意到插入排序的比对次数，在最好的情况下是$O(n)$，这种情况发生在列表已是有序的情况下，实际上，列表越接近有序，插入排序的比对次数就越少。从这个情况入手，谢尔排序以插入排序作为基础，对无序表进行“间隔”划分子列表，每个子列表都执行插入排序</p>
-<p>希尔排序（有时称为“递减递增排序”）通过将原始列表分解为多个较小的子列表来改进插入排序，每个子列表使用插入排序进行排序。 选择这些子列表的方式是希尔排序的关键。不是将列表拆分为连续项的子列表，希尔排序使用增量i（有时称为 <code>gap</code>），通过选择 i 个项的所有项来创建子列表。</p>
+        <h4 id="90-子集-II-中等"><a href="#90-子集-II-中等" class="headerlink" title="90. 子集 II(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets-ii/">90. 子集 II</a>(中等)</h4><p>给定一个可能包含重复元素的整数数组 <strong><em>nums</em></strong>，返回该数组所有可能的子集（幂集）。</p>
+<p><strong>说明：</strong>解集不能包含重复的子集。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,2]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [2],</span><br><span class="line">  [1],</span><br><span class="line">  [1,2,2],</span><br><span class="line">  [2,2],</span><br><span class="line">  [1,2],</span><br><span class="line">  []</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
         
       
       <!-- 增加版权声明 -->
@@ -373,11 +394,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
         		</li>
       		
 		</ul>
@@ -387,7 +412,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/26/5.10%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/29/90.Subsets-II/">展开全文 >></a>
         </p>
       
 
@@ -417,27 +442,28 @@
 
 
   
-    <article id="post-5.9插入排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-79.Word-Search" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/26/5.9%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">5.9插入排序</a>
+      <a class="article-title" href="/2020/09/29/79.Word-Search/">79.Word Search</a>
     </h1>
   
 
         
-        <a href="/2020/09/26/5.9%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-09-26T08:14:35.467Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+        <a href="/2020/09/29/79.Word-Search/" class="archive-article-date">
+  	<time datetime="2020-09-29T09:46:59.120Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="5-9-插入排序"><a href="#5-9-插入排序" class="headerlink" title="5.9.插入排序"></a>5.9.插入排序</h2><p>插入排序，尽管仍然是 $O(n^2)$，但算法思路与冒泡排序、选择排序不同。它始终在列表的较低位置维护一个排序的子列表。然后将每个新项 “插入” 回先前的子列表，使得排序的子列表称为较大的一个项。Figure 4 展示了插入排序过程。 阴影项表示算法进行每次遍历时的有序子列表。</p>
+        <h4 id="79-单词搜索-中等"><a href="#79-单词搜索-中等" class="headerlink" title="79. 单词搜索(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-search/">79. 单词搜索</a>(中等)</h4><p>给定一个二维网格和一个单词，找出该单词是否存在于网格中。</p>
+<p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。</p>
         
       
       <!-- 增加版权声明 -->
@@ -458,11 +484,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
         		</li>
       		
 		</ul>
@@ -472,7 +502,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/26/5.9%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/29/79.Word-Search/">展开全文 >></a>
         </p>
       
 
@@ -502,27 +532,30 @@
 
 
   
-    <article id="post-5.8选择排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-78.Subsets" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/26/5.8%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">5.8选择排序</a>
+      <a class="article-title" href="/2020/09/29/78.Subsets/">78.Subsets</a>
     </h1>
   
 
         
-        <a href="/2020/09/26/5.8%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-09-26T07:32:33.472Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+        <a href="/2020/09/29/78.Subsets/" class="archive-article-date">
+  	<time datetime="2020-09-29T09:28:36.408Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="5-8-选择排序"><a href="#5-8-选择排序" class="headerlink" title="5.8.选择排序"></a>5.8.选择排序</h2><p>选择排序改进了冒泡排序，每次遍历列表只做一次交换。为了做到这一点，一个选择排序在他遍历时寻找最大的值，并在完成遍历后，将其放置在正确的位置。与冒泡排序一样，在第一次遍历后，最大的项在正确的地方。 第二遍后，下一个最大的就位。遍历 n-1 次排序 n 个项，因为最终项必须在第（n-1）次遍历之后。</p>
+        <h4 id="78-子集-中等"><a href="#78-子集-中等" class="headerlink" title="78. 子集(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/">78. 子集</a>(中等)</h4><p>给定一组<strong>不含重复元素</strong>的整数数组 <em>nums</em>，返回该数组所有可能的子集（幂集）。</p>
+<p><strong>说明：</strong>解集不能包含重复的子集。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">输入: nums &#x3D; [1,2,3]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [1],</span><br><span class="line">  [2],</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [1,3],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  []</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
         
       
       <!-- 增加版权声明 -->
@@ -543,15 +576,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Selection Sort</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
         		</li>
       		
 		</ul>
@@ -561,7 +594,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/26/5.8%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/29/78.Subsets/">展开全文 >></a>
         </p>
       
 
@@ -591,27 +624,29 @@
 
 
   
-    <article id="post-5.7冒泡排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-77.Combinations" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/26/5.7%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">5.7冒泡排序</a>
+      <a class="article-title" href="/2020/09/29/77.Combinations/">77.Combinations</a>
     </h1>
   
 
         
-        <a href="/2020/09/26/5.7%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-09-26T07:08:45.754Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+        <a href="/2020/09/29/77.Combinations/" class="archive-article-date">
+  	<time datetime="2020-09-29T09:16:12.110Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="5-7-冒泡排序"><a href="#5-7-冒泡排序" class="headerlink" title="5.7.冒泡排序"></a>5.7.冒泡排序</h2><p>冒泡排序的算法思路在于对无序表进行多趟比较交换，每趟包括了多次两两相邻比较，并将逆序的数据项互换位置，最终能将本趟的最大<br>项就位。经过n-1趟比较交换，实现整表排序，每趟的过程类似于“气泡”在水中不断上浮到水面的经过。</p>
+        <h4 id="77-组合-中等"><a href="#77-组合-中等" class="headerlink" title="77. 组合(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/">77. 组合</a>(中等)</h4><p>给定两个整数 <em>n</em> 和 <em>k</em>，返回 1 … <em>n</em> 中所有可能的 <em>k</em> 个数的组合。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: n &#x3D; 4, k &#x3D; 2</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [2,4],</span><br><span class="line">  [3,4],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  [1,3],</span><br><span class="line">  [1,4],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
         
       
       <!-- 增加版权声明 -->
@@ -632,15 +667,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Bubble Sort</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
         		</li>
       		
 		</ul>
@@ -650,7 +685,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/26/5.7%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/29/77.Combinations/">展开全文 >></a>
         </p>
       
 
@@ -680,28 +715,310 @@
 
 
   
-    <article id="post-16-20.Python语言进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-47.Permutations-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/26/16-20.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6/">16-20.Python语言进阶</a>
+      <a class="article-title" href="/2020/09/29/47.Permutations-II/">47.Permutations II</a>
     </h1>
   
 
         
-        <a href="/2020/09/26/16-20.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2020-09-26T05:08:52.318Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
+        <a href="/2020/09/29/47.Permutations-II/" class="archive-article-date">
+  	<time datetime="2020-09-29T08:20:44.854Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Python语言进阶"><a href="#Python语言进阶" class="headerlink" title="Python语言进阶"></a>Python语言进阶</h2><h3 id="重要知识点"><a href="#重要知识点" class="headerlink" title="重要知识点"></a>重要知识点</h3><ul>
-<li>生成式（推导式）的用法</li>
+        <h4 id="47-全排列-II-中等"><a href="#47-全排列-II-中等" class="headerlink" title="47. 全排列 II(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations-ii/">47. 全排列 II</a>(中等)</h4><p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,1,2]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [1,1,2],</span><br><span class="line">  [1,2,1],</span><br><span class="line">  [2,1,1]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+        
+      
+      <!-- 增加版权声明 -->
+
+      
+      
+      <div class="declare" hidden="hidden"></div>
+      
+
+      <!-- 增加版权声明结束 -->
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/29/47.Permutations-II/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-46.Permutations" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/29/46.Permutations/">46.Permutations</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/29/46.Permutations/" class="archive-article-date">
+  	<time datetime="2020-09-29T08:18:26.820Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="46-全排列-中等"><a href="#46-全排列-中等" class="headerlink" title="46. 全排列(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">46. 全排列</a>(中等)</h4><p>给定一个 <strong>没有重复</strong> 数字的序列，返回其所有可能的全排列。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [1,3,2],</span><br><span class="line">  [2,1,3],</span><br><span class="line">  [2,3,1],</span><br><span class="line">  [3,1,2],</span><br><span class="line">  [3,2,1]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+        
+      
+      <!-- 增加版权声明 -->
+
+      
+      
+      <div class="declare" hidden="hidden"></div>
+      
+
+      <!-- 增加版权声明结束 -->
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/29/46.Permutations/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-40.Combination-Sum-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/29/40.Combination-Sum-II/">40.Combination Sum II</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/29/40.Combination-Sum-II/" class="archive-article-date">
+  	<time datetime="2020-09-29T08:09:45.573Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="40-组合总和-II-中等"><a href="#40-组合总和-II-中等" class="headerlink" title="40. 组合总和 II(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-ii/">40. 组合总和 II</a>(中等)</h4><p>给定一个数组 <code>candidates</code> 和一个目标数 <code>target</code> ，找出 <code>candidates</code> 中所有可以使数字和为 <code>target</code> 的组合。</p>
+<p><code>candidates</code> 中的每个数字在每个组合中只能使用一次。</p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>所有数字（包括目标数）都是正整数。</li>
+<li>解集不能包含重复的组合。 </li>
+</ul>
+<p><strong>示例 1:</strong></p>
+        
+      
+      <!-- 增加版权声明 -->
+
+      
+      
+      <div class="declare" hidden="hidden"></div>
+      
+
+      <!-- 增加版权声明结束 -->
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/29/40.Combination-Sum-II/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-39.Combination-Sum" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/29/39.Combination-Sum/">39.Combination Sum</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/29/39.Combination-Sum/" class="archive-article-date">
+  	<time datetime="2020-09-29T07:56:49.386Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="39-组合总和-中等"><a href="#39-组合总和-中等" class="headerlink" title="39. 组合总和(中等)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum/">39. 组合总和</a>(中等)</h4><p>给定一个<strong>无重复元素</strong>的数组 <code>candidates</code> 和一个目标数 <code>target</code> ，找出 <code>candidates</code> 中所有可以使数字和为 <code>target</code> 的组合。</p>
+<p><code>candidates</code> 中的数字可以无限制重复被选取。</p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>所有数字（包括 <code>target</code>）都是正整数。</li>
+<li>解集不能包含重复的组合。 </li>
 </ul>
         
       
@@ -723,169 +1040,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/26/16-20.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-14.网络编程入门和网络应用开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/25/14.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/">14.网络编程入门和网络应用开发</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/25/14.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.208Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="网络编程入门"><a href="#网络编程入门" class="headerlink" title="网络编程入门"></a>网络编程入门</h2><h3 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h3>
-        
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/25/14.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%E5%92%8C%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-13.进程和线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/25/13.%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">13.进程和线程</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/25/13.%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2>
-        
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Backtracking</a>
         		</li>
       		
 		</ul>
@@ -895,88 +1058,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/25/13.%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-12.字符串和正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/25/12.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">12.使用正则表达式</a>
-    </h1>
-  
-
-        
-        <a href="/2020/09/25/12.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2020-09-25T06:16:06.200Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="使用正则表达式"><a href="#使用正则表达式" class="headerlink" title="使用正则表达式"></a>使用正则表达式</h2><h3 id="正则表达式相关知识"><a href="#正则表达式相关知识" class="headerlink" title="正则表达式相关知识"></a>正则表达式相关知识</h3>
-        
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/25/12.%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/29/39.Combination-Sum/">展开全文 >></a>
         </p>
       
 
@@ -1008,7 +1090,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1143,6 +1225,78 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Selection Sort</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">顺序查找</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">BinarySearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">二分查找</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">优先队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">查找</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">二叉查找树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Sliding Window</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Binary Search Tree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Dynamic Programming</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Backtracking</a>
               </li>
             
             <div class="clearfix"></div>
